@@ -1,23 +1,25 @@
     <?php
 
-    require_once "../../config/config.php";
+    require_once "../config/config.php";
 
     class UsuarioModel{
 
         public static function cadastrar($nome, $rm, $email, $senha){
 
                 $connect = getConnection();
-                $cadastrar = $connect->prepare( "INSERT INTO usuarios (nome, rm, email, senha) VALUES (?,?,?,?)");
-                $cadastrar->bind_param("ssss", nome, rm, email, password_hash(senha, PASSWORD_DEFAULT));
+                $cadastrar = $connect->prepare("INSERT INTO usuarios (nome, rm, email, senha) VALUES (?,?,?,?)");
+                $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+                $cadastrar->bind_param("ssss", $nome, $rm, $email, $senha_hash);
+
                 $cadastrar->execute();
 
                 $cadastrar->close();
-                $conn->close();
+                $connect->close();
             
             
         }
         
-        public static function buscarUsuarioPorRmEEmail($rm, $email) {
+         public static function buscarUsuarioPorRmEEmail($rm, $email) {
         $conn = getConnection();
         $stmt = $conn->prepare("SELECT * FROM usuarios WHERE rm = ? AND email = ?");
         $stmt->bind_param("ss", $rm, $email);
@@ -30,6 +32,16 @@
         $conn->close();
 
         return $usuario ?: null;
+    }
+
+    public static function logarUsuario($rm, $email, $senha) {
+        $usuario = self::buscarUsuarioPorRmEEmail($rm, $email);
+
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
+            return $usuario; 
+        } else {
+            return null; 
+        }
     }
 
     public static function atualizarSenha($email, $novaSenha) {

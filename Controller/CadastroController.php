@@ -1,7 +1,7 @@
 <?php
 
-require_once "../../config/config.php";
-require_once __DIR__ . '../../model/UsuarioModel.php';
+require_once "../config/config.php";
+require_once "../src/Model/UsuarioModel.php";
 
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -11,11 +11,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $senha = $_POST["senha"];
         $confirmarSenha = $_POST["confirmarSenha"];
 
-        UsuarioModel::cadastrar($nome, $email, $rm, $senha);
+        UsuarioModel::cadastrar($nome, $rm, $email, $senha);
 
         echo "usuario cadastrado";
-
-        
+        header("Location: ../public/PaginaLogin.php");
         exit;
         
 }
