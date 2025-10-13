@@ -5,10 +5,11 @@ $username = "root";
 $password = 12345;
 $database = "falai";
 
-$connect = new mysqli($hostname, $username, $password, $database);
+function getConnection(){
+    $connect = new mysqli($hostname, $username, $password, $database);
 
-if($connect->connect_error){
+    if($connect->connect_error){
     die("Falha na conexão" . $connect->connect_error);
+    }
+    return $connect;
 }
-
-echo "conectado";
