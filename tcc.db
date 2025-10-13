@@ -1,0 +1,58 @@
+CREATE DATABASE IF NOT EXISTS tcc;
+USE tcc;
+
+
+-- ===============================
+-- TABELA: usuarios
+-- ===============================
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    rm VARCHAR(20) UNIQUE,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255),
+    google_id VARCHAR(100) UNIQUE,
+    username VARCHAR(30),
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ===============================
+-- TABELA: tb_ranking
+-- ===============================
+CREATE TABLE IF NOT EXISTS tb_ranking (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    pontos INT DEFAULT 0,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- ===============================
+-- TABELA: tb_tarefas
+-- ===============================
+CREATE TABLE IF NOT EXISTS tb_tarefas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    data_tarefa DATE NOT NULL,
+    horario_tarefa TIME NOT NULL,
+    status ENUM('pendente', 'concluída') DEFAULT 'pendente',
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- ===============================
+-- TABELA: tb_logs (opcional, para histórico)
+-- ===============================
+CREATE TABLE IF NOT EXISTS tb_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    acao VARCHAR(255) NOT NULL,
+    data_log TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
+);
+
+
+
+select * from usuarios;
