@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="static/PaginaAgenda.css">
   <title>Agenda</title>
 </head>
 
@@ -102,21 +103,23 @@
         </button>
       </div>
 
-      <form id="form-tarefa" class="task-form">
+      <form action="../Controller/AgendaController.php" method="POST"  id="form-tarefa" class="task-form">
         <div class="form-group">
           <label for="nome-tarefa">Nome da Tarefa:</label>
-          <input type="text" id="nome-tarefa" name="nome-tarefa" placeholder="Digite o nome da tarefa" required>
+          <input type="text" id="nome-tarefa" name="titulo" placeholder="Digite o nome da tarefa" required>
+        </div>
+
+        
+
+        <div class="form-group">
+          <label for="descricao-tarefa">Descrição (opcional):</label>
+          <textarea id="descricao-tarefa" name="descricao" placeholder="Adicione uma descrição para sua tarefa"
+            rows="3"></textarea>
         </div>
 
         <div class="form-group">
           <label for="data-tarefa">Data e Hora:</label>
-          <input type="datetime-local" id="data-tarefa" name="data-tarefa">
-        </div>
-
-        <div class="form-group">
-          <label for="descricao-tarefa">Descrição (opcional):</label>
-          <textarea id="descricao-tarefa" name="descricao-tarefa" placeholder="Adicione uma descrição para sua tarefa"
-            rows="3"></textarea>
+          <input type="datetime-local" id="data-tarefa" name="data_tarefa">
         </div>
 
         <div class="form-actions">
@@ -189,6 +192,208 @@
     new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
   <script src="{{ url_for('static', filename='PaginaAgenda/PaginaAgenda.js')}}"></script>
+
+  <script>
+    // Array para armazenar as tarefas
+let tarefas = [];
+
+// Gerenciamento do Modo Escuro (igual ao da tela de login)
+class ThemeManager {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    // O tema já foi aplicado pelo script inline no head
+    // Aqui apenas configuramos o botão e atualizamos o ícone
+    const currentTheme =
+      document.documentElement.getAttribute("data-theme") || "light";
+    this.updateToggleIcon(currentTheme);
+    this.setupToggleButton();
+  }
+
+  setTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    this.updateToggleIcon(theme);
+  }
+
+  updateToggleIcon(theme) {
+    const icon = document.getElementById("theme-icon");
+    if (icon) {
+      if (theme === "dark") {
+        icon.className = "fas fa-sun";
+      } else {
+        icon.className = "fas fa-moon";
+      }
+    }
+  }
+
+  toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    this.setTheme(newTheme);
+  }
+
+  setupToggleButton() {
+    const toggleButton = document.getElementById("toggle-dark-mode");
+    if (toggleButton) {
+      toggleButton.addEventListener("click", () => {
+        this.toggleTheme();
+      });
+    }
+  }
+}
+
+// Função para abrir o modal
+function abrirModal() {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden"; // Impede scroll da página
+}
+
+// Função para fechar o modal
+function fecharModal() {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.remove("show");
+  document.body.style.overflow = "auto"; // Restaura scroll da página
+
+  // Limpar formulário
+  document.getElementById("form-tarefa").reset();
+}
+
+// Função para fechar modal clicando fora dele
+document
+  .getElementById("modal-overlay")
+  .addEventListener("click", function (e) {
+    if (e.target === this) {
+      fecharModal();
+    }
+  });
+
+
+
+// Função para formatar data (sem erro para data inválida)
+function formatarData(dataString) {
+  if (!dataString) return "Data não informada";
+
+  try {
+    const data = new Date(dataString);
+    const opcoes = {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return data.toLocaleDateString("pt-BR", opcoes);
+  } catch (error) {
+    return dataString; // Retorna a data original se não conseguir formatar
+  }
+}
+
+// Função para mostrar mensagens (opcional)
+function mostrarMensagem(texto, tipo) {
+  // Criar elemento da mensagem
+  const mensagem = document.createElement("div");
+  mensagem.className = `mensagem ${tipo}`;
+  mensagem.textContent = texto;
+  mensagem.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        z-index: 1001;
+        animation: slideInRight 0.3s ease-out;
+    `;
+
+  if (tipo === "sucesso") {
+    mensagem.style.backgroundColor = "#10b981";
+  } else if (tipo === "erro") {
+    mensagem.style.backgroundColor = "#ef4444";
+  }
+
+  document.body.appendChild(mensagem);
+
+  // Remover mensagem após 3 segundos
+  setTimeout(() => {
+    mensagem.style.animation = "slideOutRight 0.3s ease-out";
+    setTimeout(() => {
+      document.body.removeChild(mensagem);
+    }, 300);
+  }, 3000);
+}
+
+// Adicionar estilos para as animações das mensagens
+const style = document.createElement("style");
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Fechar modal com tecla ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    fecharModal();
+  }
+});
+
+const tarefasSalvas = localStorage.getItem("tarefas");
+if (tarefasSalvas) {
+  tarefas = JSON.parse(tarefasSalvas);
+  atualizarListaTarefas();
+}
+// Inicialização quando a página carregar
+document.addEventListener("DOMContentLoaded", () => {
+  // Inicializa o gerenciador de tema
+  new ThemeManager();
+  // Inicializa animações de fade-in
+  observeElements();
+});
+
+// Animação de fade-in
+function observeElements() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-animate");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+  const fadeElements = document.querySelectorAll(".fade-in");
+  fadeElements.forEach((element) => {
+    observer.observe(element);
+  });
+}
+  </script>
 </body>
 
 </html>

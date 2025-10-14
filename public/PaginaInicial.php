@@ -107,9 +107,9 @@ if (!isset($_SESSION['usuario_id'])) {
             <div class="card-agenda">
                 <img src="{{ url_for('static', filename='img/calendario.png') }}" width="250px" alt="Ícone de Agenda">
             </div>
-            <form action="/agenda">
+            
                 <button class="botao">
-                    <a>AGENDA</a>
+                    <a href="PaginaAgenda.php">AGENDA</a> 
                 </button>
             </form>
         </div>
