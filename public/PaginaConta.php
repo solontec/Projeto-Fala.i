@@ -1,3 +1,29 @@
+<?php
+session_start();
+require_once "../config/config.php"; // conexão com o banco
+
+$conn = getConnection();
+if (!isset($_SESSION["usuario_id"])) {
+    header("Location: PaginaLogin.php");
+    exit;
+}
+
+$id = $_SESSION["usuario_id"];
+
+// Buscar informações do usuário
+$stmt = $conn->prepare("SELECT nome, rm, email FROM usuarios WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$usuario = $result->fetch_assoc();
+
+if (!$usuario) {
+    echo "Usuário não encontrado.";
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     (function () {
-      // Aplica o tema ANTES da página renderizar
+      
       const savedTheme = localStorage.getItem('theme');
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       const theme = savedTheme || systemTheme;
@@ -17,7 +43,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='PaginaConta/PaginaConta.css') }}">
+  <link rel="stylesheet" href="static/PaginaConta.css">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
   <script src="Conta.js"></script>
 </head>
@@ -62,7 +88,7 @@
 
   <nav>
     <div class="nav-left">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo"
+      <img src="img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
         width="60px">
     </div>
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
@@ -82,38 +108,41 @@
 
   <div class="tudo">
     <div class="conteudo">
+      
       <div class="nomePrincipal">
-        <p>{{ informacoes[0] }}</p>
+        <p><?= htmlspecialchars($usuario["nome"]) ?></p>
       </div>
 
       <div class="foto">
-        <img src="{{ url_for('static', filename='img/lamborghini.jpg') }}" alt="" class="fotoPerfil">
+        <img src="../public/img/lamborghini.jpg" alt="Foto de perfil" class="fotoPerfil">
         <button>Editar foto</button>
       </div>
-      
-      
+
       <div class="informacoes">
         <div class="conjunto">
-          <label for="">Email: </label>
-          <p>{{ informacoes[2] }}</p>
-        </div>
-        
-        <div class="conjunto">
-        <label for="">Rm:</label>
-        <p>{{ informacoes[1] }}</p>
-        <button>Alterar nome</button>
+          <label>Email: </label>
+          <p><?= htmlspecialchars($usuario["email"]) ?></p>
         </div>
 
         <div class="conjunto">
-          <label for="">Sair da conta: </label>
-          <button>Logout</button>
+          <label>RM:</label>
+          <p><?= htmlspecialchars($usuario["rm"]) ?></p>
+          <button>Alterar nome</button>
         </div>
 
         <div class="conjunto">
-          <label for="">Alterar Senha: </label>
+          <label>Sair da conta: </label>
+          <form action="../Controller/LogoutController.php" method="POST">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
+
+        <div class="conjunto">
+          <label>Alterar Senha: </label>
           <button>Alterar senha</button>
         </div>
       </div>
+
     </div>
   </div>
 

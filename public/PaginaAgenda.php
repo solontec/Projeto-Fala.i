@@ -35,7 +35,7 @@
 <body>
   <nav>
     <div class="nav-left">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo"
+      <img src="assets/img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
         width="60px">
     </div>
     <ul class="nav-menu">
@@ -361,11 +361,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-const tarefasSalvas = localStorage.getItem("tarefas");
-if (tarefasSalvas) {
-  tarefas = JSON.parse(tarefasSalvas);
-  atualizarListaTarefas();
-}
+
 // Inicialização quando a página carregar
 document.addEventListener("DOMContentLoaded", () => {
   // Inicializa o gerenciador de tema
@@ -393,6 +389,120 @@ function observeElements() {
     observer.observe(element);
   });
 }
+
+// Interceptar o envio do formulário e enviar via AJAX
+document.getElementById("form-tarefa").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  try {
+    const response = await fetch("../Controller/AgendaController.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      mostrarModalSucesso(result.message);
+      fecharModal();
+      this.reset();
+    } else {
+      mostrarModalErro(result.message);
+    }
+  } catch (error) {
+    mostrarModalErro("Erro na comunicação com o servidor.");
+    console.error(error);
+  }
+});
+
+// Função para criar modal de sucesso
+function mostrarModalSucesso(mensagem) {
+  const modal = document.createElement("div");
+  modal.className = "modal-feedback sucesso";
+  modal.innerHTML = `
+    <div class="modal-box">
+      <i class="fas fa-check-circle"></i>
+      <h3>${mensagem}</h3>
+      <button onclick="fecharModalFeedback()">OK</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+// Função para criar modal de erro
+function mostrarModalErro(mensagem) {
+  const modal = document.createElement("div");
+  modal.className = "modal-feedback erro";
+  modal.innerHTML = `
+    <div class="modal-box">
+      <i class="fas fa-times-circle"></i>
+      <h3>${mensagem}</h3>
+      <button onclick="fecharModalFeedback()">Fechar</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+// Função para fechar o modal de feedback
+function fecharModalFeedback() {
+  const modal = document.querySelector(".modal-feedback");
+  if (modal) modal.remove();
+}
+
+async function carregarTarefas() {
+  const response = await fetch("../Controller/AgendaController.php?action=listar");
+  const data = await response.json();
+
+  const lista = document.getElementById("lista-tarefas");
+  lista.innerHTML = "";
+
+  if (data.success && data.tarefas.length > 0) {
+    data.tarefas.forEach(tarefa => {
+      const div = document.createElement("div");
+      div.classList.add("tarefa");
+      div.innerHTML = `
+        <div class="tarefa-info">
+          <h4>${tarefa.titulo}</h4>
+          ${tarefa.descricao ? `<p>${tarefa.descricao}</p>` : ""}
+          <small>📅 ${formatarData(tarefa.data_tarefa)} — 🕒 ${tarefa.horario_tarefa.slice(0, 5)}</small>
+        </div>
+        <div class="tarefa-status ${tarefa.status === "concluída" ? "concluida" : "pendente"}">
+          ${tarefa.status}
+        </div>
+      `;
+      lista.appendChild(div);
+    });
+  } else {
+    lista.innerHTML = `<p class="sem-tarefas">Nenhuma tarefa cadastrada ainda.</p>`;
+  }
+}
+
+function formatarData(dataStr) {
+  const data = new Date(dataStr);
+  return data.toLocaleDateString("pt-BR");
+}
+
+document.getElementById("form-tarefa").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const response = await fetch("../Controller/AgendaController.php", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await response.json();
+  alert(data.message);
+
+  if (data.success) {
+    carregarTarefas(); // atualiza a lista após cadastrar
+    e.target.reset(); // limpa o formulário
+  }
+});
+
+
   </script>
 </body>
 

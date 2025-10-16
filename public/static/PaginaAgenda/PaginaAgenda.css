@@ -717,3 +717,58 @@ hr {
 .fade-delay-6 {
   transition-delay: 0.6s;
 }
+
+.modal-feedback {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-box {
+  background: var(--bg-color, #111);
+  color: white;
+  padding: 25px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.769);
+  animation: popIn 0.3s ease;
+}
+
+.modal-box i {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.modal-box button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  background-color: #10b981;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-feedback.erro .modal-box {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.modal-feedback.erro button {
+  background-color: #ef4444;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } 
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

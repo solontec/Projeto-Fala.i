@@ -31,7 +31,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <link
         href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap"
         rel="stylesheet">
-    <link rel="img/logo.png" type="image/x-icon">
+    <link rel="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaInicial/PaginaInicial.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +47,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <body>
     <nav>
         <div class="nav-left">
-            <img src="img/logo.png" alt="Logo do Chatbot" id="logo" class="logo"
+            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo"
                 width="60px">
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
@@ -80,7 +80,7 @@ if (!isset($_SESSION['usuario_id'])) {
             <section class="comecando fade-in fade-delay-1">
                 <form action="/resposta">
                     <div class="botao-comecar">
-                        <button id="botao-comecar">COMECE JÁ</button>
+                        <a href="PaginaChatbot.php" id="botao-comecar">COMECE JÁ</a>
                     </div>
                 </form>
                 <p id="textinho">
@@ -108,7 +108,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 <img src="{{ url_for('static', filename='img/calendario.png') }}" width="250px" alt="Ícone de Agenda">
             </div>
             
-                <button class="botao">
+                <button  class="botao">
                     <a href="PaginaAgenda.php">AGENDA</a> 
                 </button>
             </form>
@@ -127,7 +127,7 @@ if (!isset($_SESSION['usuario_id'])) {
             </div>
             <form action="/ranking">
                 <button class="botao">
-                    <a href="">RANKING</a>
+                    <a href="PaginaRanking.php">RANKING</a>
                 </button>
             </form>
 

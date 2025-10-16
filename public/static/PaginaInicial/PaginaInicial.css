@@ -275,7 +275,7 @@ header {
   margin-top: 20px;
 }
 
-.botao-comecar button {
+.botao-comecar a {
   background-color: var(--cor-principal);
   border: none;
   width: 550px;
@@ -291,7 +291,7 @@ header {
   box-shadow: 0 0 12px var(--hover);
 }
 
-.botao-comecar button:hover {
+.botao-comecar a:hover {
   background-color: var(--hover);
   font-family: Titillium Web, sans-serif;
   transform: scale(1.015);

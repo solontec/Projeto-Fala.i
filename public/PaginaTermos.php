@@ -10,12 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet"> <!--Bibliotecas para fontes-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaTermos/PaginaTermos.css') }}">
+     <link rel="stylesheet" href="static/PaginaTermos/PaginaTermos.css">
      <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
 </head>
 <body>
     <nav>
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo">
+        <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo">
         <a href="/login">Voltar</a> <!-- ARRUMAR ISSO PARA WINDOW HISTORY PARA VOLTAR SEMPRE PARA ANTERIOR ( TELA TERMOS (BOTAO VOLTAR))-->
     </nav>
     <div class="container-termos">

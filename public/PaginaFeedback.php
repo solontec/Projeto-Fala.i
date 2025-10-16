@@ -17,9 +17,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='PaginaConta/PaginaSuporte.css') }}">
+  <link rel="stylesheet" href="static/PaginaSuporte.css">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-  <script src="Conta.js"></script>
+  <script src="static/"></script>
 </head>
 
 <body>
@@ -62,7 +62,7 @@
 
   <nav>
     <div class="nav-left">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo"
+      <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo"
         width="60px">
     </div>
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>

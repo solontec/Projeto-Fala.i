@@ -63,7 +63,7 @@
                             <p id="texto-apresentacao-bem-vindo"></p>
                         </div>
                         <div class="logo-bem-vindo">
-                            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo"
+                            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo"
                                 class="logo">
                         </div>
                     </div>

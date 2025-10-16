@@ -30,13 +30,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/PaginaRanking/PaginaRanking.css">
     <title>Ranking</title>
 </head>
 
 <body>
     <nav>
         <div class="nav-left">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
+            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
         </div>
         <ul class="nav-menu">
             <li><a href="/inicio">Serviços</a></li>
