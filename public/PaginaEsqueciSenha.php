@@ -25,7 +25,7 @@
         rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="static/PaginaEsqueciSenha.css">
+    <link rel="stylesheet" href="static/PaginaEsqueciSenha/PaginaEsqueciSenha.css">
 
     <title>Esqueci a Senha - Fala.i</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
@@ -71,7 +71,7 @@
                 <div class="senha-esquecida" id="senha-esquecida">
                     <div class="esquecida">
                         <h3>Esqueceu a Senha?</h3>
-                        <form method="POST">
+                        <form action="../Controller/EsqueciSenhaController"  method="POST">
                             <label>Email:</label>
                             <input type="email" name="email" required minlength="10" maxlength="40"
                                 placeholder="Digite seu email">
@@ -88,9 +88,9 @@
                                         entre com sua nova senha.</p>
                                 </div>
                                 <div class="caminhos">
-                                    <a id="login-caminho" href="/">Login</a>
+                                    <a id="login-caminho" href="PaginaLogin.php">Login</a>
                                     <p id="ou">ou</p>
-                                    <a href="/cadastro" id="login-caminho">Cadastro</a>
+                                    <a href="PaginaCadastro.php" id="login-caminho">Cadastro</a>
                                 </div>
                             </div>
                         </form>
@@ -99,23 +99,7 @@
             </div>
         </div>
 
-        <!-- Mensagens Flash -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for msg in messages %}
-            <div class="flash-message">{{ msg }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
-
-        {% if erro %}
-        <script>
-            alert("{{ erro }}");
-        </script>
-        {% endif %}
-
+       
         <!-- VLibras -->
         <div vw class="enabled">
             <div vw-access-button class="active"></div>

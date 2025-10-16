@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="static/PaginaAgenda.css">
+  <link rel="stylesheet" href="static/PaginaAgenda/PaginaAgenda.css">
   <title>Agenda</title>
 </head>
 
@@ -50,8 +50,8 @@
         <i class="fas fa-moon" id="theme-icon"></i>
       </button>
       <!-- Botão Minha Conta -->
-      <form action="/minha_conta">
-        <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
+      <form action="PaginaConta.php">
+        <button class="account-btn" onclick="window.location.href='static/PaginaConta/PaginaConta.php'">
           <i class="fas fa-user"></i> Minha conta
         </button>
       </form>
