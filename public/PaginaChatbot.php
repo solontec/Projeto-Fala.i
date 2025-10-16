@@ -80,7 +80,7 @@ $resposta = $resposta ?? '';
             </div>
 
             <div class="chat">
-                <form action="../src/Controller/ChatbotController.php" method="POST" id="form">
+                <form action="../Controller/ChatbotController.php" method="POST" id="form">
                     <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"><?= htmlspecialchars($pergunta) ?></textarea>
                     <button type="submit" class="enviar"><i class="bi bi-arrow-up-circle-fill"></i></button>
                 </form>
