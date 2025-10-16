@@ -7,7 +7,7 @@
 
     <!-- Script para aplicar tema INSTANTANEAMENTE -->
     <script>
-        (function () {
+        (function ()  {
             // Aplica o tema ANTES da página renderizar
             const savedTheme = localStorage.getItem('theme');
             const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -15,6 +15,7 @@
 
             document.documentElement.setAttribute('data-theme', theme);
         })();
+        
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

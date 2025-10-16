@@ -38,7 +38,7 @@
       <img src="assets/img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
         width="60px">
     </div>
-    <ul class="nav-menu">
+    <ul class="nav-menu"> 
       <li><a href="/inicio">Serviços</a></li>
       <li><a href="PaginaCadastro.html">Quem somos</a></li>
       <li><a href="PaginaInicial.html">Tutorial</a></li>

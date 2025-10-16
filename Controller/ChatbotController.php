@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../Model/ChatModel.php';
 
-class ChatbotController
+class ChatbotController 
 {
-    public static function exibirPagina()
+    public static function exibirPagina() 
     {
         $pergunta = '';
         $resposta = '';
@@ -18,7 +18,7 @@ class ChatbotController
             }
         }
 
-        include __DIR__ . '/../../PaginaChatbot.php';
+        include __DIR__ . '/../../PaginaChatbot.php' ;
     }
 
     public static function api()
