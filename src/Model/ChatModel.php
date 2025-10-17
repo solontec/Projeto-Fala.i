@@ -1,33 +1,25 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php';
 
-use Google\GenerativeAI\Client;
-use Google\GenerativeAI\GenerativeModel;
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+use Gemini\Client;
 
 class ChatModel
 {
-    public static function gerarResposta($pergunta)
+    public static function gerarResposta($mensagem)
     {
-        // 🧠 Sua chave da API Gemini
-        $apiKey = 'AIzaSyCanZLcT_cmDQvWOiseQE1HxTXOU_PoYWY'; // <-- substitua pela sua chave
+        // Cria o cliente corretamente
+        $client = Client::factory([
+            'api_key' => getenv('GEMINI_API_KEY') ?: 'AIzaSyCanZLcT_cmDQvWOiseQE1HxTXOU_PoYWY'
+        ]);
 
-        try {
-            // Cria o cliente
-            $client = new Client([
-                'api_key' => $apiKey
-            ]);
+        // Escolhe o modelo
+        $model = $client->geminiPro();
 
-            // Cria o modelo Gemini
-            $model = new GenerativeModel('gemini-1.5-flash', $client);
+        // Gera a resposta
+        $response = $model->generateContent($mensagem);
 
-            // Gera o conteúdo
-            $result = $model->generateContent($pergunta);
-
-            // Retorna o texto gerado
-            return $result->getText() ?? 'Não consegui gerar uma resposta.';
-        } catch (Exception $e) {
-            return 'Erro ao gerar resposta: ' . $e->getMessage();
-        }
+        // Retorna apenas o texto da resposta
+        return $response->text();
     }
 }
-?>

@@ -1,41 +1,20 @@
 <?php
-require_once "../src/Model/ChatModel.php";
 
 
-class ChatbotController 
-{
-    public static function exibirPagina() 
-    {
-        $pergunta = '';
+require_once "../src/model/UsuarioModel.php";
+
+use Model\ChatModel;
+
+class ChatbotController {
+
+    public static function exibirPagina() {
+        $pergunta = $_POST['pergunta'] ?? '';
         $resposta = '';
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $pergunta = $_POST['pergunta'] ?? '';
-
-            if (!empty($pergunta)) {
-                $resposta = ChatModel::gerarResposta($pergunta);
-            } else {
-                $resposta = 'Por favor, digite uma pergunta.';
-            }
-        }
-
-        include __DIR__ . '/../../PaginaChatbot.php' ;
-    }
-
-    public static function api()
-    {
-        header('Content-Type: application/json');
-        $data = json_decode(file_get_contents('php://input'), true);
-        $pergunta = $data['message'] ?? '';
-
-        if (!empty($pergunta)) {
+        if ($pergunta) {
             $resposta = ChatModel::gerarResposta($pergunta);
-            echo json_encode(['resposta' => $resposta]);
-        } else {
-            echo json_encode(['resposta' => 'Pergunta inválida.']);
         }
 
-        exit;
+        include __DIR__ . '/../public/chat.php';
     }
 }
-?>
