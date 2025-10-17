@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../Model/ChatModel.php';
+require_once "../src/Model/ChatModel.php";
+
 
 class ChatbotController 
 {
