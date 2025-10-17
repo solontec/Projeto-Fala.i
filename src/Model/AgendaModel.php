@@ -42,4 +42,39 @@ class AgendaModel {
         return $tarefas;
     }
 
+    public static function editarTarefa($id, $usuario_id, $titulo, $descricao, $dataHora) {
+        $connect = getConnection();
+
+        $data = date('Y-m-d', strtotime($dataHora));
+        $hora = date('H:i:s', strtotime($dataHora));
+
+        $sql = "UPDATE tb_tarefas 
+                SET titulo = ?, descricao = ?, data_tarefa = ?, horario_tarefa = ? 
+                WHERE id = ? AND usuario_id = ?";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("ssssii", $titulo, $descricao, $data, $hora, $id, $usuario_id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $connect->close();
+
+        return $resultado;
+    }
+
+    public static function excluirTarefa($id, $usuario_id) {
+        $connect = getConnection();
+
+        $sql = "DELETE FROM tb_tarefas WHERE id = ? AND usuario_id = ?";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("ii", $id, $usuario_id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $connect->close();
+
+        return $resultado;
+    }
 }
+?>

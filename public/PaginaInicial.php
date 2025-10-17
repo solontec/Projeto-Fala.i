@@ -14,7 +14,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/PaginaInicial.css">
+    <link rel="stylesheet" href="static/PaginaInicial/PaginaInicial.css">
     <!-- Script para aplicar tema INSTANTANEAMENTE -->
     <script>
         (function () {

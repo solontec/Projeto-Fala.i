@@ -3,70 +3,58 @@ require_once "../config/config.php";
 require_once "../src/Model/AgendaModel.php";
 session_start();
 
-header("Content-Type: application/json"); // todas as respostas serão JSON
-
-
 $method = $_SERVER["REQUEST_METHOD"];
-$action = $_GET["action"] ?? null; // ex: AgendaController.php?action=listar
+$action = $_POST["acao"] ?? $_GET["action"] ?? null;
+$usuario_id = $_SESSION["usuario_id"] ?? 1;
 
-if ($method === "POST" && !$action) {
+// --- Criar tarefa ---
+if ($method === "POST" && $action === "criar") {
     $titulo = $_POST["titulo"];
     $descricao = $_POST["descricao"];
     $dataHora = $_POST["data_tarefa"];
-    $usuario_id = $_SESSION["usuario_id"] ?? 1; // temporário
 
     if (AgendaModel::criarTarefa($usuario_id, $titulo, $descricao, $dataHora)) {
-        echo json_encode(["success" => true, "message" => "Tarefa cadastrada com sucesso!"]);
+        header("Location: ../View/PaginaAgenda.php?msg=sucesso");
     } else {
-        echo json_encode(["success" => false, "message" => "Erro ao cadastrar tarefa."]);
+        header("Location: ../View/PaginaAgenda.php?msg=erro");
     }
     exit;
 }
 
-
-if ($method === "GET" && $action === "listar") {
-    $usuario_id = $_SESSION["usuario_id"] ?? 1;
-
-    $tarefas = AgendaModel::listarTarefas($usuario_id);
-
-    echo json_encode([
-        "success" => true,
-        "tarefas" => $tarefas
-    ]);
-    exit;
-}
-
-
-echo json_encode([
-    "success" => false,
-    "message" => "Rota inválida ou método não suportado."
-]);
-exit;
-
+// --- Editar tarefa ---
 if ($method === "POST" && $action === "editar") {
-    $id = $_POST["id"];
+    $id = $_POST["tarefa_id"];
     $titulo = $_POST["titulo"];
     $descricao = $_POST["descricao"];
     $dataHora = $_POST["data_tarefa"];
-    $usuario_id = $_SESSION["usuario_id"] ?? 1;
 
     if (AgendaModel::editarTarefa($id, $usuario_id, $titulo, $descricao, $dataHora)) {
-        echo json_encode(["success" => true, "message" => "Tarefa atualizada com sucesso!"]);
+        header("Location: ../View/PaginaAgenda.php?msg=atualizado");
     } else {
-        echo json_encode(["success" => false, "message" => "Erro ao atualizar tarefa."]);
+        header("Location: ../View/PaginaAgenda.php?msg=erro");
     }
     exit;
 }
 
+// --- Excluir tarefa ---
 if ($method === "POST" && $action === "excluir") {
-    $id = $_POST["id"];
-    $usuario_id = $_SESSION["usuario_id"] ?? 1;
+    $id = $_POST["tarefa_id"];
 
     if (AgendaModel::excluirTarefa($id, $usuario_id)) {
-        echo json_encode(["success" => true, "message" => "Tarefa excluída com sucesso!"]);
+        header("Location: ../View/PaginaAgenda.php?msg=excluido");
     } else {
-        echo json_encode(["success" => false, "message" => "Erro ao excluir tarefa."]);
+        header("Location: ../View/PaginaAgenda.php?msg=erro");
     }
     exit;
 }
 
+// --- Listar tarefas (opcional via GET) ---
+if ($method === "GET" && $action === "listar") {
+    $tarefas = AgendaModel::listarTarefas($usuario_id);
+    echo json_encode($tarefas);
+    exit;
+}
+
+echo "Rota inválida ou método não suportado.";
+exit;
+?>

@@ -494,7 +494,7 @@ a {
   margin-top: 20px;
 }
 
-.tarefa-item {
+.tarefa {
   background: var(--fundo-branco);
   border: 2px solid var(--border-color);
   padding: 15px;
@@ -505,24 +505,24 @@ a {
   transition: all 0.3s ease;
 }
 
-.tarefa-item:hover {
+.tarefa:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px var(--shadow);
 }
 
-.tarefa-item h4 {
+.tarefa h4 {
   color: var(--texto-primario);
   margin-bottom: 5px;
   font-family: "Titillium Web", sans-serif;
 }
 
-.tarefa-item .data {
+.tarefa .data {
   color: var(--texto-secundario);
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-.tarefa-item .descricao {
+.tarefa .descricao {
   color: var(--texto-primario);
   font-size: 14px;
 }
