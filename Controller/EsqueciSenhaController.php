@@ -18,7 +18,7 @@ class AuthController {
 
             // Links
             $linkRedefinicao = "https://chatbot-tcc.onrender.com/nova_senha";
-            $linkSuporte = "http://localhost:5000/inicio?email=" . urlencode($email);
+            $linkSuporte = "http://localhost:5000PaginaInicial.php?email=" . urlencode($email);
 
             $emailEnviado = enviarEmailRedefinicao($email, $rm, $linkRedefinicao, $linkSuporte);
 

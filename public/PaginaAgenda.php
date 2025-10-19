@@ -50,7 +50,7 @@ require_once "../src/Model/AgendaModel.php";
       <img src="assets/img/logo.png" alt="Logo" width="60px">
     </div>
     <ul class="nav-menu">
-      <li><a href="/inicio">Serviços</a></li>
+      <li><a href="PaginaInicial.php">Serviços</a></li>
       <li><a href="PaginaCadastro.html">Quem somos</a></li>
       <li><a href="PaginaInicial.html">Tutorial</a></li>
       <li><a href="PaginaInicial.html">Contato</a></li>

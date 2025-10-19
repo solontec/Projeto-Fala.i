@@ -52,7 +52,7 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">
-            <li><a href="/inicio">Serviços</a></li>
+            <li><a href="PaginaInicial.php">Serviços</a></li>
             <li><a href="PaginaCadastro.html">Quem somos</a></li>
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
             <li><a href="PaginaInicial.html">Contato</a></li>
@@ -63,7 +63,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 <i class="fas fa-moon" id="theme-icon"></i>
             </button>
             <!-- Botão Minha Conta -->
-            <form action="/minha_conta">
+            <form action="PaginaConta.php">
                 <button class="account-btn" type="submit">
                     <i class="fas fa-user"></i>
                     <span>Minha conta</span>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['usuario_id'])) {
         <div class="right">
             <div class="espaco fade-in fade-delay-2">
                 <div class="logo-container">
-                    <img src="img/logo.png" alt="Logo do Chatbot"
+                    <img src="assets/img/logo.png" alt="Logo do Chatbot"
                         id="logo-container" class="logo-container" width="150px">
                 </div>
                 <div class="balao-fala">
@@ -105,7 +105,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <section class="cards-container fade-in">
         <div class="card fade-delay-1">
             <div class="card-agenda">
-                <img src="{{ url_for('static', filename='img/calendario.png') }}" width="250px" alt="Ícone de Agenda">
+                <img src="assets/img/calendario.png" width="250px" alt="Ícone de Agenda">
             </div>
             
                 <button  class="botao">
@@ -115,7 +115,7 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
         <div class="card fade-delay-2">
             <div class="card-microfone">
-                <img src="{{ url_for('static', filename='img/microfone.png') }}" width="260px" alt="Ícone de Microfone">
+                <img src="assets/img/microfone.png" width="260px" alt="Ícone de Microfone">
             </div>
             <button class="botao">
                 <a href="">MICROFONE</a>
@@ -123,7 +123,7 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
         <div class="card fade-delay-3">
             <div class="card-ranking">
-                <img src="{{ url_for('static', filename='img/ranking.png') }}" width="250px" alt="Ícone de Ranking">
+                <img src="assets/img/ranking.png" width="250px" alt="Ícone de Ranking">
             </div>
             <form action="/ranking">
                 <button class="botao">
@@ -166,7 +166,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <section class="oratoria-sessao fade-in">
         <div class="oratoria">
             <div class="img-oratoria">
-                <img src="{{ url_for('static', filename='img/oratoria.jpg') }}" id="oratoria-img"
+                <img src="assets/img/oratoria.jpg" id="oratoria-img"
                     alt="Imagem de oratória">
             </div>
             <div class="texto-oratoria">
@@ -333,7 +333,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 plataforma.</p>
 
             <a href="https://meet.google.com/landing?pli=1" class="google-meet">
-                <img src="{{ url_for('static', filename='img/google-meet.png') }}" alt="" width="30px">
+                <img src="assets/img/google-meet.png" alt="" width="30px">
                 Google Meet
             </a>
 
@@ -431,7 +431,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <footer class="footer-inicio fade-in">
         <div class="footer-inicio">
             <div class="logo-footer">
-                <img src="img/logo.png" alt="" id="logo-footer">
+                <img src="assets/img/logo.png" alt="" id="logo-footer">
                 <p>FALA.I</p>
             </div>
             <hr>

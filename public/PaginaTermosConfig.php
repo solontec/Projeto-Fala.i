@@ -67,7 +67,7 @@
     </div>
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="/inicio">Serviços</a></li>
+      <li><a href="PaginaInicial.php">Serviços</a></li>
       <li><a href="PaginaCadastro.html">Quem somos</a></li>
       <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
       <li><a href="PaginaInicial.html">Contato</a></li>

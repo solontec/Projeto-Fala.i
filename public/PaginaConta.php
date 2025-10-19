@@ -11,7 +11,8 @@ if (!isset($_SESSION["usuario_id"])) {
 $id = $_SESSION["usuario_id"];
 
 // Buscar informações do usuário
-$stmt = $conn->prepare("SELECT nome, rm, email FROM usuarios WHERE id = ?");
+$stmt = $conn->prepare("SELECT nome, rm, email, imagem_usuario FROM usuarios WHERE id = ?");
+
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -88,12 +89,12 @@ if (!$usuario) {
 
   <nav>
     <div class="nav-left">
-      <img src="img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
+      <img  src="assets/img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
         width="60px">
     </div>
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="/inicio">Serviços</a></li>
+      <li><a href="PaginaInicial.php">Serviços</a></li>
       <li><a href="PaginaCadastro.html">Quem somos</a></li>
       <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
       <li><a href="PaginaInicial.html">Contato</a></li>
@@ -114,9 +115,24 @@ if (!$usuario) {
       </div>
 
       <div class="foto">
-        <img src="../public/img/lamborghini.jpg" alt="Foto de perfil" class="fotoPerfil">
-        <button>Editar foto</button>
-      </div>
+  <?php if (!empty($usuario["imagem_usuario"])): ?>
+    <img src="../<?= htmlspecialchars($usuario["imagem_usuario"]) ?>" 
+         alt="Foto do usuário" 
+         width="200" height="200" 
+         style="border-radius: 50%; object-fit: cover;">
+  <?php else: ?>
+    <p>Nenhuma foto enviada.</p>
+  <?php endif; ?>
+</div>
+
+
+      <form action="../Controller/ImagemUsuarioController.php" method="POST" enctype="multipart/form-data">
+  <div class="foto">
+      <input type="file" name="adicionarFoto" accept="image/*">
+    </div> 
+        <button type="submit">Salvar Foto</button>
+    </form>
+
 
       <div class="informacoes">
         <div class="conjunto">

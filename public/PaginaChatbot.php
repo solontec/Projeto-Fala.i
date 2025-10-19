@@ -42,7 +42,7 @@ $resposta = $resposta ?? '';
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">
-            <li><a href="/inicio">Serviços</a></li>
+            <li><a href="PaginaInicial.php">Serviços</a></li>
             <li><a href="PaginaCadastro.php">Quem somos</a></li>
             <li><a href="PaginaInicial.php">Tutorial</a></li>
             <li><a href="PaginaInicial.php">Contato</a></li>

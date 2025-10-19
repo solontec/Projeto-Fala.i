@@ -7,7 +7,7 @@ $method = $_SERVER["REQUEST_METHOD"];
 $action = $_POST["acao"] ?? $_GET["action"] ?? null;
 $usuario_id = $_SESSION["usuario_id"] ?? 1;
 
-// --- Criar tarefa ---
+
 if ($method === "POST" && $action === "criar") {
     $titulo = $_POST["titulo"];
     $descricao = $_POST["descricao"];
@@ -21,7 +21,7 @@ if ($method === "POST" && $action === "criar") {
     exit;
 }
 
-// --- Editar tarefa ---
+
 if ($method === "POST" && $action === "editar") {
     $id = $_POST["tarefa_id"];
     $titulo = $_POST["titulo"];
@@ -30,13 +30,13 @@ if ($method === "POST" && $action === "editar") {
 
     if (AgendaModel::editarTarefa($id, $usuario_id, $titulo, $descricao, $dataHora)) {
         header("Location: ../View/PaginaAgenda.php?msg=atualizado");
-    } else {
+    } else {    
         header("Location: ../View/PaginaAgenda.php?msg=erro");
     }
     exit;
 }
 
-// --- Excluir tarefa ---
+
 if ($method === "POST" && $action === "excluir") {
     $id = $_POST["tarefa_id"];
 
@@ -48,7 +48,7 @@ if ($method === "POST" && $action === "excluir") {
     exit;
 }
 
-// --- Listar tarefas (opcional via GET) ---
+
 if ($method === "GET" && $action === "listar") {
     $tarefas = AgendaModel::listarTarefas($usuario_id);
     echo json_encode($tarefas);
