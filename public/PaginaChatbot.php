@@ -1,7 +1,11 @@
 <?php
+
+require_once "../Controller/GeminiController.php";
 // Garante que variáveis existem
-$pergunta = $pergunta ?? '';
-$resposta = $resposta ?? '';
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+    $pergunta = $_POST['pergunta'] ?? "";
+    $resposta = enviarMensagemGemini($pergunta) ;
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +84,7 @@ $resposta = $resposta ?? '';
             </div>
 
             <div class="chat">
-                <form action="index.php" method="POST" id="form">
+                <form " method="POST" id="form">
                     <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"><?= htmlspecialchars($pergunta) ?></textarea>
                     <button type="submit" class="enviar"><i class="bi bi-arrow-up-circle-fill"></i></button>
                 </form>
