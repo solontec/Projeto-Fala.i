@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['erro_login'] = "Credenciais inválidas. Verifique RM, e-mail ou senha.";
         
        
-        header("Location: /index.php"); 
+        header("Location: ../public/PaginaLogin.php"); 
+        
         
         exit;
     }

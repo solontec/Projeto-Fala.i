@@ -3,7 +3,7 @@
 function getConnection(){ 
     $hostname = "localhost";
     $username = "root";
-    $password = "12345";
+    $password = "";
     $database = "tcc";
 
    $connect = new mysqli($hostname, $username, $password, $database);

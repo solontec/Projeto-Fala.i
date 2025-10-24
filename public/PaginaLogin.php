@@ -93,9 +93,9 @@
                                 <div class="linha-botoes">
                                     <button type="submit" id="entrar">Entrar</button>
                                     <p id="ou">ou</p>
-                                    <a href="/cadastro" id="cadastrar">Cadastrar</a>
+                                    <a href="PaginaCadastro.php" id="cadastrar">Cadastrar</a>
                                 </div>
-                                <a id="esqueci-senha" href="/esqueci_senha">Esqueci minha senha</a>
+                                <a id="esqueci-senha" href="PaginaEsqueciSenha.php">Esqueci minha senha</a>
                             </div>
                         </form>
                     </div>

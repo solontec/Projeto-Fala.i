@@ -111,15 +111,23 @@ require_once "../src/Model/AgendaModel.php";
             echo "<form style='display:inline;' method='POST' action='../Controller/AgendaController.php'>";
             echo "<input type='hidden' name='acao' value='editar'>";
             echo "<input type='hidden' name='tarefa_id' value='" . htmlspecialchars($tarefa['id']) . "'>";
-            echo "<button type='submit' class='btn-editar'>Editar</button>";
+            echo "<button type='submit' class='btn-editar' 
+                    style='background-color:#3498db; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;'>
+                    Editar
+                  </button>";
             echo "</form>";
 
-            echo "<form style='display:inline;' method='POST' action='../Controller/AgendaController.php' onsubmit='return confirm(\"Tem certeza que deseja excluir esta tarefa?\");'>";
+            echo "<form style='display:inline; margin-left:8px;' method='POST' action='../Controller/AgendaController.php' 
+                  onsubmit='return confirm(\"Tem certeza que deseja excluir esta tarefa?\");'>";
             echo "<input type='hidden' name='acao' value='excluir'>";
             echo "<input type='hidden' name='tarefa_id' value='" . htmlspecialchars($tarefa['id']) . "'>";
-            echo "<button type='submit' class='btn-excluir'>Excluir</button>";
+            echo "<button type='submit' class='btn-excluir' 
+                    style='background-color:#e74c3c; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;'>
+                    Excluir
+                  </button>";
             echo "</form>";
-            echo "</div>"; // fim acoes-tarefa
+            echo "</div>";
+
 
             echo "</div><hr>";
         }
@@ -143,24 +151,30 @@ require_once "../src/Model/AgendaModel.php";
         </button>
       </div>
 
-      <form action="../Controller/AgendaController.php" method="POST" id="form-tarefa" class="task-form">
-        <div class="form-group">
-          <label for="nome-tarefa">Nome da Tarefa:</label>
-          <input type="text" id="nome-tarefa" name="titulo" placeholder="Digite o nome da tarefa" required>
-        </div>
-        <div class="form-group">
-          <label for="descricao-tarefa">Descrição (opcional):</label>
-          <textarea id="descricao-tarefa" name="descricao" placeholder="Adicione uma descrição para sua tarefa" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="data-tarefa">Data e Hora:</label>
-          <input type="datetime-local" id="data-tarefa" name="data_tarefa">
-        </div>
-        <div class="form-actions">
-          <button type="button" class="cancel-btn" onclick="fecharModal()">Cancelar</button>
-          <button type="submit" class="submit-btn">Adicionar Tarefa</button>
-        </div>
-      </form>
+     <form action="../Controller/AgendaController.php" method="POST" id="form-tarefa" class="task-form">
+  <input type="hidden" name="acao" value="criar"> <!-- 🔥 necessário para o controller -->
+  
+  <div class="form-group">
+    <label for="nome-tarefa">Nome da Tarefa:</label>
+    <input type="text" id="nome-tarefa" name="titulo" placeholder="Digite o nome da tarefa" required>
+  </div>
+
+  <div class="form-group">
+    <label for="descricao-tarefa">Descrição (opcional):</label>
+    <textarea id="descricao-tarefa" name="descricao" placeholder="Adicione uma descrição para sua tarefa" rows="3"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="data-tarefa">Data e Hora:</label>
+    <input type="datetime-local" id="data-tarefa" name="data_tarefa">
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="cancel-btn" onclick="fecharModal()">Cancelar</button>
+    <button type="submit" class="submit-btn">Adicionar Tarefa</button>
+  </div>
+</form>
+
     </div>
   </div>
 

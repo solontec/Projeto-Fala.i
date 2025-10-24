@@ -14,7 +14,7 @@ if ($method === "POST" && $action === "criar") {
     $dataHora = $_POST["data_tarefa"];
 
     if (AgendaModel::criarTarefa($usuario_id, $titulo, $descricao, $dataHora)) {
-        header("Location: ../View/PaginaAgenda.php?msg=sucesso");
+        header("Location: ../public/PaginaAgenda.php?msg=sucesso");
     } else {
         header("Location: ../View/PaginaAgenda.php?msg=erro");
     }
@@ -41,7 +41,7 @@ if ($method === "POST" && $action === "excluir") {
     $id = $_POST["tarefa_id"];
 
     if (AgendaModel::excluirTarefa($id, $usuario_id)) {
-        header("Location: ../View/PaginaAgenda.php?msg=excluido");
+        header("Location: ../public/PaginaAgenda.php?msg=excluido");
     } else {
         header("Location: ../View/PaginaAgenda.php?msg=erro");
     }
