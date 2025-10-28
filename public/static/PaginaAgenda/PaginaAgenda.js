@@ -114,3 +114,17 @@ function observeElements() {
     observer.observe(element);
   });
 }
+
+function abrirModalEditar(id, titulo, descricao, dataHora) {
+  abrirModal(); // abre modal
+
+  document.getElementById("form-acao").value = "editar";
+  document.getElementById("form-tarefa-id").value = id;
+  document.getElementById("nome-tarefa").value = titulo;
+  document.getElementById("descricao-tarefa").value = descricao;
+  document.getElementById("data-tarefa").value = dataHora;
+
+  // Atualiza título do modal
+  document.querySelector(".modal-header h2").innerText = "Editar Tarefa";
+  document.querySelector(".submit-btn").innerText = "Salvar Alterações";
+}

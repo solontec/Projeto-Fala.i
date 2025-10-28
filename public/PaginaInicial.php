@@ -150,7 +150,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
             <div class="quem-somos">
                 <h3 id="quem-somos">Quem somos?</h3>
-                <img src="{{ url_for('static', filename='img/duvida.png') }}" width="280px" alt="Pessoa com dúvida">
+                <img src="assets/img/duvida.png" width="280px" alt="Pessoa com dúvida">
             </div>
         </div>
     </section>
@@ -194,13 +194,13 @@ if (!isset($_SESSION['usuario_id'])) {
                     <div class="dica-inner">
                         <div class="dica-front">
                             <div class="dica-interior">Expressão corporal</div>
-                            <div><img src="{{ url_for('static', filename='img/expressao-corporal.png') }}" alt="imagem de expressão corporal" width="200px">
+                            <div><img src="assets/img/expressao-corporal.png" alt="imagem de expressão corporal" width="200px">
                             </div>
                         </div>
                         <div class="dica-back">
                             <div class="dica-exterior">
                                 <audio controls>
-                                    <source src="{{ url_for('static', filename='audios/audio1.mp3') }}"
+                                    <source src="assets/audios/audio1.mp3"
                                         type="audio/mpeg">
                                 </audio>
                                 Expressão corporal reforça a mensagem, torna a apresentação envolvente e transmite
@@ -214,13 +214,13 @@ if (!isset($_SESSION['usuario_id'])) {
                     <div class="dica-inner">
                         <div class="dica-front">
                             <div class="dica-interior">Utilização de uma frase de impacto</div>
-                            <div><img src="{{ url_for('static', filename='img/frase-impacto.png') }}" alt="imagem de frase de impacto" width="200px">
+                            <div><img src="assets/img/frase-impacto.png" alt="imagem de frase de impacto" width="200px">
                             </div>
                         </div>
                         <div class="dica-back">
                             <div class="dica-exterior">
                                 <audio controls>
-                                    <source src="{{ url_for('static', filename='audios/audio4.mp3') }}"
+                                    <source src="assets/audios/audio4.mp3"
                                         type="audio/mpeg">
                                 </audio>
                                 Lembra dos exemplos citados? Outra característica comum são frases marcantes, que
@@ -236,12 +236,12 @@ if (!isset($_SESSION['usuario_id'])) {
                     <div class="dica-inner">
                         <div class="dica-front">
                             <div class="dica-interior">Estudo e preparação</div>
-                            <div><img src="{{ url_for('static', filename='img/livro.png') }}" alt="imagem de livro" width="200px"></div>
+                            <div><img src="assets/img/livro.png" alt="imagem de livro" width="200px"></div>
                         </div>
                         <div class="dica-back">
                             <div class="dica-exterior">
                                 <audio controls>
-                                    <source src="{{ url_for('static', filename='audios/audio2.mp3') }}"
+                                    <source src="assets/audios/audio2.mp3"
                                         type="audio/mpeg">
                                 </audio>
                                 Para melhorar sua oratória, pesquise bem o tema e organize a fala em tópicos conectados.
@@ -256,13 +256,13 @@ if (!isset($_SESSION['usuario_id'])) {
                     <div class="dica-inner">
                         <div class="dica-front">
                             <div class="dica-interior">Gerenciamento de tempo</div>
-                            <div><img src="{{ url_for('static', filename='img/gerenciar-tempo.png') }}" alt="imagem de gerenciameno de tempo" width="200px">
+                            <div><img src="assets/img/gerenciar-tempo.png" alt="imagem de gerenciameno de tempo" width="200px">
                             </div>
                         </div>
                         <div class="dica-back">
                             <div class="dica-exterior">
                                 <audio controls>
-                                    <source src="{{ url_for('static', filename='audios/audio5.mp3') }}"
+                                    <source src="assets/audios/audio5.mp3"
                                         type="audio/mpeg">
                                 </audio>
                                 Discursos muito longos ou repetitivos podem prejudicar a absorção do que você está
@@ -279,13 +279,13 @@ if (!isset($_SESSION['usuario_id'])) {
                     <div class="dica-inner">
                         <div class="dica-front">
                             <div class="dica-interior">Uso de exemplos visuais</div>
-                            <div><img src="{{ url_for('static', filename='img/exemplo-visual.png') }}" alt="imagem de exemplo visual" width="200px">
+                            <div><img src="assets/img/exemplo-visual.png" alt="imagem de exemplo visual" width="200px">
                             </div>
                         </div>
                         <div class="dica-back">
                             <div class="dica-exterior">
                                 <audio controls>
-                                    <source src="{{ url_for('static', filename='audios/audio3.mp3') }}"
+                                    <source src="assets/audios/audio3.mp3"
                                         type="audio/mpeg">
                                 </audio>
                                 Segundo Brain Rules, as pessoas lembram 65% das informações quando apresentadas com
@@ -299,13 +299,13 @@ if (!isset($_SESSION['usuario_id'])) {
                     <div class="dica-inner">
                         <div class="dica-front">
                             <div class="dica-interior">Encerramento marcante</div>
-                            <div><img src="{{ url_for('static', filename='img/encerramento-marcante.png') }}" alt="imagem de encerramento-marcante" width="200px">
+                            <div><img src="assets/img/encerramento-marcante.png" alt="imagem de encerramento-marcante" width="200px">
                             </div>
                         </div>
                         <div class="dica-back">
                             <div class="dica-exterior">
                                 <audio controls>
-                                    <source src="{{ url_for('static', filename='audios/audio6.mp3') }}"
+                                    <source src="assets/audios/audio6.mp3"
                                         type="audio/mpeg">
                                 </audio>
                                 Um bom encerramento reforça a importância do que foi dito e deixa uma impressão

@@ -95,53 +95,57 @@ require_once "../src/Model/AgendaModel.php";
           </div>
           <hr>
           <div id="lista-tarefas">
-    <?php
-    $usuario_id = $_SESSION["usuario_id"] ?? 1;
-    $tarefas = AgendaModel::listarTarefas($usuario_id);
+   <?php
+$usuario_id = $_SESSION["usuario_id"] ?? 1;
+$tarefas = AgendaModel::listarTarefas($usuario_id);
 
-    if ($tarefas && count($tarefas) > 0) {
-        foreach ($tarefas as $tarefa) {
-            echo "<div class='tarefa' data-id='" . htmlspecialchars($tarefa['id']) . "'>";
-            echo "<h4>" . htmlspecialchars($tarefa['titulo']) . "</h4>";
-            echo "<p>" . htmlspecialchars($tarefa['descricao']) . "</p>";
-            echo "<small>" . htmlspecialchars($tarefa['data_tarefa']) . "</small>";
-            
-            // Botões de Ação
-            echo "<div class='acoes-tarefa'>";
-            echo "<form style='display:inline;' method='POST' action='../Controller/AgendaController.php'>";
-            echo "<input type='hidden' name='acao' value='editar'>";
-            echo "<input type='hidden' name='tarefa_id' value='" . htmlspecialchars($tarefa['id']) . "'>";
-            echo "<button type='submit' class='btn-editar' 
-                    style='background-color:#3498db; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;'>
-                    Editar
-                  </button>";
-            echo "</form>";
+if ($tarefas && count($tarefas) > 0) {
+    foreach ($tarefas as $tarefa) {
+        $id = $tarefa['id'];
+        $titulo = addslashes($tarefa['titulo']);
+        $descricao = addslashes($tarefa['descricao']);
+        $dataHora = htmlspecialchars($tarefa['data_tarefa'] . 'T' . $tarefa['horario_tarefa']);
 
-            echo "<form style='display:inline; margin-left:8px;' method='POST' action='../Controller/AgendaController.php' 
-                  onsubmit='return confirm(\"Tem certeza que deseja excluir esta tarefa?\");'>";
-            echo "<input type='hidden' name='acao' value='excluir'>";
-            echo "<input type='hidden' name='tarefa_id' value='" . htmlspecialchars($tarefa['id']) . "'>";
-            echo "<button type='submit' class='btn-excluir' 
-                    style='background-color:#e74c3c; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;'>
-                    Excluir
-                  </button>";
-            echo "</form>";
-            echo "</div>";
+        echo "<div class='tarefa' data-id='{$id}'>";
+        echo "<h4>" . htmlspecialchars($tarefa['titulo']) . "</h4>";
+        echo "<p>" . htmlspecialchars($tarefa['descricao']) . "</p>";
+        echo "<small>" . htmlspecialchars($tarefa['data_tarefa']) . "</small>";
 
+        echo "<div class='acoes-tarefa'>";
 
-            echo "</div><hr>";
-        }
-    } else {
-        echo "<p>Nenhuma tarefa encontrada.</p>";
+        
+        echo "<button type='button' class='btn-editar' 
+            style='background-color:#3498db; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-right:8px;'
+            onclick='abrirModalEditar(\"{$id}\", \"{$titulo}\", \"{$descricao}\", \"{$dataHora}\")'>
+            Editar
+        </button>";
+
+        // Botão Excluir
+        echo "<form style='display:inline;' method='POST' action='../Controller/AgendaController.php' 
+                onsubmit='return confirm(\"Tem certeza que deseja excluir esta tarefa?\");'>";
+        echo "<input type='hidden' name='acao' value='excluir'>";
+        echo "<input type='hidden' name='tarefa_id' value='{$id}'>";
+        echo "<button type='submit' class='btn-excluir' 
+                style='background-color:#e74c3c; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;'>
+                Excluir
+              </button>";
+        echo "</form>";
+
+        echo "</div>"; 
+        echo "</div><hr>";
     }
-    ?>
+} else {
+    echo "<p>Nenhuma tarefa encontrada.</p>";
+}
+?>
+
 </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL -->
+ 
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
@@ -151,9 +155,10 @@ require_once "../src/Model/AgendaModel.php";
         </button>
       </div>
 
-     <form action="../Controller/AgendaController.php" method="POST" id="form-tarefa" class="task-form">
-  <input type="hidden" name="acao" value="criar"> <!-- 🔥 necessário para o controller -->
-  
+    <form action="../Controller/AgendaController.php" method="POST" id="form-tarefa" class="task-form">
+  <input type="hidden" id="form-acao" name="acao" value="criar">
+  <input type="hidden" id="form-tarefa-id" name="tarefa_id" value="">
+
   <div class="form-group">
     <label for="nome-tarefa">Nome da Tarefa:</label>
     <input type="text" id="nome-tarefa" name="titulo" placeholder="Digite o nome da tarefa" required>
@@ -161,7 +166,7 @@ require_once "../src/Model/AgendaModel.php";
 
   <div class="form-group">
     <label for="descricao-tarefa">Descrição (opcional):</label>
-    <textarea id="descricao-tarefa" name="descricao" placeholder="Adicione uma descrição para sua tarefa" rows="3"></textarea>
+    <textarea id="descricao-tarefa" name="descricao" placeholder="Adicione uma descrição" rows="3"></textarea>
   </div>
 
   <div class="form-group">
@@ -174,6 +179,7 @@ require_once "../src/Model/AgendaModel.php";
     <button type="submit" class="submit-btn">Adicionar Tarefa</button>
   </div>
 </form>
+
 
     </div>
   </div>

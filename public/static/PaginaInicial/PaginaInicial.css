@@ -617,7 +617,7 @@ section.sessao-onda2 {
   height: 95px;
   position: absolute;
   bottom: 0;
-  background-image: url(/static/img/onda.png);
+  background-image: url(assets/img/onda.png);
   background-size: 1000px 100px;
   animation: ondaAnimada 1.5s ease-in-out infinite alternate;
 }
@@ -627,7 +627,7 @@ section.sessao-onda2 {
   height: 100px;
   position: absolute;
   bottom: 0;
-  background-image: url(/static/img/onda2.png);
+  background-image: url(assets/img/onda2.png);
   background-size: 1000px 100px;
   animation: ondaAnimada 1.5s ease-in-out infinite alternate;
   transform: rotate(180deg);

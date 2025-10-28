@@ -4,7 +4,9 @@ require_once "../Controller/GeminiController.php";
 // Garante que variáveis existem
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     $pergunta = $_POST['pergunta'] ?? "";
-    $resposta = enviarMensagemGemini($pergunta) ;
+    $respostaApi = enviarMensagemGemini($pergunta);
+    $resposta = $respostaApi['resposta'] ?? "Erro ao obter resposta.";
+
 }
 ?>
 
@@ -76,11 +78,12 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         <div class="container">
             <div class="main-container">
                 <?php if (!empty($resposta)): ?>
-                    <div class="resposta-animada">
-                        <strong>Fala.i:</strong>
-                        <p><?= htmlspecialchars($resposta) ?></p>
-                    </div>
-                <?php endif; ?>
+    <div class="resposta-animada">
+        <strong>Fala.i:</strong>
+        <p><?= htmlspecialchars($resposta) ?></p>
+    </div>
+<?php endif; ?>
+
             </div>
 
             <div class="chat">
