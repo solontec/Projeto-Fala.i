@@ -89,6 +89,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             <div class="chat">
                 <form " method="POST" id="form">
                     <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"><?= htmlspecialchars($pergunta) ?></textarea>
+                    <div class="voice-controls">
+                <button type="button" id="btn-falar" class="falar"><i class="fas fa-microphone"></i> Falar</button>
+                <button type="button" id="btn-parar" class="parar" disabled><i class="fas fa-stop"></i> Parar</button>
+                </div>
+
                     <button type="submit" class="enviar"><i class="bi bi-arrow-up-circle-fill"></i></button>
                 </form>
             </div>
@@ -218,7 +223,80 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                 }, { threshold: 0.1 }
             )
             document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el))
-        }
+        } 
     </script>
+
+    <script>
+let recognition;
+let isRecording = false;
+
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.interimResults = false;
+    recognition.continuous = false;
+
+   recognition.onresult = async function(event) {
+    const transcript = event.results[0][0].transcript;
+    stopRecording();
+
+    // Envia a transcrição direto pro Gemini
+    await enviarMensagemGemini(transcript);
+    };
+
+    recognition.onerror = function(event) {
+        console.error("Erro no reconhecimento:", event.error);
+        stopRecording();
+    };
+}
+
+const btnFalar = document.getElementById("btn-falar");
+const btnParar = document.getElementById("btn-parar");
+
+btnFalar.addEventListener("click", () => {
+    if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz 😢");
+
+    recognition.start();
+    isRecording = true;
+    btnFalar.disabled = true;
+    btnParar.disabled = false;
+});
+
+btnParar.addEventListener("click", () => stopRecording());
+
+function stopRecording() {
+    if (recognition && isRecording) {
+        recognition.stop();
+        isRecording = false;
+        btnFalar.disabled = false;
+        btnParar.disabled = true;
+    }
+}
+
+async function enviarMensagemGemini(texto) {
+    try {
+        const response = await fetch("http://localhost:5000/mensagem", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mensagem: texto })
+        });
+
+        const data = await response.json();
+        const resposta = data.resposta || "Erro na resposta do servidor.";
+
+        // Mostra no chat
+        const mainContainer = document.querySelector(".main-container");
+        const divResposta = document.createElement("div");
+        divResposta.className = "resposta-animada";
+        divResposta.innerHTML = `<strong>Fala.i:</strong><p>${resposta}</p>`;
+        mainContainer.appendChild(divResposta);
+
+    } catch (err) {
+        console.error("Erro ao enviar para Gemini:", err);
+    }
+}
+</script>
+
 </body>
 </html>
