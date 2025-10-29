@@ -255,7 +255,7 @@ const btnFalar = document.getElementById("btn-falar");
 const btnParar = document.getElementById("btn-parar");
 
 btnFalar.addEventListener("click", () => {
-    if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz 😢");
+    if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
 
     recognition.start();
     isRecording = true;
