@@ -271,16 +271,18 @@ header {
 
 #textinho {
   color: var(--texto-secundario);
-  font-size: 20px;
+  font-size: 22px;
   margin-top: 20px;
 }
 
-.botao-comecar a {
+.botao-comecar a{
+  display: inline-block;
   background-color: var(--cor-principal);
   border: none;
-  width: 550px;
-  height: 80px;
+  width: 480px;
+  height: 70px;
   border-radius: 13px;
+  padding-top: 5px;
   font-size: 37px;
   cursor: pointer;
   font-family: Titillium Web, sans-serif;
@@ -328,6 +330,8 @@ header {
   text-align: justify;
   display: flex;
   align-items: center;
+  font-family: 'Titillium Web';
+  font-size: 18px;
 }
 
 #logo-container {
@@ -617,7 +621,7 @@ section.sessao-onda2 {
   height: 95px;
   position: absolute;
   bottom: 0;
-  background-image: url(assets/img/onda.png);
+  background-image: url(../../assets/img/onda.png);
   background-size: 1000px 100px;
   animation: ondaAnimada 1.5s ease-in-out infinite alternate;
 }
@@ -627,7 +631,7 @@ section.sessao-onda2 {
   height: 100px;
   position: absolute;
   bottom: 0;
-  background-image: url(assets/img/onda2.png);
+  background-image: url(../../assets/img/onda2.png);
   background-size: 1000px 100px;
   animation: ondaAnimada 1.5s ease-in-out infinite alternate;
   transform: rotate(180deg);
