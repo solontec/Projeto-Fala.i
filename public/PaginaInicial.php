@@ -111,7 +111,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 <img src="assets/img/microfone.png" width="260px" alt="Ícone de Microfone">
             </div>
             <button class="botao">
-                <a href="">MICROFONE</a>
+                <a href="PaginaAquecimento.php">MICROFONE</a>
             </button>
         </div>
         <div class="card fade-delay-3">
@@ -487,6 +487,40 @@ if (!isset($_SESSION['usuario_id'])) {
     </script>
     
     <script src="static/PaginaInicial/PaginaInicial.js"></script>
+
+    <script>
+// Cria um array para armazenar os players do YouTube
+let players = [];
+
+// Função chamada automaticamente quando a API do YouTube estiver pronta
+function onYouTubeIframeAPIReady() {
+    const iframes = document.querySelectorAll('.sessao-videos iframe');
+
+    iframes.forEach((iframe, index) => {
+        const player = new YT.Player(iframe, {
+            events: {
+                'onStateChange': (event) => onPlayerStateChange(event, index)
+            }
+        });
+        players.push(player);
+    });
+}
+
+// Quando um vídeo começar a tocar, pausa os outros
+function onPlayerStateChange(event, currentIndex) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        players.forEach((player, index) => {
+            if (index !== currentIndex) {
+                player.pauseVideo();
+            }
+        });
+    }
+}
+</script>
+
+<!-- Carrega a API do YouTube -->
+<script src="https://www.youtube.com/iframe_api"></script>
+
 </body>
 
 </html>

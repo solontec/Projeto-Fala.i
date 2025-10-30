@@ -59,3 +59,8 @@ CREATE TABLE IF NOT EXISTS tb_logs (
 
 
 select * from usuarios;
+
+INSERT INTO usuarios(nome, rm, email, senha) VALUES('Guilherme', '23078', 'guisolon904@gmail.com', 'Guiph123@' );
+INSERT INTO usuarios(nome, rm, email, senha) VALUES('Edu', '23263', 'eduardoataidemelo@gmail.com', '12345678' );
+INSERT INTO usuarios(nome, rm, email, senha) VALUES('Gustavo', '23028', 'gustavo.rangel086@gmail.com', 'Gu030707' );
+
