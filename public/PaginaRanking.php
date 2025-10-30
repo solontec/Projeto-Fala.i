@@ -37,7 +37,10 @@
 <body>
     <nav>
         <div class="nav-left">
-            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
+            <a href="PaginaInicial.php">
+        <img  src="assets/img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
+        width="60px">
+      </a>
         </div>
         <ul class="nav-menu">
             <li><a href="PaginaInicial.php">Serviços</a></li>

@@ -45,10 +45,10 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">
-            <li><a href="PaginaInicial.php">Serviços</a></li>
-            <li><a href="PaginaCadastro.html">Quem somos</a></li>
-            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-            <li><a href="PaginaInicial.html">Contato</a></li>
+            <li><a href="#quemsomos">Quem Somos</a></li>
+            <li><a href="#funcionalidades">Oratória</a></li>
+            <li><a href="#dicas">Dicas</a></li>
+            <li><a href="#sessao-videos">Vídeos</a></li>
         </ul>
         <div class="nav-right">
             <!-- Botão de Toggle do Modo Escuro -->
@@ -101,40 +101,32 @@ if (!isset($_SESSION['usuario_id'])) {
                 <img src="assets/img/calendario.png" width="250px" alt="Ícone de Agenda">
             </div>
             
-                <button  class="botao">
-                    <a href="PaginaAgenda.php">AGENDA</a> 
-                </button>
+                <a href="PaginaAgenda.php" class="botao">AGENDA</a>
             </form>
         </div>
         <div class="card fade-delay-2">
             <div class="card-microfone">
                 <img src="assets/img/microfone.png" width="260px" alt="Ícone de Microfone">
             </div>
-            <button class="botao">
-                <a href="PaginaAquecimento.php">MICROFONE</a>
-            </button>
+             <a href="PaginaAquecimento.php" class="botao">MICROFONE</a>
         </div>
         <div class="card fade-delay-3">
             <div class="card-ranking">
                 <img src="assets/img/ranking.png" width="250px" alt="Ícone de Ranking">
             </div>
-            <form action="/ranking">
-                <button class="botao">
-                    <a href="PaginaRanking.php">RANKING</a>
-                </button>
-            </form>
+            <a href="PaginaRanking.php" class="botao">RANKING</a>
 
         </div>
     </section>
 
-    <section class="sessao-onda">
+    <section class="sessao-onda"  id="quemsomos">
         <div class="onda" id="onda1"></div>
         <div class="onda" id="onda2"></div>
         <div class="onda" id="onda3"></div>
         <div class="onda" id="onda4"></div>
     </section>
 
-    <section class="proposta">
+    <section class="proposta" id="quemsomos">
         <div class="conteudo">
             <div class="sobre">
                 <p>O <b>FALA.I</b> nasceu como um projeto de <b>Trabalho de Conclusão de Curso</b> do nosso grupo de Informática para Internet, idealizado em fevereiro de 2025.
@@ -166,7 +158,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 <img src="assets/img/oratoria.jpg" id="oratoria-img"
                     alt="Imagem de oratória">
             </div>
-            <div class="texto-oratoria">
+            <div class="texto-oratoria"  id="funcionalidades">
                 <h3>O que é Oratória?</h3>
                 <p id="texto-oratoria">A <b>oratória</b> é a arte de falar em público de forma clara, envolvente e
                     persuasiva. É a habilidade de usar a fala para expressar opiniões, defender ideias e se comunicar
@@ -183,7 +175,7 @@ if (!isset($_SESSION['usuario_id'])) {
     </section>
 
     <!-- Seção Dicas - Cards com Flip como no original -->
-    <section class="sessao-dicas" id="sessao-dicas">
+    <section class="sessao-dicas" id="sessao-dicas" id="dicas">
         <h3 id="dicas" class="fade-in">Dicas para Oratória</h3>
         <div class="dicas-principal">
             <div class="container-dicas">
