@@ -151,3 +151,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Inicializa animações de fade-in
   observeElements()
 })
+
+// Pegue todos os elementos de áudio
+const audios = document.querySelectorAll('audio');
+
+// Adicione um evento de "play" a cada áudio
+audios.forEach(audio => {
+    audio.addEventListener('play', function() {
+        // Pause todos os outros áudios
+        audios.forEach(otherAudio => {
+            if (otherAudio !== audio && !otherAudio.paused) {
+                otherAudio.pause();
+                otherAudio.currentTime = 0; // Reseta o tempo para o início
+            }
+        });
+    });
+});
