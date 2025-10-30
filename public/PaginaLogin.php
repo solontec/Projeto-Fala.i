@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/PaginaLogin/PaginaLogin.css">
-    <script src="/static/PaginaLogin/PaginaLogin.js"></script>
-
     <!-- Script para aplicar tema INSTANTANEAMENTE -->
     <script>
         (function () {
@@ -19,17 +17,9 @@
         })();
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap"
-        rel="stylesheet">
-    <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='PaginaLogin/PaginaLogin.css') }}">
-
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <title>Pagina Login Fala.i</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
 </head>
@@ -73,18 +63,18 @@
             <div class="direita">
                 <div class="container-login" id="container-login">
                     <div class="login">
-                        <h3>Login</h3>
+                        <h3>Faça seu Login</h3>
                         <form method="POST" action="../Controller/LoginController.php" id="form-login"> 
-                            <p>E-mail</p>
+                            <p id="label">E-mail</p>
                             <input type="email" placeholder="Digite seu email" id="email" name="email" required>
                             <div class="linha-rm-senha">
                                 <div>
-                                    <p>Rm</p>
+                                    <p id="label">Rm</p>
                                     <input type="text" placeholder="Digite seu Rm" id="rm" required name="rm"
                                         maxlength="5">
                                 </div>
                                 <div>
-                                    <p>Senha</p>
+                                    <p id="label">Senha</p>
                                     <input type="password" placeholder="Digite sua senha" id="senha" name="senha"
                                         required>
                                 </div>
@@ -116,17 +106,11 @@
         </script>
 
         <footer>
-            <a href="/termos" id="ver-termos">Ver termos e condições</a>
+            <a href="PaginaTermos.php" id="ver-termos">Ver termos e condições</a>
         </footer>
     </section>
 
-    <script src="{{ url_for('static', filename='PaginaLogin/PaginaLogin.js') }}"></script>
-
-   <script>
-    // Gerenciamento do Modo Escuro
-
-   </script>
-
+    
+<script src="static/PaginaLogin/PaginaLogin.js"></script>
 </body>
-
 </html>
