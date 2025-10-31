@@ -110,58 +110,55 @@ if (!$usuario) {
   </nav>
 
   <div class="tudo">
-    <div class="conteudo">
-      
-      <div class="nomePrincipal">
-        <p><?= htmlspecialchars($usuario["nome"]) ?></p>
-      </div>
+    <<div class="perfil-container">
+  <div class="perfil-lateral">
+    <div class="foto">
+      <?php if (!empty($usuario["imagem_usuario"])): ?>
+        <img src="../<?= htmlspecialchars($usuario["imagem_usuario"]) ?>" 
+            alt="Foto do usuário" 
+            class="foto-perfil">
+      <?php else: ?>
+        <img src="../assets/user-placeholder.png" 
+            alt="Sem foto" 
+            class="foto-perfil">
+      <?php endif; ?>
+    </div>
 
-      <div class="foto">
-  <?php if (!empty($usuario["imagem_usuario"])): ?>
-    <img src="../<?= htmlspecialchars($usuario["imagem_usuario"]) ?>" 
-         alt="Foto do usuário" 
-         width="200" height="200" 
-         style="border-radius: 50%; object-fit: cover;">
-  <?php else: ?>
-    <p>Nenhuma foto enviada.</p>
-  <?php endif; ?>
-</div>
-
-
-      <form action="../Controller/ImagemUsuarioController.php" method="POST" enctype="multipart/form-data">
-  <div class="foto">
+    <form action="../Controller/ImagemUsuarioController.php" method="POST" enctype="multipart/form-data" class="form-foto">
       <input type="file" name="adicionarFoto" accept="image/*">
-    </div> 
-        <button type="submit">Salvar Foto</button>
+      <button type="submit">Salvar Foto</button>
     </form>
 
+    <h2 class="nome-usuario"><?= htmlspecialchars($usuario["nome"]) ?></h2>
+    <button class="editar-btn">Editar Perfil</button>
+  </div>
 
-      <div class="informacoes">
-        <div class="conjunto">
-          <label>Email: </label>
-          <p><?= htmlspecialchars($usuario["email"]) ?></p>
-        </div>
+  <div class="perfil-conteudo">
+    <h3>Informações da Conta</h3>
 
-        <div class="conjunto">
-          <label>RM:</label>
-          <p><?= htmlspecialchars($usuario["rm"]) ?></p>
-          <button>Alterar nome</button>
-        </div>
-
-        <div class="conjunto">
-          <label>Sair da conta: </label>
-          <form action="../Controller/LogoutController.php" method="POST">
-            <button type="submit">Logout</button>
-          </form>
-        </div>
-
-        <div class="conjunto">
-          <label>Alterar Senha: </label>
-          <button>Alterar senha</button>
-        </div>
-      </div>
-
+    <div class="info-card">
+      <label>Email:</label>
+      <p><?= htmlspecialchars($usuario["email"]) ?></p>
     </div>
+
+    <div class="info-card">
+      <label>RM: <p id="rm"><?= htmlspecialchars($usuario["rm"]) ?></p></label>
+      
+      <button>Alterar RM</button>
+    </div>
+
+    <div class="info-card">
+      <label>Alterar Senha:</label>
+      <button>Alterar senha</button>
+    </div>
+
+    <div class="info-card danger-zone">
+      <label>Sair da conta:</label>
+      <form action="../Controller/LogoutController.php" method="POST">
+        <button type="submit" class="logout-btn">Logout</button>
+      </form>
+    </div>
+  </div>
   </div>
 
   <script src="{{ url_for('static', filename='PaginaConta/PaginaConta.js') }}"></script>

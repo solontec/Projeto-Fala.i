@@ -40,8 +40,8 @@ if (!isset($_SESSION['usuario_id'])) {
 <body>
     <nav>
         <div class="nav-left">
-            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo"
-                width="60px">
+            <a href=""><img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo"
+                width="60px"></a>
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">
@@ -152,13 +152,13 @@ if (!isset($_SESSION['usuario_id'])) {
     </section>
 
     <!-- Seção Oratória - Layout Horizontal como na imagem -->
-    <section class="oratoria-sessao fade-in">
+    <section class="oratoria-sessao fade-in"  id="funcionalidades">
         <div class="oratoria">
             <div class="img-oratoria">
                 <img src="assets/img/oratoria.jpg" id="oratoria-img"
                     alt="Imagem de oratória">
             </div>
-            <div class="texto-oratoria"  id="funcionalidades">
+            <div class="texto-oratoria" >
                 <h3>O que é Oratória?</h3>
                 <p id="texto-oratoria">A <b>oratória</b> é a arte de falar em público de forma clara, envolvente e
                     persuasiva. É a habilidade de usar a fala para expressar opiniões, defender ideias e se comunicar
@@ -370,52 +370,57 @@ if (!isset($_SESSION['usuario_id'])) {
     </section>
 
     <section class="sessao-videos fade-in" id="sessao-videos">
-        <h3 id="dicas">Vídeos - Dicas para Oratória!</h3>
-        <div class="videos-dicas fade-in">
-            <div class="video fade-in">
-                <iframe src="https://www.youtube.com/embed/wLZyCpz3M7k?si=swvm31YXaHf96pW2" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <h4 class="titulo-video">Técnicas para melhorar a oratória</h4>
-            </div>
-            <div class="video fade-in">
-                <iframe src="https://www.youtube.com/embed/cTQHrNOlAUo?si=9pDrZuGvxFb_LLr2" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <h4 class="titulo-video">Curso de Oratória completo, Comunicação de Alta Performance #01</h4>
-            </div>
-            <div class="video fade-in">
-                <iframe src="https://www.youtube.com/embed/-w9tPITrRvM?si=zhw5TBz9w3rKzBOo" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <h4 class="titulo-video">5 exercícios para treinar oratória em casa (apenas 5min POR DIA)</h4>
-            </div>
-            <div class="video fade-in">
-                <iframe src="https://www.youtube.com/embed/JkhA2cxeOaA?si=kLqMDa1vzaEmNN-X" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <h4 class="titulo-video">Curso COMPLETO de oratória para INICIANTES</h4>
-            </div>
-            <div class="video fade-in">
-                <iframe src="https://www.youtube.com/embed/6aLHhfMYkA8?si=kbZXzZJuyVWKZINf" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <h4 class="titulo-video">Não é só voz! Conheça os 3 pilares da oratória</h4>
-            </div>
-            <div class="video fade-in">
-                <iframe src="https://www.youtube.com/embed/fdnPSBLHjvo?si=W0a0c0y77VLcOMQN" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <h4 class="titulo-video">Erros mortais da oratória</h4>
-            </div>
+    <h3 id="dicas">Vídeos - Dicas para Oratória!</h3>
+    <div class="videos-dicas fade-in">
+        <div class="video fade-in">
+            <iframe src="https://www.youtube.com/embed/wLZyCpz3M7k?enablejsapi=1" title="Técnicas para melhorar a oratória"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h4 class="titulo-video">Técnicas para melhorar a oratória</h4>
         </div>
-    </section>
+
+        <div class="video fade-in">
+            <iframe src="https://www.youtube.com/embed/cTQHrNOlAUo?enablejsapi=1" title="Curso de Oratória completo, Comunicação de Alta Performance #01"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h4 class="titulo-video">Curso de Oratória completo, Comunicação de Alta Performance #01</h4>
+        </div>
+
+        <div class="video fade-in">
+            <iframe src="https://www.youtube.com/embed/-w9tPITrRvM?enablejsapi=1" title="5 exercícios para treinar oratória em casa (apenas 5min POR DIA)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h4 class="titulo-video">5 exercícios para treinar oratória em casa (apenas 5min POR DIA)</h4>
+        </div>
+
+        <div class="video fade-in">
+            <iframe src="https://www.youtube.com/embed/JkhA2cxeOaA?enablejsapi=1" title="Curso COMPLETO de oratória para INICIANTES"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h4 class="titulo-video">Curso COMPLETO de oratória para INICIANTES</h4>
+        </div>
+
+        <div class="video fade-in">
+            <iframe src="https://www.youtube.com/embed/6aLHhfMYkA8?enablejsapi=1" title="Não é só voz! Conheça os 3 pilares da oratória"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h4 class="titulo-video">Não é só voz! Conheça os 3 pilares da oratória</h4>
+        </div>
+
+        <div class="video fade-in">
+            <iframe src="https://www.youtube.com/embed/fdnPSBLHjvo?enablejsapi=1" title="Erros mortais da oratória"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h4 class="titulo-video">Erros mortais da oratória</h4>
+        </div>
+    </div>
+</section>
 
     <footer class="footer-inicio fade-in">
         <div class="footer-inicio">
@@ -430,30 +435,30 @@ if (!isset($_SESSION['usuario_id'])) {
             </div>
             <div class="icons-footer">
                 <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#626262" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--footer)" viewBox="0 0 24 24">
                         <path
                             d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-3a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
                     </svg>
                 </a>
                 <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#626262" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--footer)" viewBox="0 0 24 24">
                         <path
                             d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 5 3.657 9.128 8.438 9.879v-6.988H7.898v-2.89h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.261c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33V21.88C18.344 21.128 22 17 22 12z" />
                     </svg>
                 </a>
-                <a href="https://github.com" target="_blank" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#626262" viewBox="0 0 24 24">
+                <a href="https://github.com/solontec/Projeto-Fala.i" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--footer)" viewBox="0 0 24 24">
                         <path
                             d="M12 0C5.371 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577 0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.612-4.042-1.612-.546-1.387-1.333-1.756-1.333-1.756-1.09-.744.083-.729.083-.729 1.205.086 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.604-2.665-.303-5.466-1.335-5.466-5.932 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.53 11.53 0 013.006-.404c1.02.005 2.045.138 3.006.404 2.29-1.553 3.297-1.23 3.297-1.23.655 1.653.243 2.874.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.804 5.625-5.475 5.921.43.372.823 1.102.823 2.222 0 1.604-.014 2.896-.014 3.293 0 .319.192.694.801.576C20.565 21.796 24 17.299 24 12c0-6.627-5.373-12-12-12z" />
                     </svg>
                 </a>
             </div>
             <div class="caminhos-footer">
-                <a href="/termos">Ver Termos</a>
+                <a href="PaginaTermos.php">Ver Termos</a>
                 <p>|</p>
-                <a href="/minha_conta">Minha Conta</a>
+                <a href="PaginaConta.php">Minha Conta</a>
                 <p>|</p>
-                <a href="/agenda">Agenda</a>
+                <a href="PaginaAgenda.php">Agenda</a>
                 <p>|</p>
                 <a href="#sessao-dicas">Dicas</a>
                 <p>|</p>

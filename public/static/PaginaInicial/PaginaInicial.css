@@ -26,6 +26,7 @@
   --borda-input: #828282;
   --fundo-input: #ffffff;
   --cor-input: #333;
+  --footer: #4d4d4d;
 }
 
 /* Modo Escuro */
@@ -53,6 +54,7 @@
   --borda-input: #2d2d2d;
   --fundo-input: #b4b4b4;
   --cor-input: #222222;
+  --footer: #e1e1e1;
 }
 
 /* FADE IN ANIMATION */
@@ -920,7 +922,7 @@ hr {
 .informacoes-footer {
   text-align: center;
   font-family: "Titillium Web";
-  color: #626262;
+  color: var(--footer);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -934,14 +936,14 @@ hr {
 
 .caminhos-footer, .copright {
   display: flex;
-  color: #626262;
+  color: var(--footer);
   gap: 10px;
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a {
   text-decoration: none;
-  color: #626262;
+  color: var(--footer);
   font-family: "Titillium Web";
 }
 
