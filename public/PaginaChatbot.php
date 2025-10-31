@@ -6,7 +6,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     $pergunta = $_POST['pergunta'] ?? "";
     $respostaApi = enviarMensagemGemini($pergunta);
     $resposta = $respostaApi['resposta'] ?? "Erro ao obter resposta.";
-
 }
 ?>
 
@@ -37,6 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Usa o CSS que você forneceu -->
     <link rel="stylesheet" href="static/PaginaChatbot/PaginaChatbot.css">
     <title>Chat Fala.i</title>
 </head>
@@ -76,23 +76,24 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         </div>
 
         <div class="container">
-            <div class="main-container">
+            <div class="main-container" id="chat-container">
+                <!-- Se existir resposta via POST (quando o form for submetido no backend sem JS) -->
                 <?php if (!empty($resposta)): ?>
-    <div class="resposta-animada">
-        <strong>Fala.i:</strong>
-        <p><?= htmlspecialchars($resposta) ?></p>
-    </div>
-<?php endif; ?>
-
+                    <div class="resposta-animada">
+                        <strong>Fala.i:</strong>
+                        <p><?= htmlspecialchars($resposta) ?></p>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="chat">
-                <form " method="POST" id="form">
-                    <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"><?= htmlspecialchars($pergunta) ?></textarea>
+                <!-- mantém method POST caso queira fallback sem JS; o JS previne o comportamento padrão -->
+                <form method="POST" id="form">
+                    <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"><?= isset($pergunta) ? htmlspecialchars($pergunta) : "" ?></textarea>
                     <div class="voice-controls">
-                <button type="button" id="btn-falar" class="falar"><i class="fas fa-microphone"></i> Falar</button>
-                <button type="button" id="btn-parar" class="parar" disabled><i class="fas fa-stop"></i> Parar</button>
-                </div>
+                        <button type="button" id="btn-falar" class="falar"><i class="fas fa-microphone"></i> Falar</button>
+                        <button type="button" id="btn-parar" class="parar" disabled><i class="fas fa-stop"></i> Parar</button>
+                    </div>
 
                     <button type="submit" class="enviar"><i class="bi bi-arrow-up-circle-fill"></i></button>
                 </form>
@@ -150,9 +151,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
 
+    <!-- seu JS original (se houver) -->
     <script src="static/PaginaChatbot/PaginaChatbot.js"></script>
 
     <script>
+        /* --- Manutenção dos scripts que já tinha: menu, tema, atalhos, etc --- */
         function abrirmenu() {
             const menu = document.getElementById("menu")
             menu.classList.toggle("ativo")
@@ -162,20 +165,24 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         const menu = document.getElementById("menu")
         const addButton = document.querySelector(".add")
 
-        menuContainer.addEventListener("mouseenter", () => menu.classList.add("ativo"))
-        menuContainer.addEventListener("mouseleave", () => menu.classList.remove("ativo"))
-        addButton.addEventListener("mouseenter", () => menu.classList.add("ativo"))
-        addButton.addEventListener("mouseleave", () => menu.classList.remove("ativo"))
+        if (menuContainer && menu && addButton) {
+            menuContainer.addEventListener("mouseenter", () => menu.classList.add("ativo"))
+            menuContainer.addEventListener("mouseleave", () => menu.classList.remove("ativo"))
+            addButton.addEventListener("mouseenter", () => menu.classList.add("ativo"))
+            addButton.addEventListener("mouseleave", () => menu.classList.remove("ativo"))
+        }
 
         const textarea = document.getElementById("pergunta")
         const form = document.getElementById("form")
 
-        textarea.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault()
-                form.dispatchEvent(new Event("submit"))
-            }
-        })
+        if (textarea) {
+            textarea.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault()
+                    form.dispatchEvent(new Event("submit"))
+                }
+            })
+        }
 
         function toggleMobileMenu() {
             const navMenu = document.getElementById("nav-menu")
@@ -223,80 +230,119 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                 }, { threshold: 0.1 }
             )
             document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el))
-        } 
+        }
     </script>
 
     <script>
-let recognition;
-let isRecording = false;
+    // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
+    let recognition;
+    let isRecording = false;
 
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.lang = 'pt-BR';
-    recognition.interimResults = false;
-    recognition.continuous = false;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.lang = 'pt-BR';
+        recognition.interimResults = false;
+        recognition.continuous = false;
 
-   recognition.onresult = async function(event) {
-    const transcript = event.results[0][0].transcript;
-    stopRecording();
+        recognition.onresult = async function(event) {
+            const transcript = event.results[0][0].transcript;
+            stopRecording();
+            mostrarMensagemUsuario(transcript);
+            await enviarMensagemGemini(transcript);
+        };
 
-    // Envia a transcrição direto pro Gemini
-    await enviarMensagemGemini(transcript);
-    };
-
-    recognition.onerror = function(event) {
-        console.error("Erro no reconhecimento:", event.error);
-        stopRecording();
-    };
-}
-
-const btnFalar = document.getElementById("btn-falar");
-const btnParar = document.getElementById("btn-parar");
-
-btnFalar.addEventListener("click", () => {
-    if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
-
-    recognition.start();
-    isRecording = true;
-    btnFalar.disabled = true;
-    btnParar.disabled = false;
-});
-
-btnParar.addEventListener("click", () => stopRecording());
-
-function stopRecording() {
-    if (recognition && isRecording) {
-        recognition.stop();
-        isRecording = false;
-        btnFalar.disabled = false;
-        btnParar.disabled = true;
+        recognition.onerror = function(event) {
+            console.error("Erro no reconhecimento:", event.error);
+            stopRecording();
+        };
     }
-}
 
-async function enviarMensagemGemini(texto) {
-    try {
-        const response = await fetch("http://localhost:5000/mensagem", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ mensagem: texto })
+    const btnFalar = document.getElementById("btn-falar");
+    const btnParar = document.getElementById("btn-parar");
+
+    if (btnFalar) {
+        btnFalar.addEventListener("click", () => {
+            if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
+            recognition.start();
+            isRecording = true;
+            btnFalar.disabled = true;
+            btnParar.disabled = false;
         });
-
-        const data = await response.json();
-        const resposta = data.resposta || "Erro na resposta do servidor.";
-
-        // Mostra no chat
-        const mainContainer = document.querySelector(".main-container");
-        const divResposta = document.createElement("div");
-        divResposta.className = "resposta-animada";
-        divResposta.innerHTML = `<strong>Fala.i:</strong><p>${resposta}</p>`;
-        mainContainer.appendChild(divResposta);
-
-    } catch (err) {
-        console.error("Erro ao enviar para Gemini:", err);
     }
-}
-</script>
+
+    if (btnParar) {
+        btnParar.addEventListener("click", () => stopRecording());
+    }
+
+    function stopRecording() {
+        if (recognition && isRecording) {
+            recognition.stop();
+            isRecording = false;
+            if (btnFalar) btnFalar.disabled = false;
+            if (btnParar) btnParar.disabled = true;
+        }
+    }
+
+    // Função para mostrar mensagem do usuário no chat (reaproveitável)
+    function mostrarMensagemUsuario(texto) {
+        const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+        const divUser = document.createElement("div");
+        divUser.className = "user-message";
+        // usa textContent por segurança (escape automático)
+        divUser.textContent = texto;
+        mainContainer.appendChild(divUser);
+        mainContainer.scrollTop = mainContainer.scrollHeight;
+    }
+
+    // Listener do form (envio por texto) - previne reload e usa envio AJAX local
+    const formChat = document.getElementById("form");
+    formChat.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const input = document.getElementById("pergunta");
+        const texto = input.value.trim();
+        if (!texto) return;
+
+        mostrarMensagemUsuario(texto);
+        input.value = "";
+
+        // envia para Gemini (via sua API local / flask)
+        await enviarMensagemGemini(texto);
+    });
+
+    // Envia para a rota local do Gemini (mesma lógica que você já tinha)
+    async function enviarMensagemGemini(texto) {
+        try {
+            const response = await fetch("http://localhost:5000/mensagem", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mensagem: texto })
+            });
+
+            const data = await response.json();
+            const resposta = data.resposta || "Erro na resposta do servidor.";
+
+            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+            const divResposta = document.createElement("div");
+            divResposta.className = "resposta-animada";
+            // usa innerText/creation segura: cria elementos para evitar XSS se quiser trocar depois
+            divResposta.innerHTML = `<strong>Fala.i:</strong><p>${resposta}</p>`;
+            mainContainer.appendChild(divResposta);
+
+            mainContainer.scrollTop = mainContainer.scrollHeight;
+
+        } catch (err) {
+            console.error("Erro ao enviar para Gemini:", err);
+            // opcional: mostrar mensagem de erro ao usuário
+            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+            const divResposta = document.createElement("div");
+            divResposta.className = "resposta-animada";
+            divResposta.innerHTML = `<strong>Fala.i:</strong><p>Erro ao comunicar com o servidor.</p>`;
+            mainContainer.appendChild(divResposta);
+            mainContainer.scrollTop = mainContainer.scrollHeight;
+        }
+    }
+    </script>
 
 </body>
 </html>
