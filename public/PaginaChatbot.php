@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
                 <i class="fas fa-moon" id="theme-icon"></i>
             </button>
-            <form action="/minha_conta">
+            <form action="PaginaConta.php">
                 <button class="account-btn" type="submit">
                     <i class="fas fa-user"></i>
                     <span>Minha conta</span>

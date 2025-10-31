@@ -1,9 +1,21 @@
 <?php
 session_start();
+
+// Impede cache no navegador (assim o "Voltar" não mostra a página anterior)
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+
+// Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: PaginaLogin.php");
     exit;
 }
+
+
+// Se não estiver logado, redireciona
+
 ?>
 
 <!DOCTYPE html>
