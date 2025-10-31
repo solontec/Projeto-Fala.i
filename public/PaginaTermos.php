@@ -15,7 +15,10 @@
 </head>
 <body>
     <nav>
-        <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo">
+        <<a href="PaginaInicial.php">
+        <img  src="assets/img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
+        width="60px">
+      </a>
         <a href="/login">Voltar</a> <!-- ARRUMAR ISSO PARA WINDOW HISTORY PARA VOLTAR SEMPRE PARA ANTERIOR ( TELA TERMOS (BOTAO VOLTAR))-->
     </nav>
     <div class="container-termos">

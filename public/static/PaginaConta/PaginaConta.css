@@ -22,7 +22,7 @@
   --onda: #5c5ee2;
   --onda2: #4f3cad;
   --onda3: #423291;
-  --texto: #ffffff;
+  --texto: #565656;
   --texto2: #585bfc;
   --border-color2: #e5e7eb;
   --passos: #dedede2f;
@@ -33,6 +33,7 @@
   --principal-fundo: #5c5ee2;
   --texto-informacao: #5c5ee2;
   --nome: #5c5ee2;
+  --fundo-perfil: #e4e9f0 ;  
 }
 
 /* Modo Escuro */
@@ -64,6 +65,7 @@
   --fundo-menu: #101010;
   --texto-informacao: #ffffff;
   --nome: #ffffff;
+  --fundo-perfil: #101010;
 }
 
 /* FADE IN ANIMATION */
@@ -172,6 +174,7 @@ nav {
 
 li {
   transition: 0.2s;
+  font-size: 18px;
 }
 
 li:hover {
@@ -181,6 +184,7 @@ li:hover {
 .logo {
   margin-left: 10px;
   animation: pulo 2s infinite;
+  position: fixed;
 }
 
 /* Botão Toggle Modo Escuro */
@@ -260,6 +264,7 @@ li:hover {
   padding: 50px;
   padding-top: 100px;
   color: #888;
+  position: fixed;
 }
 
 .menu-lateral li{
@@ -327,8 +332,6 @@ svg:hover{
 
 .tudo{
   display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 20px;
 }
 
@@ -340,68 +343,6 @@ svg:hover{
   width: 60vw;
   border-radius: 2rem;
   margin-left: 10%;
-  justify-content: center;
-  align-items: center;
-}
-
-.nomePrincipal p{
-  color: var(--nome);
-  font-size: 35px;
-  font-weight: bold;
-  font-family: "Archivo Black";
-}
-
-.foto{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5%;
-  margin-bottom: 7%;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-}
-
-.foto button{
-  width: 100px;
-}
-
-.fotoPerfil{
-  width: 25%;
-  border-radius: 50%;
-}
-
-.informacoes{
-  gap: 20px;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  color: var(--texto-informacao);
-}
-
-.conjunto{
-  gap: 10px;
-  display: flex;
-  flex-direction: row;
-}
-
-button{
-  background-color: var(--principal-fundo);
-  border: none;
-  border-radius: 5px;
-  height: auto;
-  padding: 5px;
-  color: white;
-  cursor: pointer;
-  font-family: 'Titillium Web';
-  font-weight: 500;
-  font-size: 15px;
-  transition: all ease-in-out 0.2s;
-}
-
-button:hover{
-  background-color: #423291;
-  transform: scale(1.02);
 }
 
 a{
@@ -415,4 +356,167 @@ a:hover{
 
 p{
   font-family: "Titillium Web";
+}
+
+input {
+  background-color: var(--cor-principal);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Titillium Web";
+  transition: 0.2s;
+  display: flex;
+}
+
+input:hover {
+  background-color: var(--hover);
+  transform: scale(1.05);
+}
+
+
+button {
+  background-color: var(--cor-principal);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Titillium Web";
+  transition: 0.2s;
+  display: flex;
+}
+
+button:hover {
+  background-color: var(--hover);
+  transform: scale(1.05);
+}
+
+/* ===== PERFIL ESTILO DISCORD ===== */
+.perfil-container {
+  display: flex;
+  gap: 40px;
+  background-color: var(--fundo-cinza);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 40px auto;
+  width: 80%;
+  box-shadow: 0 0 25px rgba(0,0,0,0.3);
+  margin-left: 300px;
+}
+
+.perfil-lateral {
+  width: 30%;
+  background-color: var(--fundo-perfil);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.foto-perfil {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--cor-principal);
+}
+
+.form-foto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.nome-usuario {
+  color: var(--texto);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.editar-btn {
+  background-color: var(--cor-principal);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: "Titillium Web";
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.editar-btn:hover {
+  background-color: var(--hover);
+  transform: scale(1.05);
+}
+
+.perfil-conteudo {
+  flex: 1;
+  background-color: var(--fundo-menu);
+  border-radius: 16px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  color: var(--texto-informacao);
+}
+
+.perfil-conteudo h3 {
+  color: var(--texto);
+  font-size: 20px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--cor-principal);
+  padding-bottom: 10px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--fundo-cinza);
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-family: "Titillium Web";
+  font-weight: 500;
+}
+
+.info-card label {
+  color: var(--texto);
+  font-weight: 700;
+}
+
+.info-card button {
+  background-color: var(--cor-principal);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Titillium Web";
+  transition: 0.2s;
+  display: flex;
+}
+
+.info-card button:hover {
+  background-color: var(--hover);
+  transform: scale(1.05);
+}
+
+.logout-btn {
+  background-color: #d9534f !important;
+}
+
+.logout-btn:hover {
+  background-color: #c9302c !important;
+}
+
+#rm{
+  font-weight: lighter;
+  margin-left: 10px;
 }

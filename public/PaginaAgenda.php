@@ -47,7 +47,9 @@ require_once "../src/Model/AgendaModel.php";
   <!-- NAV -->
   <nav>
     <div class="nav-left">
-      <img src="assets/img/logo.png" alt="Logo" width="60px">
+      <a href="PaginaInicial.php" class="logo">
+        <img src="assets/img/logo.png" alt="Logo" width="60px">
+      </a>
     </div>
     <ul class="nav-menu">
       <li><a href="PaginaInicial.php">Serviços</a></li>

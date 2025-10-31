@@ -44,7 +44,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 <body>
     <nav>
         <div class="nav-left">
-            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
+            <a href="PaginaInicial.php">
+                <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
+            </a>
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">

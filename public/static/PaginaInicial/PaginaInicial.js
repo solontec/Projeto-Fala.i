@@ -167,3 +167,28 @@ audios.forEach(audio => {
         });
     });
 });
+
+function onYouTubeIframeAPIReady() {
+        const iframes = document.querySelectorAll('.videos-dicas iframe');
+        const players = [];
+
+        iframes.forEach((iframe, i) => {
+            const player = new YT.Player(iframe, {
+                events: {
+                    'onStateChange': (event) => {
+                        if (event.data === YT.PlayerState.PLAYING) {
+                            players.forEach((p, j) => {
+                                if (i !== j) p.pauseVideo();
+                            });
+                        }
+                    }
+                }
+            });
+            players.push(player);
+        });
+    }
+
+    // Carrega a API do YouTube dinamicamente
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
