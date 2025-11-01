@@ -56,71 +56,8 @@ if (!$usuario) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="static/PaginaConta/PaginaConta.css">
+  <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
   <script src="static/PaginaConta/PaginaConta.js" defer></script>
-
-  <style>
-    /* ====== ESTILOS DO MODAL ====== */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .modal {
-      background: var(--bg-color, #fff);
-      color: var(--text-color, #333);
-      padding: 25px;
-      border-radius: 10px;
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      animation: fadeIn 0.2s ease;
-    }
-
-    .modal h3 {
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    .modal-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .btn-cancelar {
-      background: #ccc;
-      color: #222;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-confirmar {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-confirmar:hover { background: #c0392b; }
-    .btn-cancelar:hover { background: #b0b0b0; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
 </head>
 
 <body>
@@ -129,7 +66,7 @@ if (!$usuario) {
       <ul>
         <li id="principal">Minha Conta</li>
         <li><a href="PaginaSuporte.php">Ajuda/Suporte</a></li>
-        <li><a href="/termos_config">Termos de Uso</a></li>
+        <li><a href="PaginaTermosConfig.php">Termos de Uso</a></li>
         <li>Acessibilidade</li>
         <li>Feedback</li>
         <li>Logout</li>
@@ -137,8 +74,28 @@ if (!$usuario) {
     </div>
 
     <div class="icon-lista">
-      <!-- ícones omitidos para brevidade -->
-    </div>
+    <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJlKnNzzslPCvBlmcdPlXcrjSnrVjhMLZMrWRJCgkFRdNlpTgcnsTFLPSKbWMZCpsTcjKfL"
+      target="_blank" rel="noopener noreferrer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#888" viewBox="0 0 24 24">
+        <path
+          d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.01L12 13l8-8.99V4H4zm0 2.828V20h16V6.828l-8 8-8-8z" />
+      </svg>
+    </a>
+
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#626262" viewBox="0 0 24 24">
+        <path
+          d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-3a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+      </svg>
+    </a>
+
+    <a href="https://github.com" target="_blank" aria-label="GitHub">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#626262" viewBox="0 0 24 24">
+        <path
+          d="M12 0C5.371 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577 0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.612-4.042-1.612-.546-1.387-1.333-1.756-1.333-1.756-1.09-.744.083-.729.083-.729 1.205.086 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.604-2.665-.303-5.466-1.335-5.466-5.932 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.53 11.53 0 013.006-.404c1.02.005 2.045.138 3.006.404 2.29-1.553 3.297-1.23 3.297-1.23.655 1.653.243 2.874.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.804 5.625-5.475 5.921.43.372.823 1.102.823 2.222 0 1.604-.014 2.896-.014 3.293 0 .319.192.694.801.576C20.565 21.796 24 17.299 24 12c0-6.627-5.373-12-12-12z" />
+      </svg>
+    </a>
+  </div>
   </div>
 
   <nav>

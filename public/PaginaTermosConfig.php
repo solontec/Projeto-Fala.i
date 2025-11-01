@@ -26,8 +26,8 @@
   <div class="menu-lateral">
     <div class="item-lista">
     <ul>
-      <li><a href="/minha_conta">Minha Conta</a></li>
-      <li><a href="/suporte">Ajuda/Suporte</a></li>
+      <li><a href="PaginaConta.php">Minha Conta</a></li>
+      <li><a href="PaginaSuporte.php">Ajuda/Suporte</a></li>
       <li id="principal">Termos de Uso</li>
       <li>Acessibilidade</li>
       <li><a href="/feedback">Feedback</a></li>
@@ -69,10 +69,10 @@
     </div>
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="PaginaInicial.php">Serviços</a></li>
-      <li><a href="PaginaCadastro.html">Quem somos</a></li>
-      <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-      <li><a href="PaginaInicial.html">Contato</a></li>
+      <li><a href="PaginaInicial.php">Início</a></li>
+      <li><a href="PaginaAgenda.php">Agenda</a></li>
+      <li><a href="PaginaAquecimento.php">Aquecimento</a></li>
+      <li><a href="PaginaRanking.php">Ranking</a></li>
     </ul>
     <div class="nav-right">
       <!-- Botão de Toggle do Modo Escuro -->
