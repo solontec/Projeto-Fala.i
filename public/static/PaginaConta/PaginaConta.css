@@ -32,8 +32,8 @@
   --fundo-menu: #e4e9f0;
   --principal-fundo: #5c5ee2;
   --texto-informacao: #5c5ee2;
-  --nome: #5c5ee2;
-  --fundo-perfil: #e4e9f0 ;  
+  --nome: #5c5ee2; 
+  --fundo-perfil: #e4e9f0 ; 
 }
 
 /* Modo Escuro */
@@ -158,6 +158,10 @@ nav {
   font-style: normal;
   font-weight: 500;
   transition: 0.4s;
+}
+
+#abrirModalLogout{
+  cursor: pointer;
 }
 
 .nav-menu li a:hover {

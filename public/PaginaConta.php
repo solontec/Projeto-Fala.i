@@ -69,7 +69,7 @@ if (!$usuario) {
         <li><a href="PaginaTermosConfig.php">Termos de Uso</a></li>
         <li>Acessibilidade</li>
         <li>Feedback</li>
-        <li>Logout</li>
+        <li id="abrirModalLogout">Logout</li>
       </ul>
     </div>
 
@@ -149,7 +149,6 @@ if (!$usuario) {
         <div class="info-card">
           <label>RM:</label>
           <p id="rm"><?= htmlspecialchars($usuario["rm"]) ?></p>
-          <button>Alterar RM</button>
         </div>
 
         <div class="info-card">

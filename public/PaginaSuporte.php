@@ -31,7 +31,7 @@ if (!isset($_SESSION['usuario_id'])) {
       document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
-  <title>Minha Conta</title>
+  <title>Suporte Fala.i</title>
   <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['usuario_id'])) {
       <li><a href="PaginaTermosConfig.php">Termos de Uso</a></li>
       <li>Acessibilidade</li>
       <li><a href="/feedback">Feedback</a></li>
-      <li>Logout</li>
+      <li id="abrirModalLogout">Logout</li>
     </ul>
     </div>
 
@@ -103,7 +103,7 @@ if (!isset($_SESSION['usuario_id'])) {
   <div class="tudo">
     <div class="conteudo">
       <div class="nomePrincipal">
-        <p>Relatar Problema</p>
+        <p id="relatarProblema">Relatar Problema</p>
       </div>
 
       <div class="problema">
@@ -114,6 +114,42 @@ if (!isset($_SESSION['usuario_id'])) {
       </div>
     </div>
   </div>
+
+      <!-- ===== MODAL DE CONFIRMAÇÃO DE LOGOUT ===== -->
+  <div class="modal-overlay" id="modalLogout">
+    <div class="modal">
+      <h3>Tem certeza que deseja sair da conta?</h3>
+      <div class="modal-buttons">
+        <button class="btn-cancelar" id="cancelarLogout">Cancelar</button>
+        <form action="../Controller/LogoutController.php" method="POST" style="display:inline;">
+          <button type="submit" class="btn-confirmar">Sim, sair</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Script para abrir e fechar o modal
+    const modal = document.getElementById('modalLogout');
+    const btnAbrir = document.getElementById('abrirModalLogout');
+    const btnCancelar = document.getElementById('cancelarLogout');
+
+    btnAbrir.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    btnCancelar.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
 
 </body>
 

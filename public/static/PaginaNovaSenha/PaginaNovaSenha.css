@@ -29,7 +29,6 @@
   --roxo: #6b4f8a;
   --fundo-cinza: #2d2d2d;
   --texto-primario: #b8baff;
-  --texto-secundario: #8a8a9a;
   --fundo-container: #2825307e;
   --wave-3: #1a1a1a;
   --shadow-hover: #11111158;
@@ -120,6 +119,7 @@ input::placeholder {
 
 p {
   color: var(--texto-primario);
+  font-family: 'Titillium Web';
 }
 
 input:focus {
@@ -133,6 +133,7 @@ input:focus {
   text-decoration: underline;
   font-size: 15px;
   transition: color 0.3s ease;
+  margin-top: 5px;
 }
 
 [data-theme="dark"] #login-caminho {
