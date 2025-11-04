@@ -1,78 +1,126 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aquecimento de Voz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f8f9fa;
-            margin-top: 60px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aquecimento de Voz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #0a0a0a;
+      color: #00ff9d;
+      margin-top: 60px;
+    }
 
-        textarea {
-            width: 40%;
-            height: 120px;
-            margin: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            padding: 8px;
-            resize: none;
-        }
+    textarea {
+      width: 40%;
+      height: 120px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #00ff9d;
+      padding: 8px;
+      resize: none;
+      background: #1a1a1a;
+      color: #00ff9d;
+    }
 
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    button, select {
+      background: #00ff9d;
+      color: #0a0a0a;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-        button:hover {
-            background: #0056b3;
-        }
+    button:hover {
+      background: #00e68a;
+    }
 
-        #resultado {
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-    </style>
+    #resultado {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 20px;
+      white-space: pre-line;
+    }
+  </style>
 </head>
 <body>
-    <h1>🎤 Aquecimento de Voz</h1>
-    <p>1️⃣ Clique em "Gerar Texto"<br>2️⃣ Leia em voz alta com "Ler"<br>3️⃣ Veja sua nota!</p>
+  <h1>🎤 Aquecimento de Voz</h1>
+  <p>1️⃣ Escolha o nível • 2️⃣ Clique em "Gerar Texto" • 3️⃣ Leia em voz alta com "Ler"</p>
 
-    <div>
-        <textarea id="texto" placeholder="Texto gerado aqui..."></textarea>
-        <textarea id="textoLido" placeholder="Texto lido (gerado automaticamente)..."></textarea>
-    </div>
+  <div>
+    <label for="nivel">Dificuldade:</label>
+    <select id="nivel">
+      <option value="1">Nível 1 (Fácil)</option>
+      <option value="2">Nível 2 (Médio)</option>
+      <option value="3">Nível 3 (Difícil)</option>
+    </select>
+  </div>
 
-    <div>
-        <button onclick="gerarTexto()">Gerar Texto</button>
-        <button onclick="lerTexto()">Ler</button>
-    </div>
+  <div>
+    <textarea id="texto" placeholder="Texto gerado aqui..." readonly></textarea>
+    <textarea id="textoLido" placeholder="Texto reconhecido..." readonly></textarea>
 
-    <p id="resultado"></p>
+  </div>
 
-    <script>
+  <div>
+    <button onclick="gerarTexto()">Gerar Texto</button>
+    <button onclick="lerTexto()">Ler</button>
+  </div>
+
+  <p id="resultado"></p>
+
+
+<script>
+let tempoInicio = 0;   // armazena o início da fala
+let tempoFim = 0;      // armazena o fim
+
 function gerarTexto() {
-  fetch('gerar_texto.php')
+  const nivel = document.getElementById("nivel").value;
+  fetch("gerar_texto.php?nivel=" + nivel)
     .then(res => res.text())
     .then(texto => {
-      document.getElementById('texto').value = texto;
-      document.getElementById('textoLido').value = "";
-      document.getElementById('resultado').innerText = "";
+      document.getElementById("texto").value = texto;
+      document.getElementById("textoLido").value = "";
+      document.getElementById("resultado").innerHTML = "";
     })
     .catch(err => alert("Erro ao gerar texto: " + err));
+}
+
+function normalizarTexto(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,!?;:]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function similaridade(a, b) {
+  if (a === b) return true;
+
+  let dp = Array(a.length + 1).fill().map(() => Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const custo = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + custo
+      );
+    }
+  }
+
+  return dp[a.length][b.length] <= 1;
 }
 
 function lerTexto() {
@@ -88,62 +136,62 @@ function lerTexto() {
 
   recognition.start();
 
-  recognition.onstart = function() {
-    document.getElementById('resultado').innerText = "🎙️ Fale agora...";
+  // ✅ INICIA O TEMPORIZADOR AO COMEÇAR A FALAR
+  recognition.onstart = () => {
+    tempoInicio = performance.now();
+    document.getElementById("resultado").innerHTML = "🎙️ Fale agora...";
   };
 
-  recognition.onresult = function(event) {
+  // ✅ TERMINA O TEMPORIZADOR QUANDO FINALIZA O ÁUDIO
+  recognition.onresult = (event) => {
+    tempoFim = performance.now();
+    const segundos = ((tempoFim - tempoInicio) / 1000).toFixed(2);
+
     const textoLido = event.results[0][0].transcript;
-    document.getElementById('textoLido').value = textoLido;
-    compararTextos();
+    document.getElementById("textoLido").value = textoLido;
+    compararTextos(segundos);
   };
 
-  recognition.onerror = function(event) {
+  recognition.onerror = (event) => {
     alert("Erro no reconhecimento: " + event.error);
   };
 }
 
-// 🔍 Função que compara e mostra o que o usuário errou
-function compararTextos() {
-  const original = document.getElementById('texto').value.trim().toLowerCase();
-  const lido = document.getElementById('textoLido').value.trim().toLowerCase();
+function compararTextos(tempo) {
+  const original = normalizarTexto(document.getElementById("texto").value);
+  const lido = normalizarTexto(document.getElementById("textoLido").value);
 
   const palavrasOriginais = original.split(/\s+/);
   const palavrasLidas = lido.split(/\s+/);
 
   let acertos = 0;
-  let palavrasCorretas = [];
-  let palavrasErradas = [];
+  let resultadoVisual = "";
 
-  const palavrasFaladas = new Set(palavrasLidas);
+  palavrasOriginais.forEach((palavraOriginal, index) => {
+    const palavraFalada = palavrasLidas[index] || "";
 
-  // Verifica o que foi falado certo ou não
-  palavrasOriginais.forEach(p => {
-    if (palavrasFaladas.has(p)) {
+    if (similaridade(palavraOriginal, palavraFalada)) {
       acertos++;
-      palavrasCorretas.push(p);
+      resultadoVisual += `<span style="color:#00ff00; font-weight:bold;">${palavraOriginal}</span> `;
     } else {
-      palavrasErradas.push(p);
+      resultadoVisual += `<span style="color:#ff4747; font-weight:bold; text-decoration: underline;">${palavraOriginal}</span> `;
     }
   });
 
-  const porcentagem = (acertos / palavrasOriginais.length) * 100;
-  const nota = Math.round(porcentagem / 10);
+  const erros = palavrasOriginais.length - acertos;
+  const nota = Math.max(0, 10 - erros);
 
-  // 🧠 Monta o resultado completo
-  let resultadoTexto = `✅ Acertos: ${porcentagem.toFixed(1)}% — 🏆 Nota: ${nota}/10\n\n`;
-
-  if (palavrasErradas.length > 0) {
-    resultadoTexto += `❌ Palavras que você errou ou esqueceu:\n${palavrasErradas.join(", ")}\n\n`;
-  }
-
-  if (palavrasCorretas.length > 0) {
-    resultadoTexto += `✅ Palavras corretas:\n${palavrasCorretas.join(", ")}`;
-  }
-
-  document.getElementById('resultado').innerText = resultadoTexto;
+  document.getElementById("resultado").innerHTML = `
+    🕒 Tempo: <strong>${tempo} segundos</strong><br><br>
+    ✅ Acertos: ${acertos}/${palavrasOriginais.length}<br>
+    ❌ Erros: ${erros}<br>
+    🏆 Nota: <strong>${nota}/10</strong>
+    <hr>
+    <div style="font-size: 18px;">${resultadoVisual}</div>
+  `;
 }
 </script>
+
 
 </body>
 </html>
