@@ -54,7 +54,7 @@
   --border-color: #404040;
   --shadow: rgba(0, 0, 0, 0.3);
   --texto: #e8d6ff;
-  --texto-terciario: #e0d2f1;
+  --texto-terciario: #ffffff;
   --texto2: #c8ade9;
   --border-color2: #404040;
   --passos: #212127;
@@ -184,7 +184,6 @@ li:hover {
 .logo {
   margin-left: 10px;
   animation: pulo 2s infinite;
-  position: fixed;
 }
 
 /* Botão Toggle Modo Escuro */
@@ -359,7 +358,7 @@ p{
 }
 
 input {
-  background-color: var(--cor-principal);
+  background-color: #3d7ff9;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -377,7 +376,7 @@ input:hover {
 
 
 button {
-  background-color: var(--cor-principal);
+  background-color: #3d7ff9;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -401,9 +400,9 @@ button:hover {
   border-radius: 20px;
   padding: 40px;
   margin: 40px auto;
-  width: 80%;
+  width: 75%;
   box-shadow: 0 0 25px rgba(0,0,0,0.3);
-  margin-left: 300px;
+  margin-left: 350px;
 }
 
 .perfil-lateral {
@@ -422,7 +421,7 @@ button:hover {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--cor-principal);
+  border: 3px solid #3d7ff9;
 }
 
 .form-foto {
@@ -441,7 +440,7 @@ button:hover {
 }
 
 .editar-btn {
-  background-color: var(--cor-principal);
+  background-color: #3d7ff9;
   color: #fff;
   padding: 8px 16px;
   border-radius: 8px;
@@ -492,7 +491,7 @@ button:hover {
 }
 
 .info-card button {
-  background-color: var(--cor-principal);
+  background-color: #3d7ff9;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -520,3 +519,65 @@ button:hover {
   font-weight: lighter;
   margin-left: 10px;
 }
+
+    /* ====== ESTILOS DO MODAL ====== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.895);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal {
+      background: var(--fundo-perfil);
+      color: var(--texto-terciario);
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal h3 {
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn-cancelar {
+      background: #ccc;
+      color: #222;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-confirmar {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-confirmar:hover { background: #c0392b; }
+    .btn-cancelar:hover { background: #b0b0b0; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }

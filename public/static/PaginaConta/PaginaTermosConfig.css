@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium Web:wght@100;200;300;400;500;600;700&display=swap');  
+
 :root {
   /* Modo Claro */
   --fundo-branco: #ffffff;
@@ -117,7 +120,7 @@ html{
 body {
   background-color: var(--fundo-branco);
   color: var(--texto-primario);
-  font-family: "Titillium Web", sans-serif;
+  font-family: "Archivo Black", sans-serif;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -171,6 +174,7 @@ nav {
 
 li {
   transition: 0.2s;
+  font-size: 18px;
 }
 
 li:hover {
@@ -259,6 +263,7 @@ li:hover {
   padding: 50px;
   padding-top: 100px;
   color: #888;
+  position: fixed;
 }
 
 .menu-lateral li{
@@ -329,35 +334,86 @@ svg:hover{
   align-items: center;
   justify-content: center;
   margin: 20px;
-  margin-top: 3rem;
 }
 
-.conteudo{
+.conteudo {
   display: flex;
   flex-direction: column;
   background-color: var(--fundo-menu);
-  padding: 50px;
-  width: 60vw;
+  padding: 60px 80px;
+  width: 65vw;
   border-radius: 2rem;
   margin-left: 10%;
   justify-content: center;
   align-items: center;
-  height: auto;
-  max-height: 500px;
-  gap: 30px;
+  box-shadow: 0 8px 20px var(--shadow);
+  height: 500px;
+  gap: 25px;
+  margin-top: 3rem;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.conteudo h1 {
+  font-size: 2.2rem;
+  color: var(--texto-primario);
+  font-family: "Archivo Black", sans-serif;
+  margin-bottom: 15px;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 .conteudo ul {
-  max-height: 60vh;   /* define a altura máxima só para a lista */
-  overflow-y: auto;   /* ativa scroll só na lista */
-  padding-right: 10px; /* espaço pro scroll não colar no texto */
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 10px;
   scrollbar-width: thin;
   scrollbar-color: var(--texto-primario) transparent;
+  text-align: justify;
+  font-family: "Titillium Web", sans-serif;
+  color: var(--texto-terciario);
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
-.conteudo li:hover{
-    transform: scale(1.0);
-    cursor: text;
+.conteudo ul li {
+  margin-bottom: 20px;
+  list-style: none;
+}
+
+.conteudo ul li strong {
+  color: var(--texto-primario);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.conteudo ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+.conteudo ul::-webkit-scrollbar-thumb {
+  background-color: var(--texto-primario);
+  border-radius: 4px;
+}
+
+.conteudo ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .conteudo {
+    width: 85vw;
+    padding: 40px 30px;
+  }
+
+  .conteudo h1 {
+    font-size: 1.8rem;
+  }
 }
 
 .nomePrincipal{
