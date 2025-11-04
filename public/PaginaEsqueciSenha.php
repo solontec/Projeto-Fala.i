@@ -72,7 +72,7 @@
                 <div class="senha-esquecida" id="senha-esquecida">
                     <div class="esquecida">
                         <h3>Esqueceu a Senha?</h3>
-                        <form action="../Controller/EsqueciSenhaController"  method="POST">
+                        <form action="../Controller/EsqueciSenhaController.php"  method="POST">
                             <label>Email</label>
                             <input type="email" name="email" required minlength="10" maxlength="40"
                                 placeholder="Digite seu email">
@@ -81,34 +81,34 @@
                             <input type="text" name="rm" required minlength="5" maxlength="5"
                                 placeholder="Digite seu RM">
 
-                            <div class="entrar-cadastro">
-                                <div class="linha-botoes">
-                                    <button type="submit" id="entrar">Enviar</button>
-                                    <p id="texto-senha">Ao digitar seu e-mail e seu RM, um link será enviado em seu endereço de e-mail.
-                                        Clique no link, redefina sua senha, após isso volte para a página de Login e
-                                        entre com sua nova senha.</p>
+                                <div class="entrar-cadastro">
+                                    <div class="linha-botoes">
+                                        <button type="submit" id="entrar">Enviar</button>
+                                        <p id="texto-senha">Ao digitar seu e-mail e seu RM, um link será enviado em seu endereço de e-mail.
+                                            Clique no link, redefina sua senha, após isso volte para a página de Login e
+                                            entre com sua nova senha.</p>
+                                    </div>
+                                    <div class="caminhos">
+                                        <a id="login-caminho" href="PaginaLogin.php">Login</a>
+                                        <p id="ou">ou</p>
+                                        <a href="PaginaCadastro.php" id="login-caminho">Cadastro</a>
+                                    </div>
                                 </div>
-                                <div class="caminhos">
-                                    <a id="login-caminho" href="PaginaLogin.php">Login</a>
-                                    <p id="ou">ou</p>
-                                    <a href="PaginaCadastro.php" id="login-caminho">Cadastro</a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
                     </div>
                 </div>
             </div>
         </div>
 
        
-        <!-- VLibras -->
+       
         <div vw class="enabled">
             <div vw-access-button class="active"></div>
             <div vw-plugin-wrapper>
                 <div class="vw-plugin-top-wrapper"></div>
             </div>
         </div>
-
+        
         <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
         <script>
             new window.VLibras.Widget('https://vlibras.gov.br/app');
