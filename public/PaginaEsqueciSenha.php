@@ -15,7 +15,6 @@
 
             document.documentElement.setAttribute('data-theme', theme);
         })();
-        
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +23,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap"
         rel="stylesheet">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/PaginaEsqueciSenha/PaginaEsqueciSenha.css">
 
@@ -61,7 +61,7 @@
                             <p id="texto-apresentacao-bem-vindo"></p>
                         </div>
                         <div class="logo-bem-vindo">
-                            <img src="img/logo.png" alt="Logo do Chatbot" id="logo"
+                            <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo"
                                 class="logo">
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                 <div class="senha-esquecida" id="senha-esquecida">
                     <div class="esquecida">
                         <h3>Esqueceu a Senha?</h3>
-                            <form action="../Controller/EsqueciSenhaController.php"  method="POST">
-                                <label>Email:</label>
-                                <input type="email" name="email" required minlength="10" maxlength="40"
-                                    placeholder="Digite seu email">
+                        <form action="../Controller/EsqueciSenhaController.php"  method="POST">
+                            <label>Email</label>
+                            <input type="email" name="email" required minlength="10" maxlength="40"
+                                placeholder="Digite seu email">
 
-                                <label>RM:</label>
-                                <input type="text" name="rm" required minlength="5" maxlength="5"
-                                    placeholder="Digite seu RM">
+                            <label>Rm</label>
+                            <input type="text" name="rm" required minlength="5" maxlength="5"
+                                placeholder="Digite seu RM">
 
                                 <div class="entrar-cadastro">
                                     <div class="linha-botoes">
@@ -115,11 +115,11 @@
         </script>
 
         <footer>
-            <a href="/termos" id="ver-termos">Ver termos e condições</a>
+            <a href="PaginaTermos.php" id="ver-termos">Ver termos e condições</a>
         </footer>
     </section>
 
-    <script src="static/Pagin"></script>
+    <script src="static/PaginaEsqueciSenha/PaginaEsqueciSenha.js"></script>
 </body>
 
 </html>

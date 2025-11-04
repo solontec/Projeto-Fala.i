@@ -13,13 +13,12 @@
       document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
-  <title>Minha Conta</title>
+  <title>Termos Fala.i</title>
   <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="static/PaginaConta/PaginaTermosConfig.css">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-  <script src="Conta.js"></script>
+  <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -31,7 +30,7 @@
       <li id="principal">Termos de Uso</li>
       <li>Acessibilidade</li>
       <li><a href="/feedback">Feedback</a></li>
-      <li>Logout</li>
+      <li id="abrirModalLogout">Logout</li>
     </ul>
     </div>
 
@@ -142,13 +141,49 @@
             <p>Podemos atualizar estes Termos de Uso a qualquer momento. Quaisquer alterações serão publicadas na plataforma, e a data de atualização será ajustada conforme necessário. Você deve revisar os termos periodicamente para garantir que está ciente de qualquer modificação.</p><br>
 
             <li>14. Contato</li>
-            <p>Se tiver dúvidas sobre os nossos Termos de Uso, entre em contato com a nossa equipe de suporte em fala.inossotcc@gmail.com.</p>
+            <p>Se tiver dúvidas sobre os nossos Termos de Uso, entre em contato com a nossa equipe de suporte em fala.i.contact@gmail.com.</p>
         </ul>
     </div>
   </div>
 
+     <!-- ===== MODAL DE CONFIRMAÇÃO DE LOGOUT ===== -->
+  <div class="modal-overlay" id="modalLogout">
+    <div class="modal">
+      <h3>Tem certeza que deseja sair da conta?</h3>
+      <div class="modal-buttons">
+        <button class="btn-cancelar" id="cancelarLogout">Cancelar</button>
+        <form action="../Controller/LogoutController.php" method="POST" style="display:inline;">
+          <button type="submit" class="btn-confirmar">Sim, sair</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Script para abrir e fechar o modal
+    const modal = document.getElementById('modalLogout');
+    const btnAbrir = document.getElementById('abrirModalLogout');
+    const btnCancelar = document.getElementById('cancelarLogout');
+
+    btnAbrir.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    btnCancelar.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+
 </body>
 
-  <script src="{{ url_for('static', filename='PaginaConta/PaginaSuporte.js') }}"></script>
+  <script src="static/PaginaConta/PaginaSuporte.js"></script>
 
 </html>

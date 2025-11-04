@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="static/PaginaNovaSenha/PaginaNovaSenha.css">
    
     <title>Redefinir Senha</title>
@@ -86,14 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
             <form method="POST">
                 <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
                 <label>Nova Senha:</label>
-                <input type="password" name="nova_senha" required minlength="6"><br><br>
+                <input type="password" name="nova_senha" required minlength="6" placeholder="Insira sua nova senha"><br><br>
                 <button type="submit">Salvar Nova Senha</button>
             </form>
             <div class="entrar-cadastro">
                 <div class="caminhos">
-                    <a id="login-caminho" href="/">Login</a>
+                    <a id="login-caminho" href="PaginaLogin.php">Login</a>
                     <p id="ou">ou</p>
-                    <a href="/cadastro" id="login-caminho">Cadastro</a>
+                    <a href="PaginaCadastro.php" id="login-caminho">Cadastro</a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
     </script>
     
     <footer>
-        <a href="/termos" id="ver-termos">Ver termos e condições</a>
+        <a href="PaginaTermos.php" id="ver-termos">Ver termos e condições</a>
     </footer>
 </section>
 
