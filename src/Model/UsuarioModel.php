@@ -61,4 +61,16 @@
         $conn->close();
     }
 
+
+    public static function excluirUsuario($id) {
+        $conn = getConnection();
+         $stmt = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $sucesso = $stmt->affected_rows > 0;
+        $stmt->close();
+        $conn->close();
+        return $sucesso;
+    }   
+
     }

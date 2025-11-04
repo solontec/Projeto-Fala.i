@@ -165,6 +165,7 @@ if (!$usuario) {
     </div>
   </div>
 
+  
   <!-- ===== MODAL DE CONFIRMAÇÃO DE LOGOUT ===== -->
   <div class="modal-overlay" id="modalLogout">
     <div class="modal">

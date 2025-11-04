@@ -1,3 +1,36 @@
+<?php
+require_once "../src/Model/UsuarioModel.php";
+require_once "../config/config.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
+    $token = $_GET['token'];
+
+    $conn = getConnection();
+    $stmt = $conn->prepare("SELECT email, expira_em FROM redefinicoes_senha WHERE token = ?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $registro = $result->fetch_assoc();
+    $stmt->close();
+    $conn->close();
+
+    if (!$registro || strtotime($registro['expira_em']) < time()) {
+        die("<h3>❌ Link inválido ou expirado.</h3>");
+    }
+
+    $email = $registro['email'];
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $novaSenha = $_POST['nova_senha'];
+
+    UsuarioModel::atualizarSenha($email, $novaSenha);
+
+    echo "<script>alert('Senha redefinida com sucesso!'); window.location.href='PaginaLogin.php';</script>";
+    exit;
+}
+?> 
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,7 +56,7 @@
     <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='PaginaNovaSenha/PaginaNovaSenha.css') }}">
+    <link rel="stylesheet" href="static/PaginaNovaSenha/PaginaNovaSenha.css">
    
     <title>Redefinir Senha</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
@@ -51,10 +84,10 @@
         <div class="container-nova-senha">
             <h3>Redefina sua senha</h3>
             <form method="POST">
-                <input type="hidden" name="email" value="{{ email }}">
-                <label>Nova senha:</label>
-                <input type="password" name="nova_senha" required><br>
-                <button type="submit">Redefinir</button>
+                <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
+                <label>Nova Senha:</label>
+                <input type="password" name="nova_senha" required minlength="6"><br><br>
+                <button type="submit">Salvar Nova Senha</button>
             </form>
             <div class="entrar-cadastro">
                 <div class="caminhos">
@@ -83,6 +116,6 @@
     </footer>
 </section>
 
-<script src="{{ url_for('static', filename='PaginaNovaSenha/PaginaNovaSenha.js') }}"></script>
+<script src="static/PaginaNovaSenha/PaginaNovaSenha.js"></script>
 </body>
 </html>
