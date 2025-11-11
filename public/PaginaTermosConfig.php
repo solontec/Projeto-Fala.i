@@ -29,7 +29,7 @@
       <li><a href="PaginaSuporte.php">Ajuda/Suporte</a></li>
       <li id="principal">Termos de Uso</li>
       <li>Acessibilidade</li>
-      <li><a href="/feedback">Feedback</a></li>
+      <li><a href="PaginaFeedback.php">Feedback</a></li>
       <li id="abrirModalLogout">Logout</li>
     </ul>
     </div>

@@ -14,6 +14,7 @@
   --border-color: #e5e7eb;
   --shadow: rgba(0, 0, 0, 0.1);
   --preto: #444444;
+  --footer: #4d4d4d;
 }
 
 /* Modo Escuro */
@@ -26,12 +27,13 @@
   --cinza-medio: #404040;
   --roxo: #6b4f8a;
   --fundo-cinza: #2d2d2d;
-  --texto-primario: #b8baff;
+  --texto-primario: #e0d2f1 ;
   --texto-secundario: #9b9dff;
   --fundo-container: #2825307e;
   --border-color: #404040;
   --shadow: rgba(0, 0, 0, 0.3);
   --preto: #7779fd;
+  --footer: #e1e1e1;
 }
 
 * {
@@ -74,6 +76,7 @@ nav {
   margin: 0;
 }
 
+
 .nav-menu li a {
   color: var(--texto-primario);
   text-decoration: none;
@@ -85,6 +88,23 @@ nav {
 
 .nav-menu li a:hover {
   color: var(--hover);
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+li {
+  transition: 0.2s;
+  font-size: 18px;
+}
+
+li:hover {
+  transform: scale(1.1);
 }
 
 .nav-right {
@@ -177,6 +197,7 @@ h1 {
   width: 100%;
   max-width: 650px;
   text-align: justify;
+  font-family: "Titillium Web";
 }
 
 h1:hover {
@@ -613,13 +634,14 @@ a {
   }
 }
 
+/* FOOTER */
 footer {
   padding: 90px;
   padding-bottom: 30px;
   padding-top: 45px;
   background-color: var(--fundo-container);
   box-shadow: 0 0 10px var(--border-color);
-  margin: 0;
+  margin-bottom: 0;
 }
 
 #logo-footer {
@@ -652,7 +674,7 @@ hr {
 .informacoes-footer {
   text-align: center;
   font-family: "Titillium Web";
-  color: #626262;
+  color: var(--footer);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -664,22 +686,44 @@ hr {
   display: flex;
 }
 
-.caminhos-footer,
-.copright {
+.caminhos-footer, .copright {
   display: flex;
-  color: #626262;
+  color: var(--footer);
   gap: 10px;
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a {
   text-decoration: none;
-  color: #626262;
+  color: var(--footer);
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a:hover {
   text-decoration: underline;
+}
+
+.quem-somos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.quem-somos #quem-somos{
+  color: white;
+}
+
+.sobre{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  font-family: 'Titillium Web';
+  font-size: 18px;
 }
 
 .fade-in {
@@ -771,4 +815,23 @@ hr {
 @keyframes popIn {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+.tarefa {
+  position: relative; /* necessário para posicionar os botões dentro */
+  background: var(--fundo-branco);
+  border: 2px solid var(--border-color);
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-left: 4px solid var(--cor-principal);
+  box-shadow: 0 2px 4px var(--shadow);
+  transition: all 0.3s ease;
+  min-height: 120px; /* para garantir espaço suficiente */
+}
+
+.acoes-tarefa {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
 }

@@ -12,14 +12,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
      <link rel="stylesheet" href="static/PaginaTermos/PaginaTermos.css">
      <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+     <script>
+        (function () {
+            // Aplica o tema ANTES da página renderizar
+            const savedTheme = localStorage.getItem('theme');
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const theme = savedTheme || systemTheme;
+
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
 </head>
 <body>
     <nav>
-        <<a href="PaginaInicial.php">
+        <a href="">
         <img  src="assets/img/logo.png " alt="Logo do Chatbot" id="logo" class="logo"
         width="60px">
       </a>
-        <a href="/login">Voltar</a> <!-- ARRUMAR ISSO PARA WINDOW HISTORY PARA VOLTAR SEMPRE PARA ANTERIOR ( TELA TERMOS (BOTAO VOLTAR))-->
+        <a href="PaginaLogin.php" id="voltar">Voltar</a>
+
+                <!-- Botão de Toggle do Modo Escuro -->
+        <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
     </nav>
     <div class="container-termos">
         <h1>Termos e Condições</h1>
@@ -95,5 +111,7 @@
         <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
+
+        <script src="static/PaginaTermos/PaginaTermos.js"></script>
 </body>
 </html>
