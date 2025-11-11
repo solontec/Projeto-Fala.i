@@ -117,10 +117,9 @@ if ($tarefas && count($tarefas) > 0) {
 
         
         echo "<button type='button' class='btn-editar' 
-            style='background-color:#3498db; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-right:8px;'
-            onclick='abrirModalEditar(\"{$id}\", \"{$titulo}\", \"{$descricao}\", \"{$dataHora}\")'>
-            Editar
-        </button>";
+    onclick='abrirModalEditar(\"{$id}\", \"" . htmlspecialchars($tarefa['titulo']) . "\", \"" . htmlspecialchars($tarefa['descricao']) . "\", \"" . htmlspecialchars($tarefa['data_tarefa'] . "T" . $tarefa['horario_tarefa']) . "\")'>
+    Editar
+    </button>";
 
         // Botão Excluir
         echo "<form style='display:inline;' method='POST' action='../Controller/AgendaController.php' 
@@ -304,6 +303,49 @@ function formatarData(dataString) {
   } catch (error) {
     return dataString; // Retorna a data original se não conseguir formatar
   }
+}
+
+function abrirModalEditar(id, titulo, descricao, dataHora) {
+  // Abre o modal
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+
+  // Preenche os campos do formulário
+  document.getElementById("form-acao").value = "editar";
+  document.getElementById("form-tarefa-id").value = id;
+  document.getElementById("nome-tarefa").value = titulo;
+  document.getElementById("descricao-tarefa").value = descricao;
+  document.getElementById("data-tarefa").value = dataHora;
+
+  // Muda o título e o texto do botão
+  document.querySelector(".modal-content h2").innerText = "Editar Tarefa";
+  document.querySelector(".submit-btn").innerText = "Salvar Alterações";
+}
+
+function abrirModal() {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+
+  // Garante que é modo "criar"
+  document.getElementById("form-acao").value = "criar";
+  document.getElementById("form-tarefa-id").value = "";
+  document.querySelector(".modal-content h2").innerText = "Adicionar Nova Tarefa";
+  document.querySelector(".submit-btn").innerText = "Adicionar Tarefa";
+}
+
+function fecharModal() {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.remove("show");
+  document.body.style.overflow = "auto";
+  document.getElementById("form-tarefa").reset();
+
+  // Volta pro modo "criar"
+  document.getElementById("form-acao").value = "criar";
+  document.getElementById("form-tarefa-id").value = "";
+  document.querySelector(".modal-content h2").innerText = "Adicionar Nova Tarefa";
+  document.querySelector(".submit-btn").innerText = "Adicionar Tarefa";
 }
   </script>
 </body>

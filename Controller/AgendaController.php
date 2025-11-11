@@ -29,10 +29,11 @@ if ($method === "POST" && $action === "editar") {
     $dataHora = $_POST["data_tarefa"];
 
     if (AgendaModel::editarTarefa($id, $usuario_id, $titulo, $descricao, $dataHora)) {
-        header("Location: ../View/PaginaAgenda.php?msg=atualizado");
-    } else {    
-        header("Location: ../View/PaginaAgenda.php?msg=erro");
+    header("Location: ../public/PaginaAgenda.php?msg=atualizado");
+     } else {
+    header("Location: ../public/PaginaAgenda.php?msg=erro");
     }
+
     exit;
 }
 

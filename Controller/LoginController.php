@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         
         header("Location: ../public/PaginaInicial.php");
+        // aqui vou inserir a lógica,
         exit;
     } else {
        
