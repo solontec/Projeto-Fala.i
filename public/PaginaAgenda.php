@@ -119,10 +119,9 @@ if ($tarefas && count($tarefas) > 0) {
 
         
         echo "<button type='button' class='btn-editar' 
-            style='background-color:#3498db; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-right:8px;'
-            onclick='abrirModalEditar(\"{$id}\", \"{$titulo}\", \"{$descricao}\", \"{$dataHora}\")'>
-            Editar
-        </button>";
+    onclick='abrirModalEditar(\"{$id}\", \"" . htmlspecialchars($tarefa['titulo']) . "\", \"" . htmlspecialchars($tarefa['descricao']) . "\", \"" . htmlspecialchars($tarefa['data_tarefa'] . "T" . $tarefa['horario_tarefa']) . "\")'>
+    Editar
+    </button>";
 
         // Botão Excluir
         echo "<form style='display:inline;' method='POST' action='../Controller/AgendaController.php' 
@@ -230,6 +229,135 @@ if ($tarefas && count($tarefas) > 0) {
       <p>©2025 Fala.i. Todos os direitos reservados.</p>
     </div>
   </footer>
-  <script src="static/PaginaAgenda/PaginaAgenda.js"></script>
+
+  <!-- JS -->
+  <script>
+    // Funções modal
+    function abrirModal() {
+      document.getElementById("modal-overlay").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function fecharModal() {
+      document.getElementById("modal-overlay").classList.remove("show");
+      document.body.style.overflow = "auto";
+      document.getElementById("form-tarefa").reset();
+    }
+    document.getElementById("modal-overlay").addEventListener("click", function (e) {
+      if (e.target === this) fecharModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") fecharModal();
+    });
+
+    // Tema escuro
+    class ThemeManager {
+      constructor() {
+        this.init();
+      }
+      init() {
+        const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+        this.updateToggleIcon(currentTheme);
+        this.setupToggleButton();
+      }
+      setTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+        this.updateToggleIcon(theme);
+      }
+      updateToggleIcon(theme) {
+        const icon = document.getElementById("theme-icon");
+        icon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
+      }
+      toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        this.setTheme(currentTheme === "dark" ? "light" : "dark");
+      }
+      setupToggleButton() {
+        const toggleButton = document.getElementById("toggle-dark-mode");
+        toggleButton.addEventListener("click", () => this.toggleTheme());
+      }
+    }
+
+    // Fade-in footer e outros elementos
+    function observeElements() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("fade-animate");
+            }
+          });
+        }, { threshold: 0.1 }
+      );
+      document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      new ThemeManager();
+      observeElements();
+    });
+
+    // Função para formatar data (sem erro para data inválida)
+function formatarData(dataString) {
+  if (!dataString) return "Data não informada";
+
+  try {
+    const data = new Date(dataString);
+    const opcoes = {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return data.toLocaleDateString("pt-BR", opcoes);
+  } catch (error) {
+    return dataString; // Retorna a data original se não conseguir formatar
+  }
+}
+
+function abrirModalEditar(id, titulo, descricao, dataHora) {
+  // Abre o modal
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+
+  // Preenche os campos do formulário
+  document.getElementById("form-acao").value = "editar";
+  document.getElementById("form-tarefa-id").value = id;
+  document.getElementById("nome-tarefa").value = titulo;
+  document.getElementById("descricao-tarefa").value = descricao;
+  document.getElementById("data-tarefa").value = dataHora;
+
+  // Muda o título e o texto do botão
+  document.querySelector(".modal-content h2").innerText = "Editar Tarefa";
+  document.querySelector(".submit-btn").innerText = "Salvar Alterações";
+}
+
+function abrirModal() {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+
+  // Garante que é modo "criar"
+  document.getElementById("form-acao").value = "criar";
+  document.getElementById("form-tarefa-id").value = "";
+  document.querySelector(".modal-content h2").innerText = "Adicionar Nova Tarefa";
+  document.querySelector(".submit-btn").innerText = "Adicionar Tarefa";
+}
+
+function fecharModal() {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.remove("show");
+  document.body.style.overflow = "auto";
+  document.getElementById("form-tarefa").reset();
+
+  // Volta pro modo "criar"
+  document.getElementById("form-acao").value = "criar";
+  document.getElementById("form-tarefa-id").value = "";
+  document.querySelector(".modal-content h2").innerText = "Adicionar Nova Tarefa";
+  document.querySelector(".submit-btn").innerText = "Adicionar Tarefa";
+}
+  </script>
 </body>
 </html>
