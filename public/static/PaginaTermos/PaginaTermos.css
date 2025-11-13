@@ -3,10 +3,23 @@
   --cor-principal:  #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
---roxo-claro: #b2b3ff54;
+  --roxo-claro: #b2b3ff54;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
+  --roxo-escuro: #2c0b52;
+}
+
+[data-theme="dark"] {
+  --fundo-branco: #1a1a1a;
+  --cor-principal: #8b8dff;
+  --hover: #7779ff;
+  --cor-terciaria: #9b9dff;
+  --roxo-claro: #2a2a3a;
+  --cinza-medio: #404040;
+  --roxo: #6b4f8a;
+  --fundo-cinza: #2d2d2d;
+  --roxo-escuro: #f0e2ff;
 }
 
 *{
@@ -28,6 +41,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: all 0.4s;
 }
 
 nav{
@@ -69,14 +83,14 @@ li{
     padding-left: 0;
     font-size: 23px;
     font-family: 'Titillium Web';
-    color: #2c0b52;
+    color: var(--roxo-escuro);
 }
 
 p{
     text-indent: 2em;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
-    color: #2c0b52;
+    color: var(--roxo-escuro);
     padding-bottom: 10px;
 }
 
@@ -98,4 +112,35 @@ a{
     50% {
         transform: translateY(-20px); /* Ajuste a altura do pulo conforme necessário */
     }
+}
+
+
+/* Botão Toggle Modo Escuro */
+.toggle-mode {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-mode:hover {
+  background-color: var(--hover);
+  transform: scale(1.1);
+}
+
+#voltar{
+    margin-right: 100px;
 }

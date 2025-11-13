@@ -191,7 +191,6 @@ function compararTextos(tempo) {
   `;
 }
 </script>
-
-
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 </html>

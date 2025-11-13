@@ -112,5 +112,6 @@
 
     
 <script src="static/PaginaLogin/PaginaLogin.js"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 </html>

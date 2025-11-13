@@ -38,7 +38,8 @@ if (!isset($_SESSION['usuario_id'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="static/PaginaSuporte.css">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="static/PaginaConta/PaginaSuporte.css">
   <script src="static/"></script>
 </head>
 
@@ -46,12 +47,12 @@ if (!isset($_SESSION['usuario_id'])) {
   <div class="menu-lateral">
     <div class="item-lista">
     <ul>
-      <li><a href="/minha_conta">Minha Conta</a></li>
-      <li><a href="/suporte">Ajuda/Suporte</a></li>
-      <li><a href="/termos_config">Termos de Uso</a></li>
-      <li>Acessibilidade</li>
+      <li><a href="PaginaConta.php">Minha Conta</a></li>
+      <li><a href="PaginaSuporte.php">Ajuda/Suporte</a></li>
+      <li><a href="PaginaTermosConfig.php">Termos de Uso</a></li>
+      <li><a href="PaginaAcessibilidade.php">Acessibilidade</a></li>
       <li id="principal">Feedback</li>
-      <li>Logout</li>
+      <li id="abrirModalLogout">Logout</li>
     </ul>
     </div>
 
@@ -89,10 +90,10 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="PaginaInicial.php">Serviços</a></li>
-      <li><a href="PaginaCadastro.html">Quem somos</a></li>
-      <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-      <li><a href="PaginaInicial.html">Contato</a></li>
+      <li><a href="PaginaInicial.php">Início</a></li>
+      <li><a href="PaginaAgenda.php">Agenda</a></li>
+      <li><a href="PaginaAquecimento.php">Aquecimento</a></li>
+      <li><a href="PaginaRanking.php">Ranking</a></li>
     </ul>
     <div class="nav-right">
       <!-- Botão de Toggle do Modo Escuro -->
@@ -118,8 +119,48 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
   </div>
 
+  
+      <!-- ===== MODAL DE CONFIRMAÇÃO DE LOGOUT ===== -->
+  <div class="modal-overlay" id="modalLogout">
+    <div class="modal">
+      <h3>Tem certeza que deseja sair da conta?</h3>
+      <div class="modal-buttons">
+        <button class="btn-cancelar" id="cancelarLogout">Cancelar</button>
+        <form action="../Controller/LogoutController.php" method="POST" style="display:inline;">
+          <button type="submit" class="btn-confirmar">Sim, sair</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
 </body>
 
-  <script src="{{ url_for('static', filename='PaginaConta/PaginaSuporte.js') }}"></script>
 
+
+  <script>
+    // Script para abrir e fechar o modal
+    const modal = document.getElementById('modalLogout');
+    const btnAbrir = document.getElementById('abrirModalLogout');
+    const btnCancelar = document.getElementById('cancelarLogout');
+
+    btnAbrir.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    btnCancelar.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+
+  <script src="static/PaginaConta/PaginaSuporte.js"></script>
+
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </html>
