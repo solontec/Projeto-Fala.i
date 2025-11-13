@@ -120,6 +120,7 @@
     </section>
 
     <script src="static/PaginaEsqueciSenha/PaginaEsqueciSenha.js"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 
 </html>

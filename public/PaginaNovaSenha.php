@@ -117,5 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
 </section>
 
 <script src="static/PaginaNovaSenha/PaginaNovaSenha.js"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 </html>

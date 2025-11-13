@@ -44,5 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
     <input type="password" name="nova_senha" required minlength="6"><br><br>
     <button type="submit">Salvar Nova Senha</button>
   </form>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 </html>

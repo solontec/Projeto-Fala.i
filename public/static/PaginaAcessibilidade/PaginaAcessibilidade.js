@@ -40,7 +40,7 @@ class Acessibilidade {
 }
 
 // ===============================
-// CLASSE DE GERENCIAMENTO DE TEMA
+// GESTOR DE TEMA (corrigido e funcional)
 // ===============================
 class ThemeManager {
   constructor() {
@@ -48,26 +48,28 @@ class ThemeManager {
   }
 
   init() {
-    // Define tema inicial (localStorage ou sistema)
     const savedTheme = localStorage.getItem("theme");
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     const theme = savedTheme || systemTheme;
-    document.documentElement.setAttribute("data-theme", theme);
 
-    this.updateIcons(theme);
-    this.setupToggleButtons();
-  }
-
-  setTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
     this.updateIcons(theme);
+
+    const toggleButtons = document.querySelectorAll(
+      "#toggle-dark-mode, #toggle-dark-mode-card, .toggle-theme, [data-toggle-theme]"
+    );
+
+    toggleButtons.forEach((button) => {
+      button.addEventListener("click", () => this.toggleTheme());
+    });
   }
 
   toggleTheme() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
-    this.setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    this.updateIcons(newTheme);
   }
 
   updateIcons(theme) {
@@ -82,77 +84,27 @@ class ThemeManager {
       }
     });
   }
-
-  setupToggleButtons() {
-    const toggleButtons = document.querySelectorAll(
-      "#toggle-dark-mode, #toggle-dark-mode-card, .toggle-theme, [data-toggle-theme]"
-    );
-    toggleButtons.forEach((button) => {
-      button.addEventListener("click", () => this.toggleTheme());
-    });
-  }
 }
 
-// ===============================
-// FUNÇÃO DE OBSERVAÇÃO PARA FADE-IN
-// ===============================
-function observeElements() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-animate");
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-      rootMargin: "-50px",
-    }
-  );
+document.addEventListener("DOMContentLoaded", () => {
+  new ThemeManager();
+});
 
-  const fadeElements = document.querySelectorAll(".fade-in");
-  fadeElements.forEach((el) => observer.observe(el));
-}
+
 
 // ===============================
-// FUNÇÕES DO MENU MOBILE
-// ===============================
-function toggleMobileMenu() {
-  const menu = document.getElementById("nav-menu");
-  menu.classList.toggle("active");
-}
-
-function setupMobileMenu() {
-  const menuLinks = document.querySelectorAll(".nav-menu a");
-  const menu = document.getElementById("nav-menu");
-  menuLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("active");
-    });
-  });
-
-  document.addEventListener("click", (event) => {
-    const toggle = document.querySelector(".mobile-menu-toggle");
-    if (!menu.contains(event.target) && toggle && !toggle.contains(event.target)) {
-      menu.classList.remove("active");
-    }
-  });
-}
-
-// ===============================
-// INICIALIZAÇÃO DE TODAS AS FUNÇÕES
+// EXECUÇÃO
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
-  // Inicia acessibilidade
+  // Inicia acessibilidade e tema só após o DOM carregar
   window.acessibilidade = new Acessibilidade();
 
-  // Inicia tema
-  window.themeManager = new ThemeManager();
+  const themeManager = new ThemeManager();
+  themeManager.init();
 
-  // Observa elementos para fade-in
-  observeElements();
-
-  // Configura menu mobile
-  setupMobileMenu();
+  // Garante que o tema seja aplicado corretamente ao abrir a página
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
 });
