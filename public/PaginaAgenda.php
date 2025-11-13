@@ -219,7 +219,8 @@ if ($tarefas && count($tarefas) > 0) {
     </div>
   </footer>
 
-  <!-- JS -->
+ <script src="../public/js/pontuacao_tempo.js"></script>
+
   <script>
     // Funções modal
     function abrirModal() {

@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $senha = $_POST["senha"];
         $confirmarSenha = $_POST["confirmarSenha"];
 
+        
         UsuarioModel::cadastrar($nome, $rm, $email, $senha);
 
         echo "usuario cadastrado";

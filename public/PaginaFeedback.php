@@ -117,6 +117,7 @@ if (!isset($_SESSION['usuario_id'])) {
       </div>
     </div>
   </div>
+<script src="../public/js/pontuacao_tempo.js"></script>
 
 </body>
 

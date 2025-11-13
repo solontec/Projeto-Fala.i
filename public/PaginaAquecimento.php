@@ -76,6 +76,8 @@
 
   <p id="resultado"></p>
 
+  <script src="../public/js/pontuacao_tempo.js"></script>
+
 
 <script>
 let tempoInicio = 0;   // armazena o início da fala
