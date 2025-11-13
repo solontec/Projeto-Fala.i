@@ -3,6 +3,7 @@
 
 require_once "../config/config.php";
 require_once "../src/Model/UsuarioModel.php";
+require_once "../src/Model/RankingModel.php"; // ✅ adiciona o model do ranking
 
 session_start();
 
@@ -12,28 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
-    
     $usuario = UsuarioModel::logarUsuario($rm, $email, $senha);
 
     if ($usuario) {
-        
+        //  Guarda os dados do usuário na sessão
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_email'] = $usuario['email'];
         $_SESSION['usuario_rm'] = $usuario['rm'];
-        $_SESSION['usuario_nome'] = $usuario['nome']; // Adicionado para ser útil
+        $_SESSION['usuario_nome'] = $usuario['nome'];
 
-        
+        // Adiciona pontos de login (só uma vez por dia)
+        RankingModel::adicionarPontos($_SESSION['usuario_id'], 'login');
+
+        //  Redireciona para a página inicial
         header("Location: ../public/PaginaInicial.php");
-        // aqui vou inserir a lógica,
         exit;
     } else {
-       
+        //  Caso falhe o login
         $_SESSION['erro_login'] = "Credenciais inválidas. Verifique RM, e-mail ou senha.";
-        
-       
-        header("Location: ../public/PaginaLogin.php"); 
-        
-        
+        header("Location: ../public/PaginaLogin.php");
         exit;
     }
 }

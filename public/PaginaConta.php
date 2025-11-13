@@ -177,6 +177,7 @@ if (!$usuario) {
       </div>
     </div>
   </div>
+<script src="../public/js/pontuacao_tempo.js"></script>
 
   <script>
     // Script para abrir e fechar o modal

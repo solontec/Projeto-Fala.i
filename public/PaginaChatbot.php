@@ -152,6 +152,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+    <script src="../public/js/pontuacao_tempo.js"></script>
+
 
     <!-- seu JS original (se houver) -->
     <script src="static/PaginaChatbot/PaginaChatbot.js"></script>

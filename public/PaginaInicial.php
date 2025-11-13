@@ -494,7 +494,8 @@ if (!isset($_SESSION['usuario_id'])) {
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-    
+    <script src="../public/js/pontuacao_tempo.js"></script>
+
     <script src="static/PaginaInicial/PaginaInicial.js"></script>
 
     <script>

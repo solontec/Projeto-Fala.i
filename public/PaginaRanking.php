@@ -1,4 +1,6 @@
 <?php
+require_once "../src/Model/RankingModel.php";
+$ranking = RankingModel::getRanking();
 session_start();
 
 // Impede cache no navegador (assim o "Voltar" não mostra a página anterior)
@@ -151,6 +153,25 @@ header("Expires: 0");
                     </div>
                     {% endfor %}
                    
+                <?php
+require_once "../src/Model/RankingModel.php";
+$ranking = RankingModel::getRanking();
+?>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Usuário</th><th>Pontos</th></tr>
+  </thead>
+  <tbody>
+    <?php foreach ($ranking as $i => $row): ?>
+      <tr>
+        <td><?= $i + 1 ?></td>
+        <td><?= htmlspecialchars($row['nome']) ?></td>
+        <td><?= $row['pontos'] ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
 
                     </div>
                 </div>
