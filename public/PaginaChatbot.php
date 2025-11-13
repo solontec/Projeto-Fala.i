@@ -235,115 +235,138 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             )
             document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el))
         }
-  
+    </script>
+
+    <script>
     // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
-    let recognition;
-    let isRecording = false;
+    // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
+let recognition;
+let isRecording = false;
+let audioBlob = null;
+let audioURL = null;
 
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        recognition = new SpeechRecognition();
-        recognition.lang = 'pt-BR';
-        recognition.interimResults = false;
-        recognition.continuous = false;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.interimResults = false;
+    recognition.continuous = false;
 
-        recognition.onresult = async function(event) {
-            const transcript = event.results[0][0].transcript;
-            stopRecording();
-            mostrarMensagemUsuario(transcript);
-            await enviarMensagemGemini(transcript);
-        };
+    recognition.onresult = async function(event) {
+        const transcript = event.results[0][0].transcript;
+        stopRecording();
+        mostrarMensagemUsuario(transcript);
+        await enviarMensagemGemini(transcript);
+    };
 
-        recognition.onerror = function(event) {
-            console.error("Erro no reconhecimento:", event.error);
-            stopRecording();
-        };
-    }
+    recognition.onerror = function(event) {
+        console.error("Erro no reconhecimento:", event.error);
+        stopRecording();
+    };
+}
 
-    const btnFalar = document.getElementById("btn-falar");
-    const btnParar = document.getElementById("btn-parar");
+const btnFalar = document.getElementById("btn-falar");
+const btnParar = document.getElementById("btn-parar");
 
-    if (btnFalar) {
-        btnFalar.addEventListener("click", () => {
-            if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
-            recognition.start();
-            isRecording = true;
-            btnFalar.disabled = true;
-            btnParar.disabled = false;
-        });
-    }
-
-    if (btnParar) {
-        btnParar.addEventListener("click", () => stopRecording());
-    }
-
-    function stopRecording() {
-        if (recognition && isRecording) {
-            recognition.stop();
-            isRecording = false;
-            if (btnFalar) btnFalar.disabled = false;
-            if (btnParar) btnParar.disabled = true;
-        }
-    }
-
-    // Função para mostrar mensagem do usuário no chat (reaproveitável)
-    function mostrarMensagemUsuario(texto) {
-        const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-        const divUser = document.createElement("div");
-        divUser.className = "user-message";
-        // usa textContent por segurança (escape automático)
-        divUser.textContent = texto;
-        mainContainer.appendChild(divUser);
-        mainContainer.scrollTop = mainContainer.scrollHeight;
-    }
-
-    // Listener do form (envio por texto) - previne reload e usa envio AJAX local
-    const formChat = document.getElementById("form");
-    formChat.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const input = document.getElementById("pergunta");
-        const texto = input.value.trim();
-        if (!texto) return;
-
-        mostrarMensagemUsuario(texto);
-        input.value = "";
-
-        // envia para Gemini (via sua API local / flask)
-        await enviarMensagemGemini(texto);
+if (btnFalar) {
+    btnFalar.addEventListener("click", () => {
+        if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
+        recognition.start();
+        isRecording = true;
+        btnFalar.disabled = true;
+        btnParar.disabled = false;
     });
+}
 
-    // Envia para a rota local do Gemini (mesma lógica que você já tinha)
-    async function enviarMensagemGemini(texto) {
-        try {
-            const response = await fetch("http://localhost:5000/mensagem", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mensagem: texto })
-            });
+if (btnParar) {
+    btnParar.addEventListener("click", () => stopRecording());
+}
 
-            const data = await response.json();
-            const resposta = data.resposta || "Erro na resposta do servidor.";
-
-            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-            const divResposta = document.createElement("div");
-            divResposta.className = "resposta-animada";
-            // usa innerText/creation segura: cria elementos para evitar XSS se quiser trocar depois
-            divResposta.innerHTML = `<strong>Fala.i:</strong><p>${resposta}</p>`;
-            mainContainer.appendChild(divResposta);
-
-            mainContainer.scrollTop = mainContainer.scrollHeight;
-
-        } catch (err) {
-            console.error("Erro ao enviar para Gemini:", err);
-            // opcional: mostrar mensagem de erro ao usuário
-            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-            const divResposta = document.createElement("div");
-            divResposta.className = "resposta-animada";
-            divResposta.innerHTML = `<strong>Fala.i:</strong><p>Erro ao comunicar com o servidor.</p>`;
-            mainContainer.appendChild(divResposta);
-            mainContainer.scrollTop = mainContainer.scrollHeight;
-        }
+function stopRecording() {
+    if (recognition && isRecording) {
+        recognition.stop();
+        isRecording = false;
+        if (btnFalar) btnFalar.disabled = false;
+        if (btnParar) btnParar.disabled = true;
     }
+}
+
+// Função para mostrar mensagem do usuário no chat (reaproveitável)
+function mostrarMensagemUsuario(texto) {
+    const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+    const divUser = document.createElement("div");
+    divUser.className = "user-message";
+    divUser.textContent = texto;
+    mainContainer.appendChild(divUser);
+    mainContainer.scrollTop = mainContainer.scrollHeight;
+}
+
+// Enviar áudio como arquivo para o servidor
+const audioRecorder = new (window.AudioContext || window.webkitAudioContext)();
+let recorder;
+
+async function startRecording() {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mediaRecorder = new MediaRecorder(stream);
+    recorder = mediaRecorder;
+
+    mediaRecorder.ondataavailable = event => {
+        audioBlob = event.data;
+        audioURL = URL.createObjectURL(audioBlob);
+
+        // Exibir o áudio gravado no chat
+        mostrarAudioUsuario(audioURL);
+        // Enviar áudio para o backend
+        sendAudioToServer(audioBlob);
+    };
+
+    mediaRecorder.start();
+}
+
+function mostrarAudioUsuario(audioURL) {
+    const mainContainer = document.getElementById("chat-container");
+    const divUser = document.createElement("div");
+    divUser.className = "user-message";
+    const audioElement = document.createElement("audio");
+    audioElement.controls = true;
+    audioElement.src = audioURL;
+    divUser.appendChild(audioElement);
+    mainContainer.appendChild(divUser);
+    mainContainer.scrollTop = mainContainer.scrollHeight;
+}
+
+function sendAudioToServer(audioBlob) {
+    const formData = new FormData();
+    formData.append("audio", audioBlob, "audio.wav");
+
+    fetch("http://localhost:5000/mensagem", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const resposta = data.resposta || "Erro na resposta do servidor.";
+        const mainContainer = document.getElementById("chat-container");
+        const divResposta = document.createElement("div");
+        divResposta.className = "resposta-animada";
+        divResposta.innerHTML = `<strong>Fala.i:</strong><p>${resposta}</p>`;
+        mainContainer.appendChild(divResposta);
+        mainContainer.scrollTop = mainContainer.scrollHeight;
+    })
+    .catch(err => {
+        console.error("Erro ao enviar para Gemini:", err);
+        const mainContainer = document.getElementById("chat-container");
+        const divResposta = document.createElement("div");
+        divResposta.className = "resposta-animada";
+        divResposta.innerHTML = `<strong>Fala.i:</strong><p>Erro ao comunicar com o servidor.</p>`;
+        mainContainer.appendChild(divResposta);
+        mainContainer.scrollTop = mainContainer.scrollHeight;
+    });
+}
+
+// Função de iniciar gravação ao clicar no botão "Falar"
+document.getElementById("btn-falar").addEventListener("click", startRecording);
+
     </script>
 
   <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
