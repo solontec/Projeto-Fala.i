@@ -113,5 +113,6 @@
         </script>
 
         <script src="static/PaginaTermos/PaginaTermos.js"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 </html>

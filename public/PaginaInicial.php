@@ -529,6 +529,7 @@ function onPlayerStateChange(event, currentIndex) {
 
 <!-- Carrega a API do YouTube -->
 <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 
 </body>
 

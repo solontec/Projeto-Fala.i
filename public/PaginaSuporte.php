@@ -47,7 +47,7 @@ if (!isset($_SESSION['usuario_id'])) {
       <li><a href="PaginaConta.php">Minha Conta</a></li>
       <li id="principal">Ajuda/Suporte</li>
       <li><a href="PaginaTermosConfig.php">Termos de Uso</a></li>
-      <li>Acessibilidade</li>
+      <li><a href="PaginaAcessibilidade.php">Acessibilidade</a></li>
       <li><a href="PaginaFeedback.php">Feedback</a></li>
       <li id="abrirModalLogout">Logout</li>
     </ul>
@@ -154,5 +154,6 @@ if (!isset($_SESSION['usuario_id'])) {
 </body>
 
   <script src="./static/PaginaConta/PaginaSuporte.js"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 
 </html>

@@ -346,5 +346,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     }
     </script>
 
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 </html>

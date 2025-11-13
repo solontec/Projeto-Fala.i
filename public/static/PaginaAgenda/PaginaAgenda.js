@@ -2,14 +2,28 @@
 // 📦 GESTÃO DE MODAL
 // ===============================
 window.abrirModal = function () {
-  document.getElementById("modal-overlay").classList.add("show");
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
   document.body.style.overflow = "hidden";
+
+  // Define modo "criar"
+  document.getElementById("form-acao").value = "criar";
+  document.getElementById("form-tarefa-id").value = "";
+  document.querySelector(".modal-content h2").innerText = "Adicionar Nova Tarefa";
+  document.querySelector(".submit-btn").innerText = "Adicionar Tarefa";
 };
 
 window.fecharModal = function () {
-  document.getElementById("modal-overlay").classList.remove("show");
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.remove("show");
   document.body.style.overflow = "auto";
   document.getElementById("form-tarefa").reset();
+
+  // Restaura modo "criar"
+  document.getElementById("form-acao").value = "criar";
+  document.getElementById("form-tarefa-id").value = "";
+  document.querySelector(".modal-content h2").innerText = "Adicionar Nova Tarefa";
+  document.querySelector(".submit-btn").innerText = "Adicionar Tarefa";
 };
 
 // Fecha modal clicando fora
@@ -28,6 +42,26 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ===============================
+// ✏️ ABRIR MODAL DE EDIÇÃO
+// ===============================
+window.abrirModalEditar = function (id, titulo, descricao, dataHora) {
+  const modal = document.getElementById("modal-overlay");
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+
+  // Preenche o formulário
+  document.getElementById("form-acao").value = "editar";
+  document.getElementById("form-tarefa-id").value = id;
+  document.getElementById("nome-tarefa").value = titulo;
+  document.getElementById("descricao-tarefa").value = descricao;
+  document.getElementById("data-tarefa").value = dataHora;
+
+  // Atualiza título e botão
+  document.querySelector(".modal-content h2").innerText = "Editar Tarefa";
+  document.querySelector(".submit-btn").innerText = "Salvar Alterações";
+};
+
+// ===============================
 // 🌙 GERENCIAMENTO DE TEMA (DARK/LIGHT)
 // ===============================
 class ThemeManager {
@@ -40,6 +74,7 @@ class ThemeManager {
       localStorage.getItem("theme") ||
       document.documentElement.getAttribute("data-theme") ||
       "light";
+
     document.documentElement.setAttribute("data-theme", currentTheme);
     this.updateToggleIcon(currentTheme);
     this.setupToggleButton();
@@ -53,9 +88,7 @@ class ThemeManager {
 
   updateToggleIcon(theme) {
     const icon = document.getElementById("theme-icon");
-    if (icon) {
-      icon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
-    }
+    if (icon) icon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
   }
 
   toggleTheme() {
@@ -108,25 +141,6 @@ function formatarData(dataString) {
     return dataString;
   }
 }
-
-// ===============================
-// 📝 TAREFAS
-// ===============================
-let tarefas = [];
-
-window.abrirModalEditar = function (id, titulo, descricao, dataHora) {
-  abrirModal();
-
-  document.getElementById("form-acao").value = "editar";
-  document.getElementById("form-tarefa-id").value = id;
-  document.getElementById("nome-tarefa").value = titulo;
-  document.getElementById("descricao-tarefa").value = descricao;
-  document.getElementById("data-tarefa").value = dataHora;
-
-  // Atualiza título e botão
-  document.querySelector(".modal-header h2").innerText = "Editar Tarefa";
-  document.querySelector(".submit-btn").innerText = "Salvar Alterações";
-};
 
 // ===============================
 // 🚀 INICIALIZAÇÃO

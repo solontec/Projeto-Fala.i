@@ -526,3 +526,46 @@ a:hover{
 #abrirModalLogout{
   cursor: pointer;
 }
+/* === ALTO CONTRASTE === */
+.alto-contraste {
+  filter: invert(100%) hue-rotate(180deg);
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* === PÁGINA DE ACESSIBILIDADE === */
+.card-acessibilidade {
+  background: var(--fundo-branco);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.acoes-acessibilidade {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.grupo h3 {
+  margin-bottom: 0.5rem;
+}
+
+.grupo button {
+  margin: 0 0.3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--cor-principal);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.grupo button:hover {
+  background: var(--hover);
+}

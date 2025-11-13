@@ -114,7 +114,8 @@
         </footer>
     </section>
 
-    <script src="static/PaginaCadastro/PaginaCadastro.js"></script> 
+    <script src="static/PaginaCadastro/PaginaCadastro.js"></script>
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
 
 </html>

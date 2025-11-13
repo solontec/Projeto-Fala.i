@@ -67,7 +67,7 @@ if (!$usuario) {
         <li id="principal">Minha Conta</li>
         <li><a href="PaginaSuporte.php">Ajuda/Suporte</a></li>
         <li><a href="PaginaTermosConfig.php">Termos de Uso</a></li>
-        <li>Acessibilidade</li>
+        <li><a href="PaginaAcessibilidade.php">Acessibilidade</a></li>
         <li><a href="PaginaFeedback.php">Feedback</a></li>
         <li id="abrirModalLogout">Logout</li>
       </ul>
@@ -199,6 +199,8 @@ if (!$usuario) {
       }
     });
   </script>
+  
+  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 
 </body>
 </html>
