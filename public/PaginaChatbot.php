@@ -235,9 +235,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             )
             document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el))
         }
-    </script>
-
-    <script>
+  
     // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
     let recognition;
     let isRecording = false;

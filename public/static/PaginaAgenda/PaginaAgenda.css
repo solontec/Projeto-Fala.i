@@ -666,7 +666,7 @@ footer {
 }
 
 hr {
-  width: 300%;
+  width: 100%;
   color: var(--cinza-medio);
   border-color: var(--border-color);
 }
