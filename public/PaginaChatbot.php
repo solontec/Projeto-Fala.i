@@ -38,7 +38,146 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Usa o CSS que você forneceu -->
     <link rel="stylesheet" href="static/PaginaChatbot/PaginaChatbot.css">
+
+    <!-- marked.js para transformar Markdown em HTML (usado no front-end) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- DOMPurify para sanitizar o HTML gerado (proteção XSS) -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
     <title>Chat Fala.i</title>
+    <style>
+ /* ============================================================
+   1. REMOVER QUALQUER ZOOM EM QUALQUER ELEMENTO DO CARD
+   ============================================================ */
+.ia-card,
+.ia-card *,
+.resposta-animada,
+.resposta-animada *,
+.fala-formatada,
+.fala-formatada * {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* ============================================================
+   2. AJUSTES GERAIS
+   ============================================================ */
+.resposta-animada,
+.fala-formatada,
+.ia-card,
+.ia-text {
+    box-sizing: border-box;
+}
+
+.fala-formatada {
+    margin-top: 8px;
+    white-space: normal;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+}
+
+/* Parágrafos com espaçamento suave */
+.fala-formatada p {
+    margin: 6px 0;
+}
+
+/* Espaço entre bolhas de chat */
+.resposta-animada,
+.user-message {
+    margin: 10px 0;
+}
+
+/* ============================================================
+   3. CARD ESTILIZADO (MODERNO E ALINHADO)
+   ============================================================ */
+.ia-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* Header (Ex: "Feedback de Fala — Fala.i") */
+.ia-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.ia-header h2 {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 700;
+}
+
+.ia-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+}
+
+/* ============================================================
+   4. TÍTULOS
+   ============================================================ */
+.fala-formatada h3 {
+    margin: 16px 0 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.fala-formatada h1,
+.fala-formatada h2 {
+    margin: 14px 0 6px;
+    font-weight: 700;
+}
+
+/* ============================================================
+   5. LISTAS (PONTOS ALINHADOS E BONITOS)
+   ============================================================ */
+.fala-formatada ul {
+    margin: 8px 0 14px;
+    padding-left: 22px;
+    list-style: none; /* Remove bullet feio */
+}
+
+.fala-formatada ul li {
+    position: relative;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    padding-left: 14px;
+}
+
+/* Marcador estilizado (bullet bonito) */
+.fala-formatada ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: 1.2rem;
+    color: #2b2b2b;
+}
+
+/* ============================================================
+   6. Énfase e negrito
+   ============================================================ */
+.fala-formatada strong {
+    font-weight: 700;
+}
+
+.fala-formatada em {
+    opacity: 0.9;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -83,7 +222,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                 <?php if (!empty($resposta)): ?>
                     <div class="resposta-animada">
                         <strong>Fala.i:</strong>
-                        <p><?= htmlspecialchars($resposta) ?></p>
+                        <div class="fala-formatada"><?= nl2br(htmlspecialchars($resposta)) ?></div>
                     </div>
                 <?php endif; ?>
             </div>
@@ -153,7 +292,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
     <script src="../public/js/pontuacao_tempo.js"></script>
-
 
     <!-- seu JS original (se houver) -->
     <script src="static/PaginaChatbot/PaginaChatbot.js"></script>
@@ -239,134 +377,121 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
     <script>
     // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
-    // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
-let recognition;
-let isRecording = false;
-let audioBlob = null;
-let audioURL = null;
+    let recognition;
+    let isRecording = false;
 
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.lang = 'pt-BR';
-    recognition.interimResults = false;
-    recognition.continuous = false;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.lang = 'pt-BR';
+        recognition.interimResults = false;
+        recognition.continuous = false;
 
-    recognition.onresult = async function(event) {
-        const transcript = event.results[0][0].transcript;
-        stopRecording();
-        mostrarMensagemUsuario(transcript);
-        await enviarMensagemGemini(transcript);
-    };
+      recognition.onresult = async function(event) {
+    const transcript = event.results[0][0].transcript;
+    stopRecording();
 
-    recognition.onerror = function(event) {
-        console.error("Erro no reconhecimento:", event.error);
-        stopRecording();
-    };
-}
+    // MOSTRA "Áudio" NA TELA
+    mostrarMensagemUsuario("🎤 Áudio");
 
-const btnFalar = document.getElementById("btn-falar");
-const btnParar = document.getElementById("btn-parar");
+    // MAS ENVIA A TRANSCRIÇÃO REAL PARA A IA
+    await enviarMensagemGemini(transcript);
+};
 
-if (btnFalar) {
-    btnFalar.addEventListener("click", () => {
-        if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
-        recognition.start();
-        isRecording = true;
-        btnFalar.disabled = true;
-        btnParar.disabled = false;
-    });
-}
 
-if (btnParar) {
-    btnParar.addEventListener("click", () => stopRecording());
-}
-
-function stopRecording() {
-    if (recognition && isRecording) {
-        recognition.stop();
-        isRecording = false;
-        if (btnFalar) btnFalar.disabled = false;
-        if (btnParar) btnParar.disabled = true;
+        recognition.onerror = function(event) {
+            console.error("Erro no reconhecimento:", event.error);
+            stopRecording();
+        };
     }
-}
 
-// Função para mostrar mensagem do usuário no chat (reaproveitável)
-function mostrarMensagemUsuario(texto) {
-    const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-    const divUser = document.createElement("div");
-    divUser.className = "user-message";
-    divUser.textContent = texto;
-    mainContainer.appendChild(divUser);
-    mainContainer.scrollTop = mainContainer.scrollHeight;
-}
+    const btnFalar = document.getElementById("btn-falar");
+    const btnParar = document.getElementById("btn-parar");
 
-// Enviar áudio como arquivo para o servidor
-const audioRecorder = new (window.AudioContext || window.webkitAudioContext)();
-let recorder;
+    if (btnFalar) {
+        btnFalar.addEventListener("click", () => {
+            if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
+            recognition.start();
+            isRecording = true;
+            btnFalar.disabled = true;
+            btnParar.disabled = false;
+        });
+    }
 
-async function startRecording() {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mediaRecorder = new MediaRecorder(stream);
-    recorder = mediaRecorder;
+    if (btnParar) {
+        btnParar.addEventListener("click", () => stopRecording());
+    }
 
-    mediaRecorder.ondataavailable = event => {
-        audioBlob = event.data;
-        audioURL = URL.createObjectURL(audioBlob);
+    function stopRecording() {
+        if (recognition && isRecording) {
+            recognition.stop();
+            isRecording = false;
+            if (btnFalar) btnFalar.disabled = false;
+            if (btnParar) btnParar.disabled = true;
+        }
+    }
 
-        // Exibir o áudio gravado no chat
-        mostrarAudioUsuario(audioURL);
-        // Enviar áudio para o backend
-        sendAudioToServer(audioBlob);
-    };
-
-    mediaRecorder.start();
-}
-
-function mostrarAudioUsuario(audioURL) {
-    const mainContainer = document.getElementById("chat-container");
-    const divUser = document.createElement("div");
-    divUser.className = "user-message";
-    const audioElement = document.createElement("audio");
-    audioElement.controls = true;
-    audioElement.src = audioURL;
-    divUser.appendChild(audioElement);
-    mainContainer.appendChild(divUser);
-    mainContainer.scrollTop = mainContainer.scrollHeight;
-}
-
-function sendAudioToServer(audioBlob) {
-    const formData = new FormData();
-    formData.append("audio", audioBlob, "audio.wav");
-
-    fetch("http://localhost:5000/mensagem", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        const resposta = data.resposta || "Erro na resposta do servidor.";
-        const mainContainer = document.getElementById("chat-container");
-        const divResposta = document.createElement("div");
-        divResposta.className = "resposta-animada";
-        divResposta.innerHTML = `<strong>Fala.i:</strong><p>${resposta}</p>`;
-        mainContainer.appendChild(divResposta);
+    // Função para mostrar mensagem do usuário no chat (reaproveitável)
+    function mostrarMensagemUsuario(texto) {
+        const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+        const divUser = document.createElement("div");
+        divUser.className = "user-message";
+        // usa textContent por segurança (escape automático)
+        divUser.textContent = texto;
+        mainContainer.appendChild(divUser);
         mainContainer.scrollTop = mainContainer.scrollHeight;
-    })
-    .catch(err => {
-        console.error("Erro ao enviar para Gemini:", err);
-        const mainContainer = document.getElementById("chat-container");
-        const divResposta = document.createElement("div");
-        divResposta.className = "resposta-animada";
-        divResposta.innerHTML = `<strong>Fala.i:</strong><p>Erro ao comunicar com o servidor.</p>`;
-        mainContainer.appendChild(divResposta);
-        mainContainer.scrollTop = mainContainer.scrollHeight;
+    }
+
+    // Listener do form (envio por texto) - previne reload e usa envio AJAX local
+    const formChat = document.getElementById("form");
+    formChat.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const input = document.getElementById("pergunta");
+        const texto = input.value.trim();
+        if (!texto) return;
+
+        mostrarMensagemUsuario(texto);
+        input.value = "";
+
+        // envia para Gemini (via sua API local / flask)
+        await enviarMensagemGemini(texto);
     });
-}
 
-// Função de iniciar gravação ao clicar no botão "Falar"
-document.getElementById("btn-falar").addEventListener("click", startRecording);
+    // Envia para a rota local do Gemini (mesma lógica que você já tinha)
+    async function enviarMensagemGemini(texto) {
+        try {
+            const response = await fetch("http://localhost:5000/mensagem", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mensagem: texto })
+            });
 
+            const data = await response.json();
+            const resposta = data.resposta || "Erro na resposta do servidor.";
+
+            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+            const divResposta = document.createElement("div");
+            divResposta.className = "resposta-animada";
+            // usa innerText/creation segura: cria elementos para evitar XSS se quiser trocar depois
+            // >>> ALTERAÇÃO: usar marked + DOMPurify para formatar e sanitizar
+            const htmlFromMd = marked.parse(resposta);
+            const safeHtml = DOMPurify.sanitize(htmlFromMd);
+            divResposta.innerHTML = `<strong>Fala.i:</strong><div class="fala-formatada">${safeHtml}</div>`;
+            mainContainer.appendChild(divResposta);
+
+            mainContainer.scrollTop = mainContainer.scrollHeight;
+
+        } catch (err) {
+            console.error("Erro ao enviar para Gemini:", err);
+            // opcional: mostrar mensagem de erro ao usuário
+            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
+            const divResposta = document.createElement("div");
+            divResposta.className = "resposta-animada";
+            divResposta.innerHTML = `<strong>Fala.i:</strong><p>Erro ao comunicar com o servidor.</p>`;
+            mainContainer.appendChild(divResposta);
+            mainContainer.scrollTop = mainContainer.scrollHeight;
+        }
+    }
     </script>
 
   <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
