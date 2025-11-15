@@ -45,8 +45,10 @@
     </div>
   </nav>
 
+  <div class="container">
   <main class="main-content">
-    <h1>Aquecimento de Voz</h1>
+    <div class="esquerda">
+      <h1>Aquecimento de Voz</h1>
       <p>1 - Escolha o nível</p>
        <p>2 - Clique em "Gerar Texto"</p>
        <p>3 - Leia em voz alta com "Ler"</p>
@@ -59,8 +61,10 @@
           <option value="3">Nível 3 (Difícil)</option>
         </select>
       </div>
-
-      <div class="conteudo-texto">
+    </div>
+    
+      <div class="direita">
+        <div class="conteudo-texto">
         <textarea id="texto" placeholder="Texto gerado aqui..." readonly></textarea>
         <textarea id="textoLido" placeholder="Texto reconhecido..." readonly></textarea>
       </div>
@@ -69,9 +73,10 @@
         <button onclick="gerarTexto()">Gerar Texto</button>
         <button onclick="lerTexto()">Ler</button>
       </div>
-
+      </div>
       <p id="resultado"></p>
   </main>
+  </div>
 
     <footer class="footer-inicio fade-in">
         <div class="footer-inicio">
