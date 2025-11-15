@@ -28,6 +28,7 @@
   --roxo-escuro: #491f7a;
   --mensagem-usuario-bg: #686bff;
   --mensagem-bot-bg: #f0f0f0;
+  --footer: #4d4d4d;
 }
 
 /* Modo Escuro */
@@ -56,6 +57,7 @@
   --cor-input: #222222;
   --mensagem-usuario-bg: #8b8dff;
   --mensagem-bot-bg: #2d2d2d;
+  --footer: #e1e1e1;
 }
 
 * {
@@ -511,13 +513,14 @@ align-items: flex-start; /* Novo: Para o contêiner .chat-mensagens (que está e
     transition: margin-left 0.3s ease;
 }
 
+/* FOOTER */
 footer {
   padding: 90px;
   padding-bottom: 30px;
   padding-top: 45px;
   background-color: var(--fundo-container);
   box-shadow: 0 0 10px var(--border-color);
-  margin: 0;
+  margin-bottom: 0;
 }
 
 #logo-footer {
@@ -550,7 +553,7 @@ hr {
 .informacoes-footer {
   text-align: center;
   font-family: "Titillium Web";
-  color: #626262;
+  color: var(--footer);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -562,22 +565,44 @@ hr {
   display: flex;
 }
 
-.caminhos-footer,
-.copright {
+.caminhos-footer, .copright {
   display: flex;
-  color: #626262;
+  color: var(--footer);
   gap: 10px;
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a {
   text-decoration: none;
-  color: #626262;
+  color: var(--footer);
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a:hover {
   text-decoration: underline;
+}
+
+.quem-somos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.quem-somos #quem-somos{
+  color: white;
+}
+
+.sobre{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  font-family: 'Titillium Web';
+  font-size: 18px;
 }
 
 .fade-in {
