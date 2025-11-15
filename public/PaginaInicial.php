@@ -109,23 +109,29 @@ if (!isset($_SESSION['usuario_id'])) {
 
     <section class="cards-container fade-in">
         <div class="card fade-delay-1">
+            <a href="PaginaAgenda.php">
             <div class="card-agenda">
                 <img src="assets/img/calendario.png" width="250px" alt="Ícone de Agenda">
             </div>
+            </a>
             
                 <a href="PaginaAgenda.php" class="botao">AGENDA</a>
             </form>
         </div>
         <div class="card fade-delay-2">
+            <a href="PaginaAquecimento.php">
             <div class="card-microfone">
                 <img src="assets/img/microfone.png" width="260px" alt="Ícone de Microfone">
             </div>
-             <a href="PaginaAquecimento.php" class="botao">MICROFONE</a>
+            </a>
+             <a href="PaginaAquecimento.php" class="botao">AQUECER VOZ</a>
         </div>
         <div class="card fade-delay-3">
+            <a href="PaginaRanking.php">
             <div class="card-ranking">
                 <img src="assets/img/ranking.png" width="250px" alt="Ícone de Ranking">
             </div>
+            </a>
             <a href="PaginaRanking.php" class="botao">RANKING</a>
 
         </div>

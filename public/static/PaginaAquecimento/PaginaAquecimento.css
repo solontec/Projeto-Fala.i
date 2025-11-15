@@ -1,0 +1,386 @@
+:root {
+  /* Modo Claro */
+  --fundo-branco: #ffffff;
+  --cor-principal: #686bff;
+  --hover: #5557ff;
+  --cor-terciaria: #7779fd;
+  --roxo-claro: #b2b3ff54;
+  --cinza-medio: #cfd4d8;
+  --roxo: #491f7a;
+  --fundo-cinza: #efefef;
+  --texto-primario: #686bff;
+  --texto-secundario: #7779fd;
+  --fundo-container: #b2b3ff54;
+  --border-color: #e5e7eb;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --preto: #444444;
+  --footer: #4d4d4d;
+}
+
+/* Modo Escuro */
+[data-theme="dark"] {
+  --fundo-branco: #1a1a1a;
+  --cor-principal: #8b8dff;
+  --hover: #7779ff;
+  --cor-terciaria: #9b9dff;
+  --roxo-claro: #2a2a3a;
+  --cinza-medio: #404040;
+  --roxo: #6b4f8a;
+  --fundo-cinza: #2d2d2d;
+  --texto-primario: #e0d2f1 ;
+  --texto-secundario: #9b9dff;
+  --fundo-container: #2825307e;
+  --border-color: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --preto: #7779fd;
+  --footer: #e1e1e1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.4s ease;
+}
+
+body {
+  background-color: var(--fundo-branco);
+  color: var(--texto-primario);
+  font-family: "Titillium Web", sans-serif;
+  cursor: default;
+  width: 100%;
+  height: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: var(--fundo-branco);
+}
+
+.nav-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  justify-content: center;
+  flex: 2;
+  padding: 0;
+  margin: 0;
+}
+
+
+.nav-menu li a {
+  color: var(--texto-primario);
+  text-decoration: none;
+  font-family: "Titillium Web", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  transition: 0.4s;
+}
+
+.nav-menu li a:hover {
+  color: var(--hover);
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+li {
+  transition: 0.2s;
+  font-size: 18px;
+}
+
+li:hover {
+  transform: scale(1.1);
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.logo {
+  margin-left: 10px;
+  animation: pulo 2s infinite;
+}
+
+/* Botão Toggle Modo Escuro */
+.toggle-mode {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-mode:hover {
+  background-color: var(--hover);
+  transform: scale(1.1);
+}
+
+.account-btn {
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.4s;
+  width: 155px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Titillium Web';
+}
+
+.account-btn:hover {
+  background-color: var(--hover);
+  transform: scale(1.05);
+}
+
+@keyframes pulo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* FOOTER */
+footer {
+  padding: 90px;
+  padding-bottom: 30px;
+  padding-top: 45px;
+  background-color: var(--fundo-container);
+  box-shadow: 0 0 10px var(--border-color);
+  margin-bottom: 0;
+}
+
+#logo-footer {
+  width: 80px;
+}
+
+.logo-footer {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  gap: 30px;
+  font-family: "Righteous";
+  font-size: 40px;
+  color: var(--cor-principal);
+}
+
+.footer-inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+hr {
+  width: 300%;
+  color: var(--cinza-medio);
+  border-color: var(--border-color);
+}
+
+.informacoes-footer {
+  text-align: center;
+  font-family: "Titillium Web";
+  color: var(--footer);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icons-footer {
+  text-decoration: none;
+  gap: 15px;
+  display: flex;
+}
+
+.caminhos-footer, .copright {
+  display: flex;
+  color: var(--footer);
+  gap: 10px;
+  font-family: "Titillium Web";
+}
+
+.caminhos-footer a {
+  text-decoration: none;
+  color: var(--footer);
+  font-family: "Titillium Web";
+}
+
+.caminhos-footer a:hover {
+  text-decoration: underline;
+}
+
+.quem-somos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.quem-somos #quem-somos{
+  color: white;
+}
+
+.sobre{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  font-family: 'Titillium Web';
+  font-size: 18px;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in.fade-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays para efeito staggered */
+.fade-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  transition-delay: 0.4s;
+}
+
+.fade-delay-5 {
+  transition-delay: 0.5s;
+}
+
+.fade-delay-6 {
+  transition-delay: 0.6s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+  gap: 20px;
+  width: 100%;
+  height: 85vh;
+}
+
+h1{
+    font-size: 40px;
+}
+
+select{
+    background-color: #226cff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    color: white;
+}
+
+.conteudo-texto {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+textarea {
+    width: 45%;
+    height: 120px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #226cff;
+    padding: 8px;
+    resize: none;
+    background: var(--fundo-branco);
+    color: var(--cor-terciaria);
+}
+
+#resultado {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    white-space: pre-line;
+}
+
+button{
+    background-color: #226cff;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 100px;
+    cursor: pointer;
+}

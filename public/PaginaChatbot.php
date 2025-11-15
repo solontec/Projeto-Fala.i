@@ -2,7 +2,7 @@
 
 require_once "../Controller/GeminiController.php";
 // Garante que variáveis existem
-if($_SERVER['REQUEST_METHOD'] === "POST"){
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $pergunta = $_POST['pergunta'] ?? "";
     $respostaApi = enviarMensagemGemini($pergunta);
     $resposta = $respostaApi['resposta'] ?? "Erro ao obter resposta.";
@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Script para aplicar tema INSTANTANEAMENTE -->
     <script>
-        (function () {
+        (function() {
             const savedTheme = localStorage.getItem('theme');
             const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             const theme = savedTheme || systemTheme;
@@ -45,139 +45,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
 
     <title>Chat Fala.i</title>
-    <style>
- /* ============================================================
-   1. REMOVER QUALQUER ZOOM EM QUALQUER ELEMENTO DO CARD
-   ============================================================ */
-.ia-card,
-.ia-card *,
-.resposta-animada,
-.resposta-animada *,
-.fala-formatada,
-.fala-formatada * {
-    transform: none !important;
-    transition: none !important;
-}
-
-/* ============================================================
-   2. AJUSTES GERAIS
-   ============================================================ */
-.resposta-animada,
-.fala-formatada,
-.ia-card,
-.ia-text {
-    box-sizing: border-box;
-}
-
-.fala-formatada {
-    margin-top: 8px;
-    white-space: normal;
-    line-height: 1.5;
-    font-size: 0.95rem;
-    color: #1a1a1a;
-}
-
-/* Parágrafos com espaçamento suave */
-.fala-formatada p {
-    margin: 6px 0;
-}
-
-/* Espaço entre bolhas de chat */
-.resposta-animada,
-.user-message {
-    margin: 10px 0;
-}
-
-/* ============================================================
-   3. CARD ESTILIZADO (MODERNO E ALINHADO)
-   ============================================================ */
-.ia-card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 18px 20px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    max-width: 860px;
-    margin: 0 auto;
-}
-
-/* Header (Ex: "Feedback de Fala — Fala.i") */
-.ia-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.ia-header h2 {
-    margin: 0;
-    font-size: 1.08rem;
-    font-weight: 700;
-}
-
-.ia-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-}
-
-/* ============================================================
-   4. TÍTULOS
-   ============================================================ */
-.fala-formatada h3 {
-    margin: 16px 0 6px;
-    font-weight: 700;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.fala-formatada h1,
-.fala-formatada h2 {
-    margin: 14px 0 6px;
-    font-weight: 700;
-}
-
-/* ============================================================
-   5. LISTAS (PONTOS ALINHADOS E BONITOS)
-   ============================================================ */
-.fala-formatada ul {
-    margin: 8px 0 14px;
-    padding-left: 22px;
-    list-style: none; /* Remove bullet feio */
-}
-
-.fala-formatada ul li {
-    position: relative;
-    margin-bottom: 6px;
-    line-height: 1.5;
-    padding-left: 14px;
-}
-
-/* Marcador estilizado (bullet bonito) */
-.fala-formatada ul li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: 4px;
-    font-size: 1.2rem;
-    color: #2b2b2b;
-}
-
-/* ============================================================
-   6. Énfase e negrito
-   ============================================================ */
-.fala-formatada strong {
-    font-weight: 700;
-}
-
-.fala-formatada em {
-    opacity: 0.9;
-}
-
-</style>
-
 </head>
 
 <body>
@@ -189,10 +56,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">
-            <li><a href="PaginaInicial.php">Serviços</a></li>
-            <li><a href="PaginaCadastro.php">Quem somos</a></li>
-            <li><a href="PaginaInicial.php">Tutorial</a></li>
-            <li><a href="PaginaInicial.php">Contato</a></li>
+            <li><a href="PaginaInicial.php">Início</a></li>
+            <li><a href="PaginaAgenda.php">Agenda</a></li>
+            <li><a href="PaginaAquecimento.php">Aquecimento</a></li>
+            <li><a href="PaginaRanking.php">Ranking</a></li>
         </ul>
         <div class="nav-right">
             <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
@@ -208,36 +75,36 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     </nav>
 
     <div class="tudo">
-        <div class="menu-container">
-            <div class="icon-menu">
-                <button class="bars" onclick="abrirmenu()"><i class="fas fa-bars"></i></button>
-                <button class="add">&plus;</button>
-            </div>
-            <div class="menu" id="menu"></div>
-        </div>
 
         <div class="container">
             <div class="main-container" id="chat-container">
-                <!-- Se existir resposta via POST (quando o form for submetido no backend sem JS) -->
-                <?php if (!empty($resposta)): ?>
-                    <div class="resposta-animada">
-                        <strong>Fala.i:</strong>
-                        <div class="fala-formatada"><?= nl2br(htmlspecialchars($resposta)) ?></div>
-                    </div>
-                <?php endif; ?>
+                <div class="chat-mensagens" id="chat-mensagens-list">
+                    <?php if (!empty($resposta)): ?>
+                        <div class="mensagem-bot"><strong>Fala.i:</strong>
+                            <div class="fala-formatada"><?= nl2br(htmlspecialchars($resposta)) ?></div>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="chat">
                 <!-- mantém method POST caso queira fallback sem JS; o JS previne o comportamento padrão -->
                 <form method="POST" id="form">
-                    <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"><?= isset($pergunta) ? htmlspecialchars($pergunta) : "" ?></textarea>
-                    <div class="voice-controls">
-                        <button type="button" id="btn-falar" class="falar"><i class="fas fa-microphone"></i> Falar</button>
-                        <button type="button" id="btn-parar" class="parar" disabled><i class="fas fa-stop"></i> Parar</button>
-                    </div>
+                    <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"></textarea>
 
-                    <button type="submit" class="enviar"><i class="bi bi-arrow-up-circle-fill"></i></button>
+                    <div class="botoes-lado-a-lado">
+                        <!-- Botão Falar -->
+                        <button type="button" id="btn-falar" class="falar">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+
+                        <!-- Botão Enviar -->
+                        <button type="submit" class="enviar">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -290,210 +157,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     </div>
 
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <script src="../public/js/pontuacao_tempo.js"></script>
 
     <!-- seu JS original (se houver) -->
     <script src="static/PaginaChatbot/PaginaChatbot.js"></script>
-
-    <script>
-        /* --- Manutenção dos scripts que já tinha: menu, tema, atalhos, etc --- */
-        function abrirmenu() {
-            const menu = document.getElementById("menu")
-            menu.classList.toggle("ativo")
-        }
-
-        const menuContainer = document.querySelector(".menu-container")
-        const menu = document.getElementById("menu")
-        const addButton = document.querySelector(".add")
-
-        if (menuContainer && menu && addButton) {
-            menuContainer.addEventListener("mouseenter", () => menu.classList.add("ativo"))
-            menuContainer.addEventListener("mouseleave", () => menu.classList.remove("ativo"))
-            addButton.addEventListener("mouseenter", () => menu.classList.add("ativo"))
-            addButton.addEventListener("mouseleave", () => menu.classList.remove("ativo"))
-        }
-
-        const textarea = document.getElementById("pergunta")
-        const form = document.getElementById("form")
-
-        if (textarea) {
-            textarea.addEventListener("keydown", (event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                    event.preventDefault()
-                    form.dispatchEvent(new Event("submit"))
-                }
-            })
-        }
-
-        function toggleMobileMenu() {
-            const navMenu = document.getElementById("nav-menu")
-            navMenu.classList.toggle("mobile-active")
-        }
-
-        class ThemeManager {
-            constructor() { this.init() }
-            init() {
-                const currentTheme = document.documentElement.getAttribute("data-theme") || "light"
-                this.updateToggleIcon(currentTheme)
-                this.setupToggleButton()
-            }
-            setTheme(theme) {
-                document.documentElement.setAttribute("data-theme", theme)
-                localStorage.setItem("theme", theme)
-                this.updateToggleIcon(theme)
-            }
-            updateToggleIcon(theme) {
-                const icon = document.getElementById("theme-icon")
-                if (icon) icon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon"
-            }
-            toggleTheme() {
-                const currentTheme = document.documentElement.getAttribute("data-theme")
-                const newTheme = currentTheme === "dark" ? "light" : "dark"
-                this.setTheme(newTheme)
-            }
-            setupToggleButton() {
-                const toggleButton = document.getElementById("toggle-dark-mode")
-                if (toggleButton) toggleButton.addEventListener("click", () => this.toggleTheme())
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            new ThemeManager()
-            observeElements()
-        })
-
-        function observeElements() {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) entry.target.classList.add("fade-animate")
-                    })
-                }, { threshold: 0.1 }
-            )
-            document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el))
-        }
-    </script>
-
-    <script>
-    // ---------------- Voice recognition + Chat behavior (integrado e preservando seu código) ----------------
-    let recognition;
-    let isRecording = false;
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        recognition = new SpeechRecognition();
-        recognition.lang = 'pt-BR';
-        recognition.interimResults = false;
-        recognition.continuous = false;
-
-      recognition.onresult = async function(event) {
-    const transcript = event.results[0][0].transcript;
-    stopRecording();
-
-    // MOSTRA "Áudio" NA TELA
-    mostrarMensagemUsuario("🎤 Áudio");
-
-    // MAS ENVIA A TRANSCRIÇÃO REAL PARA A IA
-    await enviarMensagemGemini(transcript);
-};
-
-
-        recognition.onerror = function(event) {
-            console.error("Erro no reconhecimento:", event.error);
-            stopRecording();
-        };
-    }
-
-    const btnFalar = document.getElementById("btn-falar");
-    const btnParar = document.getElementById("btn-parar");
-
-    if (btnFalar) {
-        btnFalar.addEventListener("click", () => {
-            if (!recognition) return alert("Seu navegador não suporta reconhecimento de voz ");
-            recognition.start();
-            isRecording = true;
-            btnFalar.disabled = true;
-            btnParar.disabled = false;
-        });
-    }
-
-    if (btnParar) {
-        btnParar.addEventListener("click", () => stopRecording());
-    }
-
-    function stopRecording() {
-        if (recognition && isRecording) {
-            recognition.stop();
-            isRecording = false;
-            if (btnFalar) btnFalar.disabled = false;
-            if (btnParar) btnParar.disabled = true;
-        }
-    }
-
-    // Função para mostrar mensagem do usuário no chat (reaproveitável)
-    function mostrarMensagemUsuario(texto) {
-        const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-        const divUser = document.createElement("div");
-        divUser.className = "user-message";
-        // usa textContent por segurança (escape automático)
-        divUser.textContent = texto;
-        mainContainer.appendChild(divUser);
-        mainContainer.scrollTop = mainContainer.scrollHeight;
-    }
-
-    // Listener do form (envio por texto) - previne reload e usa envio AJAX local
-    const formChat = document.getElementById("form");
-    formChat.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const input = document.getElementById("pergunta");
-        const texto = input.value.trim();
-        if (!texto) return;
-
-        mostrarMensagemUsuario(texto);
-        input.value = "";
-
-        // envia para Gemini (via sua API local / flask)
-        await enviarMensagemGemini(texto);
-    });
-
-    // Envia para a rota local do Gemini (mesma lógica que você já tinha)
-    async function enviarMensagemGemini(texto) {
-        try {
-            const response = await fetch("http://localhost:5000/mensagem", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mensagem: texto })
-            });
-
-            const data = await response.json();
-            const resposta = data.resposta || "Erro na resposta do servidor.";
-
-            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-            const divResposta = document.createElement("div");
-            divResposta.className = "resposta-animada";
-            // usa innerText/creation segura: cria elementos para evitar XSS se quiser trocar depois
-            // >>> ALTERAÇÃO: usar marked + DOMPurify para formatar e sanitizar
-            const htmlFromMd = marked.parse(resposta);
-            const safeHtml = DOMPurify.sanitize(htmlFromMd);
-            divResposta.innerHTML = `<strong>Fala.i:</strong><div class="fala-formatada">${safeHtml}</div>`;
-            mainContainer.appendChild(divResposta);
-
-            mainContainer.scrollTop = mainContainer.scrollHeight;
-
-        } catch (err) {
-            console.error("Erro ao enviar para Gemini:", err);
-            // opcional: mostrar mensagem de erro ao usuário
-            const mainContainer = document.getElementById("chat-container") || document.querySelector(".main-container");
-            const divResposta = document.createElement("div");
-            divResposta.className = "resposta-animada";
-            divResposta.innerHTML = `<strong>Fala.i:</strong><p>Erro ao comunicar com o servidor.</p>`;
-            mainContainer.appendChild(divResposta);
-            mainContainer.scrollTop = mainContainer.scrollHeight;
-        }
-    }
-    </script>
-
-  <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
+    <script src="static/PaginaAcessibilidade/PaginaAcessibilidade.js"></script>
 </body>
+
 </html>
