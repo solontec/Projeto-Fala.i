@@ -79,7 +79,6 @@ require_once "../src/Model/AgendaModel.php";
         <button class="add-task-btn" onclick="abrirModal()">
           <p class="add">+</p> Adicionar uma tarefa
         </button>
-        <p id="google-agenda">Integrado com Google Agenda*</p>
       </div>
       <p id="texto" class="textos">Para adicionar seus trabalhos e apresentações clique no botão acima.</p>
       <a href="https://calendar.google.com/calendar/u/0/r" class="google-agenda">
@@ -224,8 +223,8 @@ if ($tarefas && count($tarefas) > 0) {
       <a href="/termos">Ver Termos</a> | 
       <a href="/minha_conta">Minha Conta</a> | 
       <a href="/agenda">Agenda</a> | 
-      <a href="#sessao-dicas">Dicas</a> | 
-      <a href="#sessao-videos">Vídeos</a>
+      <a href="PaginaInicial.php">Dicas</a> | 
+      <a href="PaginaInicial.php">Vídeos</a>
     </div>
     <div class="copright">
       <p>©2025 Fala.i. Todos os direitos reservados.</p>

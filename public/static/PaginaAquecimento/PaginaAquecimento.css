@@ -346,6 +346,7 @@ hr {
   display: flex;
   flex-direction: column;
   margin-left: 7%;
+  margin-top: 3%;
 }
 
 .direita{
@@ -356,7 +357,6 @@ hr {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
 }
 
 h1{

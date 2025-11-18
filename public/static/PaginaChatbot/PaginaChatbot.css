@@ -750,8 +750,8 @@ width: 100%; /* Garante que ocupe toda a largura do .main-container */
 /* Container dos botões */
 .botoes-lado-a-lado {
     position: absolute;
-    right: 55px;
-    bottom: 55px;
+    right: 8%;
+    bottom: 75%;
     display: flex;
     gap: 8px;
 }

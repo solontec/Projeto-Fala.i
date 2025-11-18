@@ -135,7 +135,6 @@ if (!$usuario) {
         </form>
 
         <h2 class="nome-usuario"><?= htmlspecialchars($usuario["nome"]) ?></h2>
-        <button class="editar-btn">Editar Perfil</button>
       </div>
 
       <div class="perfil-conteudo">
@@ -158,7 +157,7 @@ if (!$usuario) {
 
         <div class="info-card danger-zone">
           <label>Sair da conta:</label>
-          <button type="button" class="logout-btn" id="abrirModalLogout">Logout</button>
+          <button type="button" class="logout-btn" id="aabrirModalLogout">Logout</button>
         </div>
       </div>
     </div>
@@ -183,9 +182,12 @@ if (!$usuario) {
     // Script para abrir e fechar o modal
     const modal = document.getElementById('modalLogout');
     const btnAbrir = document.getElementById('abrirModalLogout');
+    const btnAbrirr = document.getElementById('aabrirModalLogout');
     const btnCancelar = document.getElementById('cancelarLogout');
 
     btnAbrir.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });    btnAbrirr.addEventListener('click', () => {
       modal.style.display = 'flex';
     });
 

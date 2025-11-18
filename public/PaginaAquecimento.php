@@ -116,9 +116,9 @@
                 <p>|</p>
                 <a href="PaginaAgenda.php">Agenda</a>
                 <p>|</p>
-                <a href="#sessao-dicas">Dicas</a>
+                <a href="PaginaInicial.php">Dicas</a>
                 <p>|</p>
-                <a href="#sessao-videos">Vídeos</a>
+                <a href="PaginaInicial.php">Vídeos</a>
             </div>
 
             <div class="copright">

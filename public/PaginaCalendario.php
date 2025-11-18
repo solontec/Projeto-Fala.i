@@ -148,7 +148,7 @@ body{
 }
 
 /* colors (sticky note palette) */
-.pt-yellow{ background: ; }
+.pt-yellow{ background: #ffd650ff; }
 .pt-orange{ background:#ffb07c; }
 .pt-green{ background:#cbeaa5; }
 .pt-blue{ background:#9fe8ff; }

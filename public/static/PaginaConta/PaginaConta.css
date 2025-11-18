@@ -585,3 +585,174 @@ button:hover {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
+    
+    /* === PERFIL CLEAN & MINIMAL USANDO VARIÁVEIS === */
+
+.perfil-container {
+  display: flex;
+  gap: 40px;
+  background-color: var(--fundo-cinza);
+  border-radius: 18px;
+  padding: 40px;
+  margin: 40px auto;
+  width: 75%;
+  box-shadow: 0 4px 20px var(--shadow);
+  margin-left: 350px;
+}
+
+/* CARD LATERAL */
+.perfil-lateral {
+  width: 30%;
+  background-color: var(--fundo-perfil);
+  border-radius: 14px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  border: 1px solid var(--border-color2);
+}
+
+/* FOTO */
+.foto-perfil {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color2);
+}
+
+/* INPUT FILE */
+.form-foto input[type="file"] {
+  background: var(--fundo-branco);
+  color: var(--texto-terciario);
+  border: 1px solid var(--border-color2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: "Titillium Web";
+  cursor: pointer;
+}
+
+.form-foto input[type="file"]:hover {
+  background: var(--fundo-cinza);
+  transform: none;
+}
+
+/* BOTÕES */
+button,
+input[type="submit"],
+input[type="button"] {
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: "Titillium Web";
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: var(--hover);
+  transform: translateY(-2px);
+}
+
+.editar-btn {
+  width: 140px;
+}
+
+/* NOME */
+.nome-usuario {
+  color: var(--texto);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 10px;
+  font-family: "Titillium Web";
+}
+
+/* ÁREA DA DIREITA */
+.perfil-conteudo {
+  flex: 1;
+  background-color: var(--fundo-perfil);
+  border-radius: 14px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 1px solid var(--border-color2);
+}
+
+.perfil-conteudo h3 {
+  color: var(--texto);
+  font-size: 19px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--cor-principal);
+  padding-bottom: 10px;
+}
+
+/* CARDS DE INFO */
+.info-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--fundo-cinza);
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-family: "Titillium Web";
+  font-weight: 500;
+  border: 1px solid var(--border-color2);
+}
+
+.info-card label {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+/* BOTÃO VERMELHO LOGOUT */
+.logout-btn {
+  background-color: #d9534f !important;
+}
+
+.logout-btn:hover {
+  background-color: #c9302c !important;
+}
+
+/* === BOTÕES DA ÁREA DE FOTO (AMBOS CINZA) === */
+
+/* Botão de escolher arquivo */
+.form-foto input[type="file"] {
+  background: var(--cinza-medio);
+  color: var(--texto);
+  border: 1px solid var(--border-color2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: "Titillium Web";
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form-foto input[type="file"]:hover {
+  background: var(--fundo-cinza);
+  transform: translateY(-1px);
+}
+
+/* Botão de salvar foto – mesmo estilo */
+.form-foto button {
+  background: var(--cinza-medio);
+  color: var(--texto);
+  border: 1px solid var(--border-color2);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: "Titillium Web";
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form-foto button:hover {
+  background: var(--fundo-cinza);
+  transform: translateY(-1px);
+}
+

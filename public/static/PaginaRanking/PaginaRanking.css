@@ -21,6 +21,8 @@
   --bronze: #b1783e;
   --roxo-escuro: #491f7a;
   --texto-colocacao: #ffffff;
+  
+  --footer: #4d4d4d;
 }
 
 /* Modo Escuro */
@@ -39,11 +41,12 @@
   --border-color: #404040;
   --shadow-prata: rgba(146, 146, 146, 0.3);
   --preto: #7779fd;
-  --ouro: #ffd700;
-  --prata: #c0c0c0;
+  --ouro: #cfb000;
+  --prata: #a1a1a1;
   --bronze: #b1783e;
   --roxo-escuro: #491f7a;
   --texto-colocacao: #1a1a1a;
+  --footer: #e1e1e1;
 }
 
 * {
@@ -103,6 +106,7 @@ nav {
 li {
   transition: 0.2s;
   font-weight: lighter;
+  font-size: 18px;
 }
 
 li:hover {
@@ -389,13 +393,14 @@ strong {
   }
 }
 
+/* FOOTER */
 footer {
   padding: 90px;
   padding-bottom: 30px;
   padding-top: 45px;
   background-color: var(--fundo-container);
   box-shadow: 0 0 10px var(--border-color);
-  margin: 0;
+  margin-bottom: 0;
 }
 
 #logo-footer {
@@ -428,7 +433,7 @@ hr {
 .informacoes-footer {
   text-align: center;
   font-family: "Titillium Web";
-  color: #626262;
+  color: var(--footer);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -440,22 +445,44 @@ hr {
   display: flex;
 }
 
-.caminhos-footer,
-.copright {
+.caminhos-footer, .copright {
   display: flex;
-  color: #626262;
+  color: var(--footer);
   gap: 10px;
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a {
   text-decoration: none;
-  color: #626262;
+  color: var(--footer);
   font-family: "Titillium Web";
 }
 
 .caminhos-footer a:hover {
   text-decoration: underline;
+}
+
+.quem-somos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.quem-somos #quem-somos{
+  color: white;
+}
+
+.sobre{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  font-family: 'Titillium Web';
+  font-size: 18px;
 }
 
 .fade-in {
@@ -492,4 +519,17 @@ hr {
 
 .fade-delay-6 {
   transition-delay: 0.6s;
+}
+
+/* Cores específicas para os textos do pódio */
+.texto-ouro {
+  color: #ffffff; /* contraste forte no dourado */
+}
+
+.texto-prata {
+  color: #ffffff; /* contraste forte no prata */
+}
+
+.texto-bronze {
+  color: #ffffff; /* branco para contrastar com o bronze */
 }
