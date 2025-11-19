@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <body>
     <nav>
         <div class="nav-left">
-            <a href="PaginaInicial.php">
+            <a href="index.php">
                 <img src="assets/img/logo.png" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
             </a>
         </div>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="nav-menu" id="nav-menu">
-            <li><a href="PaginaInicial.php">Início</a></li>
+            <li><a href="index.php">Início</a></li>
             <li><a href="PaginaAgenda.php">Agenda</a></li>
             <li><a href="PaginaAquecimento.php">Aquecimento</a></li>
             <li><a href="PaginaRanking.php">Ranking</a></li>
@@ -147,9 +147,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <p>|</p>
                 <a href="PaginaAgenda.php">Agenda</a>
                 <p>|</p>
-                <a href="PaginaInicial.php">Dicas</a>
+                <a href="index.php">Dicas</a>
                 <p>|</p>
-                <a href="PaginaInicial.php">Vídeos</a>
+                <a href="index.php">Vídeos</a>
             </div>
 
             <div class="copright">

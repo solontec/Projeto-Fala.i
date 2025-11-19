@@ -23,12 +23,12 @@
 <body>
   <nav>
     <div class="nav-left">
-      <a href="PaginaInicial.php" class="logo">
+      <a href="index.php" class="logo">
         <img src="assets/img/logo.png" alt="Logo" width="60px">
       </a>
     </div>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="PaginaInicial.php">Início</a></li>
+      <li><a href="index.php">Início</a></li>
       <li><a href="PaginaAgenda.php">Agenda</a></li>
       <li><a href="PaginaChatbot.php">Chatbot</a></li>
       <li><a href="PaginaRanking.php">Ranking</a></li>
@@ -116,9 +116,9 @@
                 <p>|</p>
                 <a href="PaginaAgenda.php">Agenda</a>
                 <p>|</p>
-                <a href="PaginaInicial.php">Dicas</a>
+                <a href="index.php">Dicas</a>
                 <p>|</p>
-                <a href="PaginaInicial.php">Vídeos</a>
+                <a href="index.php">Vídeos</a>
             </div>
 
             <div class="copright">
