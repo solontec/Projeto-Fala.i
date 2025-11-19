@@ -49,12 +49,12 @@ require_once "../src/Model/AgendaModel.php";
   <!-- NAV -->
   <nav>
     <div class="nav-left">
-      <a href="index.php" class="logo">
+      <a href="PaginaLogin.php" class="logo">
         <img src="assets/img/logo.png" alt="Logo" width="60px">
       </a>
     </div>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="index.php">Início</a></li>
+      <li><a href="PaginaLogin.php">Início</a></li>
       <li><a href="PaginaCalendario.php">Calendário</a></li>
       <li><a href="PaginaAquecimento.php">Aquecimento</a></li>
       <li><a href="PaginaRanking.php">Ranking</a></li>
@@ -223,8 +223,8 @@ if ($tarefas && count($tarefas) > 0) {
       <a href="/termos">Ver Termos</a> | 
       <a href="/minha_conta">Minha Conta</a> | 
       <a href="/agenda">Agenda</a> | 
-      <a href="index.php">Dicas</a> | 
-      <a href="index.php">Vídeos</a>
+      <a href="PaginaLogin.php">Dicas</a> | 
+      <a href="PaginaLogin.php">Vídeos</a>
     </div>
     <div class="copright">
       <p>©2025 Fala.i. Todos os direitos reservados.</p>

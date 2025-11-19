@@ -250,7 +250,7 @@ button:hover {
   position: fixed;
   top: 20px;
   left: 130px;
-  z-index: 9999;
+  z-PaginaLogin: 9999;
   display: flex;
   gap: 4px;
 }
@@ -288,7 +288,7 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-PaginaLogin: 10000;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -303,7 +303,7 @@ button:hover {
   position: fixed;
   top: 100px;
   right: 20px;
-  z-index: 9999;
+  z-PaginaLogin: 9999;
   max-width: 300px;
 }
 

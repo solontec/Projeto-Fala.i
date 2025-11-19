@@ -292,7 +292,7 @@ align-items: flex-start; /* Novo: Para o contêiner .chat-mensagens (que está e
   top: 0;
   left: 0;
   width: 75px;
-  z-index: 1;
+  z-PaginaLogin: 1;
   transition: width 0.3s ease-in-out;
 }
 
@@ -338,7 +338,7 @@ align-items: flex-start; /* Novo: Para o contêiner .chat-mensagens (que está e
   position: fixed;
   top: 20px;
   left: 0;
-  z-index: 2;
+  z-PaginaLogin: 2;
   width: 72px;
   align-items: center;
   justify-content: center;

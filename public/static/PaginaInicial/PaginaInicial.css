@@ -641,28 +641,28 @@ section.sessao-onda2 {
 
 #onda1,
 #onda5 {
-  z-index: 1000;
+  z-PaginaLogin: 1000;
   opacity: 1;
   background-position-x: 600px;
 }
 
 #onda2,
 #onda6 {
-  z-index: 999;
+  z-PaginaLogin: 999;
   opacity: 0.5;
   background-position-x: 400px;
 }
 
 #onda3,
 #onda7 {
-  z-index: 998;
+  z-PaginaLogin: 998;
   opacity: 0.2;
   background-position-x: 200px;
 }
 
 #onda4,
 #onda8 {
-  z-index: 997;
+  z-PaginaLogin: 997;
   opacity: 0.8;
   background-position-x: 100px;
 }
@@ -1161,7 +1161,7 @@ hr {
     padding: 20px;
     box-shadow: 0 4px 6px var(--shadow);
     gap: 15px;
-    z-index: 1000;
+    z-PaginaLogin: 1000;
   }
 
   .sessao-dicas {
@@ -1481,7 +1481,7 @@ body::before {
   height: 100%;
   backdrop-filter: blur(3px);
   background-color: rgba(52, 52, 52, 0.1);
-  z-index: 9999;
+  z-PaginaLogin: 9999;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;

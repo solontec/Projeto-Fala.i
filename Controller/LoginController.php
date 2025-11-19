@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         RankingModel::adicionarPontos($_SESSION['usuario_id'], 'login');
 
         //  Redireciona para a página inicial
-        header("Location: ../public/index.php");
+        header("Location: ../public/PaginaLogin.php");
         exit;
     } else {
         //  Caso falhe o login

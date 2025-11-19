@@ -369,7 +369,7 @@ a {
   -webkit-backdrop-filter: blur(8px);
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-PaginaLogin: 1000;
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -769,7 +769,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-PaginaLogin: 2000;
   animation: fadeIn 0.3s ease;
 }
 

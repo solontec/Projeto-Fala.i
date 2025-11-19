@@ -131,7 +131,7 @@ a{
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-PaginaLogin: 10000;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }

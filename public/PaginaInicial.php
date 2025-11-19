@@ -24,7 +24,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/index/index.css">
+    <link rel="stylesheet" href="static/PaginaLogin/PaginaLogin.css">
     <!-- Script para aplicar tema INSTANTANEAMENTE -->
     <script>
         (function () {
@@ -502,7 +502,7 @@ if (!isset($_SESSION['usuario_id'])) {
     </script>
     <script src="../public/js/pontuacao_tempo.js"></script>
 
-    <script src="static/index/index.js"></script>
+    <script src="static/PaginaLogin/PaginaLogin.js"></script>
 
     <script>
 // Cria um array para armazenar os players do YouTube
@@ -512,10 +512,10 @@ let players = [];
 function onYouTubeIframeAPIReady() {
     const iframes = document.querySelectorAll('.sessao-videos iframe');
 
-    iframes.forEach((iframe, index) => {
+    iframes.forEach((iframe, PaginaLogin) => {
         const player = new YT.Player(iframe, {
             events: {
-                'onStateChange': (event) => onPlayerStateChange(event, index)
+                'onStateChange': (event) => onPlayerStateChange(event, PaginaLogin)
             }
         });
         players.push(player);
@@ -523,10 +523,10 @@ function onYouTubeIframeAPIReady() {
 }
 
 // Quando um vídeo começar a tocar, pausa os outros
-function onPlayerStateChange(event, currentIndex) {
+function onPlayerStateChange(event, currentPaginaLogin) {
     if (event.data === YT.PlayerState.PLAYING) {
-        players.forEach((player, index) => {
-            if (index !== currentIndex) {
+        players.forEach((player, PaginaLogin) => {
+            if (PaginaLogin !== currentPaginaLogin) {
                 player.pauseVideo();
             }
         });

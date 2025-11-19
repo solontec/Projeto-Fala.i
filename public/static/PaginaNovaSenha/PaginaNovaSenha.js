@@ -50,12 +50,12 @@ const containers = document.querySelectorAll(".container-nova-senha")
 containers.forEach((container) => {
   container.addEventListener("mouseenter", () => {
     document.body.classList.add("blur-ativa")
-    container.style.zIndex = "9999"
+    container.style.zPaginaLogin = "9999"
   })
 
   container.addEventListener("mouseleave", () => {
     document.body.classList.remove("blur-ativa")
-    container.style.zIndex = ""
+    container.style.zPaginaLogin = ""
   })
 })
 

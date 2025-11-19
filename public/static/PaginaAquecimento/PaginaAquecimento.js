@@ -87,8 +87,8 @@ function compararTextos(tempo) {
   let acertos = 0;
   let resultadoVisual = "";
 
-  palavrasOriginais.forEach((palavraOriginal, index) => {
-    const palavraFalada = palavrasLidas[index] || "";
+  palavrasOriginais.forEach((palavraOriginal, PaginaLogin) => {
+    const palavraFalada = palavrasLidas[PaginaLogin] || "";
 
     if (similaridade(palavraOriginal, palavraFalada)) {
       acertos++;

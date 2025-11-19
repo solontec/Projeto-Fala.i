@@ -56,13 +56,13 @@ $restantes = array_slice($ranking, 3);
 
     <nav>
         <div class="nav-left">
-            <a href="index.php">
+            <a href="PaginaLogin.php">
                 <img src="assets/img/logo.png" alt="Logo" width="60px" class="logo">
             </a>
         </div>
 
         <ul class="nav-menu">
-            <li><a href="index.php">Início</a></li>
+            <li><a href="PaginaLogin.php">Início</a></li>
             <li><a href="PaginaAgenda.php">Agenda</a></li>
             <li><a href="PaginaAquecimento.php">Aquecimento</a></li>
             <li><a href="PaginaCalendario.php">Calendário</a></li>
@@ -208,9 +208,9 @@ $restantes = array_slice($ranking, 3);
                 <p>|</p>
                 <a href="PaginaAgenda.php">Agenda</a>
                 <p>|</p>
-                <a href="index.php">Dicas</a>
+                <a href="PaginaLogin.php">Dicas</a>
                 <p>|</p>
-                <a href="index.php">Vídeos</a>
+                <a href="PaginaLogin.php">Vídeos</a>
             </div>
 
             <div class="copright">

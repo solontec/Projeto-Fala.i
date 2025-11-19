@@ -68,13 +68,13 @@ document.getElementById("decrease-font").addEventListener("click", () => {
 // Auto-hide flash messages
 function autoHideFlashMessages() {
   const flashMessages = document.querySelectorAll('.flash-message')
-  flashMessages.forEach((message, index) => {
+  flashMessages.forEach((message, PaginaLogin) => {
     setTimeout(() => {
       message.style.animation = 'slideOut 0.3s ease forwards'
       setTimeout(() => {
         message.remove()
       }, 300)
-    }, 3000 + (index * 500)) // Escalonamento para múltiplas mensagens
+    }, 3000 + (PaginaLogin * 500)) // Escalonamento para múltiplas mensagens
   })
 }
 

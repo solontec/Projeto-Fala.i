@@ -166,7 +166,7 @@ body{
   background:rgba(0,0,0,0.45);
   align-items:center;
   justify-content:center;
-  z-index:30;
+  z-PaginaLogin:30;
 }
 .modal .box{
   background:#fff;
@@ -257,35 +257,35 @@ const ANO = 2025;
 const MESES = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 const colors = ["pt-yellow","pt-orange","pt-green","pt-blue","pt-pink","pt-cyan"];
 
-let selectedMonthIndex = new Date().getMonth(); // load current month
+let selectedMonthPaginaLogin = new Date().getMonth(); // load current month
 let selectedDate = null; // "YYYY-MM-DD"
-let selectedIndex = null; // index of note in date array
+let selectedPaginaLogin = null; // PaginaLogin of note in date array
 
 /* sidebar render */
 const sidebar = document.getElementById('sidebar');
 MESES.forEach((m,i)=>{
   const btn = document.createElement('button');
-  btn.className = 'month-btn' + (i===selectedMonthIndex ? ' active' : '');
+  btn.className = 'month-btn' + (i===selectedMonthPaginaLogin ? ' active' : '');
   btn.innerText = m;
   btn.onclick = ()=>{
     document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    selectedMonthIndex = i;
+    selectedMonthPaginaLogin = i;
     renderCalendar(i);
   };
   sidebar.appendChild(btn);
 });
 
 /* calendar render */
-function renderCalendar(monthIndex){
+function renderCalendar(monthPaginaLogin){
   const container = document.getElementById('calendar-container');
   container.innerHTML = ''; // clear
 
   // header + table
-  const firstDay = new Date(ANO, monthIndex, 1).getDay(); // 0..6 (Sun..Sat)
-  const lastDay = new Date(ANO, monthIndex+1, 0).getDate();
+  const firstDay = new Date(ANO, monthPaginaLogin, 1).getDay(); // 0..6 (Sun..Sat)
+  const lastDay = new Date(ANO, monthPaginaLogin+1, 0).getDate();
 
-  let html = `<table class="calendar-table"><tr><th colspan="7">${MESES[monthIndex].toUpperCase()} - ${ANO}</th></tr>`;
+  let html = `<table class="calendar-table"><tr><th colspan="7">${MESES[monthPaginaLogin].toUpperCase()} - ${ANO}</th></tr>`;
   html += `<tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>`;
   html += `<tr>`;
 
@@ -294,7 +294,7 @@ function renderCalendar(monthIndex){
   for(let i=0;i<offset;i++) html += '<td></td>';
 
   for(let d=1; d<= lastDay; d++){
-    const iso = `${ANO}-${String(monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const iso = `${ANO}-${String(monthPaginaLogin+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     html += `<td onclick="openAddModal('${iso}')"><div class="daynum">${d}</div>`;
 
     const notes = JSON.parse(localStorage.getItem(iso) || '[]');
@@ -364,7 +364,7 @@ function saveAdd(){
   arr.push({titulo:t, descricao:d});
   localStorage.setItem(selectedDate, JSON.stringify(arr));
   modalAdd.style.display = 'none';
-  renderCalendar(selectedMonthIndex); // show immediately
+  renderCalendar(selectedMonthPaginaLogin); // show immediately
 }
 
 /* ========== MODAL: VIEW / EDIT ========== */
@@ -379,7 +379,7 @@ document.getElementById('btnDelete').onclick = deleteNote;
 function openViewModal(e, isoDate, idx){
   e.stopPropagation();
   selectedDate = isoDate;
-  selectedIndex = idx;
+  selectedPaginaLogin = idx;
   const arr = JSON.parse(localStorage.getItem(isoDate) || '[]');
   const note = arr[idx];
   viewTitulo.value = note.titulo;
@@ -396,23 +396,23 @@ function saveEdit(){
   const d = viewDesc.value.trim();
   if(!t){ alert('Título vazio!'); viewTitulo.focus(); return; }
   const arr = JSON.parse(localStorage.getItem(selectedDate) || '[]');
-  arr[selectedIndex] = { titulo:t, descricao:d };
+  arr[selectedPaginaLogin] = { titulo:t, descricao:d };
   localStorage.setItem(selectedDate, JSON.stringify(arr));
   modalView.style.display = 'none';
-  renderCalendar(selectedMonthIndex);
+  renderCalendar(selectedMonthPaginaLogin);
 }
 
 function deleteNote(){
   if(!confirm('Excluir este lembrete?')) return;
   const arr = JSON.parse(localStorage.getItem(selectedDate) || '[]');
-  arr.splice(selectedIndex,1);
+  arr.splice(selectedPaginaLogin,1);
   localStorage.setItem(selectedDate, JSON.stringify(arr));
   modalView.style.display = 'none';
-  renderCalendar(selectedMonthIndex);
+  renderCalendar(selectedMonthPaginaLogin);
 }
 
 /* on load */
-renderCalendar(selectedMonthIndex);
+renderCalendar(selectedMonthPaginaLogin);
 </script>
 </body>
 </html>
