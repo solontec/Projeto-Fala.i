@@ -2,12 +2,14 @@ const textarea = document.getElementById("pergunta");
 const form = document.getElementById("form");
 
 if (textarea) {
-  textarea.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      form.dispatchEvent(new Event("submit"));
-    }
-  });
+textarea.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    form.requestSubmit();  // <<< aqui
+    e.preventDefault();
+  }
+});
+
 }
 
 function toggleMobileMenu() {
