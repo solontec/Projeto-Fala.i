@@ -53,18 +53,6 @@ python gemini.py
 Caso utilize outro ambiente (PHP, Node ou Web), ajuste o comando conforme a tecnologia adotada.
 
 <hr>
-
-📁 Estrutura do Projeto
-
-Resumo da organização do repositório:
-
-Projeto-Fala.i/
-├── index.*              # Ponto de entrada do projeto
-├── Controllers/         # Controle de fluxo e regras
-├── Models/              # Lógica de negócio e processamento
-├── Views/               # Interface do usuário
-└── README.md
-<hr>
 📚 Contexto Acadêmico
 
 Este projeto foi desenvolvido como Trabalho de Conclusão de Curso, aplicando conceitos de:
