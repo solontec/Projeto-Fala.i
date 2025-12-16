@@ -4,6 +4,8 @@ FALAI é um projeto desenvolvido como Trabalho de Conclusão de Curso (TCC) com 
 
 A proposta do projeto é oferecer um ambiente onde o usuário possa praticar a fala, organizar discursos e acompanhar sua evolução, promovendo mais clareza, segurança e confiança ao se comunicar em diferentes contextos.
 
+<hr>
+
 🎯 Objetivo do Projeto
 
 O FALAI busca:
