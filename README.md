@@ -18,6 +18,8 @@ Ajudar no desenvolvimento da confiança ao falar em público
 
 Aplicar conceitos de tecnologia no apoio à expressão verbal
 
+<hr>
+
 ⚙️ Funcionalidades
 
 Treino de oratória por meio de interações guiadas
@@ -27,6 +29,7 @@ Simulação de situações reais de fala (apresentações, discursos, entrevista
 Organização de informações e registros de evolução do usuário
 
 Estrutura baseada em regras bem definidas para análise e acompanhamento
+<hr>
 
 🛠️ Tecnologias e Conceitos
 
@@ -37,6 +40,7 @@ Lógica de negócio aplicada ao desenvolvimento pessoal
 Interface simples e focada na experiência do usuário
 
 Linguagem de programção Python.
+<hr>
 
 ▶️ Execução do Projeto
 
@@ -46,8 +50,9 @@ Exemplo:
 
 python gemini.py
 
-
 Caso utilize outro ambiente (PHP, Node ou Web), ajuste o comando conforme a tecnologia adotada.
+
+<hr>
 
 📁 Estrutura do Projeto
 
@@ -59,7 +64,7 @@ Projeto-Fala.i/
 ├── Models/              # Lógica de negócio e processamento
 ├── Views/               # Interface do usuário
 └── README.md
-
+<hr>
 📚 Contexto Acadêmico
 
 Este projeto foi desenvolvido como Trabalho de Conclusão de Curso, aplicando conceitos de:
