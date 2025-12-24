@@ -18,7 +18,8 @@ class RankingModel {
 
         $pdo = getConnection(); 
 
-        // ✅ Evita múltiplos pontos de login no mesmo dia
+
+        
         if ($tipo === 'login') {
             $sqlCheck = "SELECT COUNT(*) FROM tb_pontuacao_detalhada
                          WHERE usuario_id = ? 
